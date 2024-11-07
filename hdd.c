@@ -7,7 +7,7 @@
 
 
 static Process user_proc[REQUESTS_NUM];
-Buffer free_buffers[CACHE_CAP];
+//Buffer free_buffers[CACHE_CAP];
 Cache *cache = NULL;
 
 size_t read_sector(Process p)
@@ -26,7 +26,7 @@ void generate_request(Process (*f)(int, bool))
     for (int i = 0; i < REQUESTS_NUM; ++i)
     {
 	//generate sector
-	int gs = (rand()%REQUESTS_NUM)*TOTAL_SECTORS/REQUESTS_NUM;
+	int gs = (rand()%6)*TOTAL_SECTORS/REQUESTS_NUM;
 	printf("-------------------------\n");
 	printf("gs: %d\n", gs);
 	printf("-------------------------\n");
@@ -39,18 +39,6 @@ void generate_request(Process (*f)(int, bool))
     }
 }
 
-bool get_free_buffer(Buffer* free_buf)
-{
-    for (int i = 0; i < CACHE_CAP; ++i)
-    {
-	if (!free_buffers[i].used)
-	{
-	    *free_buf = free_buffers[i];
-	    return true;
-	}
-    }
-    return false;
-}
 
 int send_process_to_hdd(Process p)
 {
@@ -60,12 +48,7 @@ int send_process_to_hdd(Process p)
     if (!cache_get(cache, p, &sect))
     {
 	//perform expensive operation
-	sect = read_sector(p);
-	if (!get_free_buffer(&free_buffer))
-	{
-	    printf("[INFO] No free buffers");
-	}
-	
+	sect = read_sector(p);	
 	cache_put(cache, &free_buffer, sect);
     }
 
@@ -85,8 +68,8 @@ void alloc_cache()
 
     for (int i = 0; i < CACHE_CAP; ++i)
     {
-        cache->buffers[i].counter = 0;
-        cache->buffers[i].sector = 0;
+        cache->buffers[i].counter = -1;
+        cache->buffers[i].sector = -1;
         cache->buffers[i].used = false;
     }
 }
