@@ -77,7 +77,7 @@ void cache_cleanup(Cache *cache)
 {
     for (int i = 0; i < CACHE_CAP; ++i)
     {
-	printf("Buffer %d:\n    counter = %d\n    sector = %ld\n    used = %b\n\n", CACHE_CAP - i+1, cache->buffers[i].counter, cache->buffers[i].sector, cache->buffers[i].used);
+	printf("Buffer %d:\n    counter = %d\n    sector = %ld\n    used = %b\n\n", i, cache->buffers[i].counter, cache->buffers[i].sector, cache->buffers[i].used);
     }
     (void) cache;
 }

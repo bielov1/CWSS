@@ -3,12 +3,14 @@
 
 #include "hdd.h"
 #include "cache_lfu.h"
+#include "scheduler.h"
 
 
 
 static Process user_proc[REQUESTS_NUM];
-//Buffer free_buffers[CACHE_CAP];
 Cache *cache = NULL;
+Queue q;
+
 
 size_t read_sector(Process p)
 {
@@ -27,9 +29,9 @@ void generate_request(Process (*f)(int, bool))
     {
 	//generate sector
 	int gs = (rand()%6)*TOTAL_SECTORS/REQUESTS_NUM;
-	printf("-------------------------\n");
-	printf("gs: %d\n", gs);
-	printf("-------------------------\n");
+	//printf("-------------------------\n");
+	//printf("gs: %d\n", gs);
+	//printf("-------------------------\n");
 	//generate action
 	bool ga = true; // TEMPORARY action for a process.
 	// In future should be random between write and read.
@@ -51,8 +53,6 @@ int send_process_to_hdd(Process p)
 	sect = read_sector(p);	
 	cache_put(cache, &free_buffer, sect);
     }
-
-    //printf("%zu\n", sect);
     
     return 1;
 }
@@ -74,18 +74,45 @@ void alloc_cache()
     }
 }
 
+#define SCHEDULEIO_FIFO  0
+#define SCHEDULEIO_LOOK  1
+#define SCHEDULEIO_FLOOK 2
+
+#define SCHEDULEIO_IMPL SCHEDULEIO_FIFO
+
+#if SCHEDULEIO_IMPL == SCHEDULEIO_FIFO
+#include "io_fifo.c"
+#elif SCHEDULEIO_IMPL == SCHEDULEIO_LOOK
+#include "io_look.c"
+#elif SCHEDULEIO_IMPL == SCHEDULEIO_FLOOK
+#include "io_flook.c"
+#else
+#error "Unknown io implementation"
+#endif
+
+void filter(Queue *q)
+{
+    for (int i = 0; i < REQUESTS_NUM; ++i)
+    {
+	Process filteed_proccess = scheduleIO(q);
+	send_process_to_hdd(filteed_proccess);	
+    }
+}
+
 int main()
 {
     generate_request(read_action);
     
     alloc_cache();
     printf("Kernel mode\n");
-    
+    initializeQueue(&q);
     for (int i = 0; i < REQUESTS_NUM; ++i)
     {
-	send_process_to_hdd(user_proc[i]);	
+	printf("[SCHEDLER] Process %d was added.\n", i);
+	enqueue(&q, &user_proc[i]);
     }
-    
+    filter(&q);
+    print_queue(&q);
     cache_cleanup(cache);
     return 0;
 }
