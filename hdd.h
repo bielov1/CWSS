@@ -18,7 +18,12 @@ typedef struct {
 
 typedef struct {
     size_t sector;
+    size_t track;
     bool is_reading;
 } Process;
+
+typedef struct {
+    size_t current_track;
+} Disk_Controler;
 
 #endif

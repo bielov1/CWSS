@@ -10,52 +10,40 @@
 static Process user_proc[REQUESTS_NUM];
 Cache *cache = NULL;
 Queue q;
+Disk_Controler dc;
 
+void initialize_dc(Disk_Controler* dc)
+{
+    dc->current_track = 0;
+}
 
 size_t read_sector(Process p)
 {
     return p.sector;
 }
 
-Process read_action(int sector, bool action)
+Process read_action(size_t sector, size_t track, bool action)
 {
-    return (Process) {sector, action};
+    return (Process) {sector, track, action};
 }
 
 
-void generate_request(Process (*f)(int, bool))
+void generate_request(Process (*f)(size_t, size_t, bool))
 {
     for (int i = 0; i < REQUESTS_NUM; ++i)
     {
 	//generate sector
-	int gs = (rand()%6)*TOTAL_SECTORS/REQUESTS_NUM;
-	//printf("-------------------------\n");
-	//printf("gs: %d\n", gs);
-	//printf("-------------------------\n");
+	int gs = rand()%TOTAL_SECTORS;
+	int gt = gs/SECTORS_PER_TRACK;
 	//generate action
 	bool ga = true; // TEMPORARY action for a process.
 	// In future should be random between write and read.
 	
-	Process p = f(gs, ga);
+	Process p = f(gs, gt, ga);
 	user_proc[i] = p; 
     }
 }
 
-
-int send_process_to_hdd(Process p)
-{
-    size_t sect = 0;
-    Buffer free_buffer;
-    
-    if (!cache_get(cache, p, &sect))
-    {
-	//perform expensive operation
-	sect = read_sector(p);	
-	cache_put(cache, &free_buffer, sect);
-    }
-    
-    return 1;
-}
 
 void alloc_cache()
 {
@@ -78,7 +66,7 @@ void alloc_cache()
 #define SCHEDULEIO_LOOK  1
 #define SCHEDULEIO_FLOOK 2
 
-#define SCHEDULEIO_IMPL SCHEDULEIO_FIFO
+#define SCHEDULEIO_IMPL SCHEDULEIO_LOOK
 
 #if SCHEDULEIO_IMPL == SCHEDULEIO_FIFO
 #include "io_fifo.c"
@@ -90,29 +78,30 @@ void alloc_cache()
 #error "Unknown io implementation"
 #endif
 
-void filter(Queue *q)
+void send_process_to_hdd(Process p)
 {
-    for (int i = 0; i < REQUESTS_NUM; ++i)
+    size_t sect = 0;
+    Buffer free_buffer;
+    if (!cache_get(cache, p, &sect))
     {
-	Process filteed_proccess = scheduleIO(q);
-	send_process_to_hdd(filteed_proccess);	
+	//perform expensive operation
+	sect = read_sector(p);	
+	cache_put(cache, &free_buffer, sect);
     }
 }
 
 int main()
 {
     generate_request(read_action);
-    
     alloc_cache();
-    printf("Kernel mode\n");
     initializeQueue(&q);
     for (int i = 0; i < REQUESTS_NUM; ++i)
     {
-	printf("[SCHEDLER] Process %d was added.\n", i);
+	printf("[SCHEDULER] Process %d was added.\n", i);
 	enqueue(&q, &user_proc[i]);
     }
-    filter(&q);
-    print_queue(&q);
+    initialize_dc(&dc);
+    scheduleIO(&q, &dc);
     cache_cleanup(cache);
     return 0;
 }
