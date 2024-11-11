@@ -33,8 +33,8 @@ void generate_request(Process (*f)(size_t, size_t, bool))
     for (int i = 0; i < REQUESTS_NUM; ++i)
     {
 	//generate sector
-	int gs = rand()%TOTAL_SECTORS;
-	int gt = gs/SECTORS_PER_TRACK;
+	int gs = rand() % (TOTAL_SECTORS - 1);
+	int gt = gs/SECTORS_PER_TRACK; 
 	//generate action
 	bool ga = true; // TEMPORARY action for a process.
 	// In future should be random between write and read.

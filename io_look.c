@@ -26,6 +26,7 @@ void quick_sort_queue(int l, int r, bool reverse)
     if (i < r) quick_sort_queue(i, r, reverse);
 }
 
+
 void scheduleIO(Queue *q, Disk_Controler *dc)
 {
     // start point
@@ -34,51 +35,56 @@ void scheduleIO(Queue *q, Disk_Controler *dc)
     int end = q->rear - 1;
 
     quick_sort_queue(q->front + 1, end, reverse);
-
+    print_queue(q);
     while (!is_empty(q))
     {
 	bool found_request = false;
 	int queue_start = q->front + 1;
-	int queue_end = q->rear;
-	for (int i = queue_start; i < queue_end; ++i)
-        {
-            if (dc->current_track == q->items[i].track)
-            {
-                send_process_to_hdd(q->items[i]);
-                if (reverse)
+	int queue_end = q->rear - 1;
+	if (reverse)
+	{
+	    for (int i = queue_end; i >= queue_start; i--)
+	    {
+		if (dc->current_track == q->items[i].track)
 		{
+		    send_process_to_hdd(q->items[i]);
 		    dequeue_tail(q);
-		}
-		else
-		{
-		    dequeue_head(q);
-		}
-                requests_count++;
-                found_request = true;
+		    requests_count++;
+		    found_request = true;
 
-		// limit check for current track to process requests that is in the same track.
-                if (requests_count >= MAX_REQUESTS_PER_TRACK)
-                {
-                    break;
-                }
-            }
-        }
+		    // limit check for current track to process requests that is in the same track.
+		    if (requests_count >= MAX_REQUESTS_PER_TRACK)
+		    {
+			break;
+		    }
+		}
+	    }
+	}
+	else
+	{
+	    for (int i = queue_start; i <= queue_end; ++i)
+	    {
+		if (dc->current_track == q->items[i].track)
+		{
+		    send_process_to_hdd(q->items[i]);
+		    dequeue_head(q);
+		    requests_count++;
+		    found_request = true;
+
+		    // limit check for current track to process requests that is in the same track.
+		    if (requests_count >= MAX_REQUESTS_PER_TRACK)
+		    {
+			break;
+		    }
+		}
+	    }
+	}
 	
 	if (!found_request || requests_count >= MAX_REQUESTS_PER_TRACK)
         {
-            requests_count = 0; // Оновлення лічильника запитів
-
-            // Зміна напряму, якщо немає запитів у поточному напрямку
-            if (reverse)
-            {   
-                dc->current_track = q->items[q->front + 1].track;
-                reverse = false;
-            }
-            else
-            {
-		dc->current_track = q->items[q->rear - 1].track;
-                reverse = true;
-            }
+            requests_count = 0;
+            dc->current_track = reverse ? q->items[q->front + 1].track : q->items[q->rear - 1].track;
+	    reverse = !reverse;
         }
     }
     
