@@ -3,7 +3,7 @@
 
 #include "scheduler.h"
 
-void initializeQueue(Queue *q)
+void initialize_queue(Queue *q)
 {
     q->front = -1;
     q->rear = 0;

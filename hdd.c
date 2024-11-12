@@ -5,8 +5,6 @@
 #include "cache_lfu.h"
 #include "scheduler.h"
 
-
-
 static Process user_proc[REQUESTS_NUM];
 Cache *cache = NULL;
 Queue q;
@@ -30,10 +28,21 @@ Process read_action(size_t sector, size_t track, bool action)
 
 void generate_request(Process (*f)(size_t, size_t, bool))
 {
+    int prev_gs = -1;
     for (int i = 0; i < REQUESTS_NUM; ++i)
     {
 	//generate sector
-	int gs = rand() % (TOTAL_SECTORS - 1);
+	int gs;
+
+        if (prev_gs != -1 && (rand() % 100) < 30)
+        {
+            gs = prev_gs;
+        }
+        else
+        {
+            gs = rand() % (TOTAL_SECTORS - 1);
+            prev_gs = gs;
+        }
 	int gt = gs/SECTORS_PER_TRACK; 
 	//generate action
 	bool ga = true; // TEMPORARY action for a process.
@@ -66,7 +75,7 @@ void alloc_cache()
 #define SCHEDULEIO_LOOK  1
 #define SCHEDULEIO_FLOOK 2
 
-#define SCHEDULEIO_IMPL SCHEDULEIO_LOOK
+#define SCHEDULEIO_IMPL SCHEDULEIO_FLOOK
 
 #if SCHEDULEIO_IMPL == SCHEDULEIO_FIFO
 #include "io_fifo.c"
@@ -94,7 +103,7 @@ int main()
 {
     generate_request(read_action);
     alloc_cache();
-    initializeQueue(&q);
+    initialize_queue(&q);
     for (int i = 0; i < REQUESTS_NUM; ++i)
     {
 	printf("[SCHEDULER] Process %d was added.\n", i);

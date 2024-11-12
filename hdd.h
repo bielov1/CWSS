@@ -26,6 +26,7 @@ typedef struct {
     size_t current_track;
 } Disk_Controler;
 
+
 void send_process_to_hdd(Process p);
 
 #endif

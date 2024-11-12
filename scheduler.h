@@ -9,7 +9,7 @@ typedef struct {
     int rear;
 } Queue;
 
-void initializeQueue(Queue *q);
+void initialize_queue(Queue *q);
 bool is_empty(Queue *q);
 bool is_full(Queue *q);
 void enqueue(Queue *q, Process *p);

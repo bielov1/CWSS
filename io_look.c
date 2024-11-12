@@ -1,29 +1,29 @@
 #include "hdd.h"
 
-void quick_sort_queue(int l, int r, bool reverse)
+void quick_sort_queue(Queue *q, int l, int r)
 {
     int i = l;
     int j = r;
 
     Process w;
     
-    Process x = q.items[(l+r)/2];
+    Process x = q->items[(l+r)/2];
     while (i < j)
     {
-	while (q.items[i].sector < x.sector) i++;
-        while (x.sector < q.items[j].sector) j--;
+	while (q->items[i].sector < x.sector) i++;
+        while (x.sector < q->items[j].sector) j--;
      	if (i <= j)
 	{
-	    w = q.items[i];
-	    q.items[i] = q.items[j];
-	    q.items[j] = w;
+	    w = q->items[i];
+	    q->items[i] = q->items[j];
+	    q->items[j] = w;
 	    i++;
 	    j--;
 	     
 	}
     }
-    if (l < j) quick_sort_queue(l, j, reverse);
-    if (i < r) quick_sort_queue(i, r, reverse);
+    if (l < j) quick_sort_queue(q, l, j);
+    if (i < r) quick_sort_queue(q, i, r);
 }
 
 
@@ -33,9 +33,7 @@ void scheduleIO(Queue *q, Disk_Controler *dc)
     bool reverse = false;
     int requests_count = 0;
     int end = q->rear - 1;
-
-    quick_sort_queue(q->front + 1, end, reverse);
-    print_queue(q);
+    quick_sort_queue(q, q->front + 1, end);
     while (!is_empty(q))
     {
 	bool found_request = false;

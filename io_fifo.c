@@ -3,11 +3,11 @@
 void scheduleIO(Queue *q, Disk_Controler *dc)
 {
     (void) dc;
-    Process p;
-    for (int i = 0; i < REQUESTS_NUM; ++i)
+    int queue_start = q->front + 1;
+    int queue_end = q->rear - 1;
+    for (int i = queue_start; i <= queue_end; ++i)
     {
-	p = q->items[q->front];
+	send_process_to_hdd(q->items[i]);
 	dequeue_head(q);
-	send_process_to_hdd(p);
     }
 }
