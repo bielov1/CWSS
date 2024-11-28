@@ -3,22 +3,8 @@
 
 #include "hdd.h"
 
-typedef struct {
-    Process items[REQUESTS_NUM];
-    int front;
-    int rear;
-} Queue;
-
-void initialize_queue(Queue *q);
-bool is_empty(Queue *q);
-bool is_full(Queue *q);
-void enqueue(Queue *q, Process *p);
-void dequeue_head(Queue *q);
-void dequeue_tail(Queue *q);
-Process* peek(Queue *q);
-void print_queue(Queue *q);
-int get_size(Queue *q);
-
-
+int fifo_schedule(IORequestNode **rq);
+//int look_schedule();
+int flook_schedule(IORequestNode **rq, Disk_Controler *dc);
 
 #endif

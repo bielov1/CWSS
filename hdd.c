@@ -1,18 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <signal.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
 
 #include "hdd.h"
 #include "cache_lfu.h"
 #include "scheduler.h"
+#include "driver.h"
 
-static Process user_proc[REQUESTS_NUM];
+Process user_proc[REQUESTS_NUM];
 Cache *cache = NULL;
-Queue q;
 Disk_Controler dc;
 
 void initialize_dc(Disk_Controler* dc)
 {
-    dc->current_track = 0;
+    dc->head_pos = 0;
+    dc->head_direction = 1;
 }
 
 size_t read_sector(Process p)
@@ -20,13 +26,13 @@ size_t read_sector(Process p)
     return p.sector;
 }
 
-Process read_action(size_t sector, size_t track, bool action)
+Process read_action(size_t sector, bool action)
 {
-    return (Process) {sector, track, action};
+    return (Process) {sector, action};
 }
 
 
-void generate_request(Process (*f)(size_t, size_t, bool))
+void generate_processes(Process (*f)(size_t, bool))
 {
     int prev_gs = -1;
     for (int i = 0; i < REQUESTS_NUM; ++i)
@@ -34,22 +40,21 @@ void generate_request(Process (*f)(size_t, size_t, bool))
 	//generate sector
 	int gs;
 
-        if (prev_gs != -1 && (rand() % 100) < 30)
-        {
+	if (prev_gs != -1 && (rand() % 100) < 30)
+	{
             gs = prev_gs;
-        }
-        else
-        {
+	}
+	else
+	{
             gs = rand() % (TOTAL_SECTORS - 1);
             prev_gs = gs;
-        }
-	int gt = gs/SECTORS_PER_TRACK; 
+	}
 	//generate action
 	bool ga = true; // TEMPORARY action for a process.
 	// In future should be random between write and read.
-	
-	Process p = f(gs, gt, ga);
-	user_proc[i] = p; 
+
+	Process p = f(gs, ga);
+	user_proc[i] = p;
     }
 }
 
@@ -71,23 +76,7 @@ void alloc_cache()
     }
 }
 
-#define SCHEDULEIO_FIFO  0
-#define SCHEDULEIO_LOOK  1
-#define SCHEDULEIO_FLOOK 2
-
-#define SCHEDULEIO_IMPL SCHEDULEIO_FLOOK
-
-#if SCHEDULEIO_IMPL == SCHEDULEIO_FIFO
-#include "io_fifo.c"
-#elif SCHEDULEIO_IMPL == SCHEDULEIO_LOOK
-#include "io_look.c"
-#elif SCHEDULEIO_IMPL == SCHEDULEIO_FLOOK
-#include "io_flook.c"
-#else
-#error "Unknown io implementation"
-#endif
-
-void send_process_to_hdd(Process p)
+void send_request_to_hdd(Process p)
 {
     size_t sect = 0;
     Buffer free_buffer;
@@ -99,18 +88,43 @@ void send_process_to_hdd(Process p)
     }
 }
 
-int main()
+
+void simulate(SchedulerType sched_t, int *t)
 {
-    generate_request(read_action);
-    alloc_cache();
-    initialize_queue(&q);
+    (void) t;
+    IORequestNode *request_queue;
+
+    generate_processes(read_action);
+    request_queue = NULL;
+    initialize_dc(&dc);
+    
     for (int i = 0; i < REQUESTS_NUM; ++i)
     {
-	printf("[SCHEDULER] Process %d was added.\n", i);
-	enqueue(&q, &user_proc[i]);
+	add_request(&request_queue, &user_proc[i]);
     }
-    initialize_dc(&dc);
-    scheduleIO(&q, &dc);
+    
+    if (sched_t == SCHEDULER_FIFO)
+    {
+	fifo_schedule(&request_queue);
+    }
+    else if (sched_t == SCHEDULER_LOOK)
+    {
+	//look_sort(&request_queue);
+    }
+    else if (sched_t == SCHEDULER_FLOOK)
+    {
+	flook_schedule(&request_queue, &dc);
+    }    
+}
+
+
+
+int main()
+{
+    SchedulerType sched_type = SCHEDULER_FLOOK;
+    int time = 0;
+    alloc_cache();
+    simulate(sched_type, &time);
     cache_cleanup(cache);
     return 0;
 }
