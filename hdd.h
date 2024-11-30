@@ -6,16 +6,11 @@
 
 #include "config.h"
 
-typedef struct {   
-    int counter;
-    size_t sector;
-    size_t track;
-    bool used;
-} Buffer;
+typedef enum Mode {
+    USER_MODE,
+    KERNEL_MODE
+} Mode;
 
-typedef struct {
-    Buffer buffers[CACHE_CAP];
-} Cache;
 
 typedef enum {
     SCHEDULER_FIFO,
@@ -26,6 +21,7 @@ typedef enum {
 typedef struct {
     size_t sector;
     bool is_reading;
+    Mode mode;
 } Process;
 
 typedef struct IORequestNodeStruct {

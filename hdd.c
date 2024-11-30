@@ -12,7 +12,6 @@
 #include "driver.h"
 
 Process user_proc[REQUESTS_NUM];
-Cache *cache = NULL;
 Disk_Controler dc;
 
 void initialize_dc(Disk_Controler* dc)
@@ -26,13 +25,13 @@ size_t read_sector(Process p)
     return p.sector;
 }
 
-Process read_action(size_t sector, bool action)
+Process read_action(size_t sector, bool action, Mode mode)
 {
-    return (Process) {sector, action};
+    return (Process) {sector, action, mode};
 }
 
 
-void generate_processes(Process (*f)(size_t, bool))
+void generate_processes(Process (*f)(size_t, bool, Mode))
 {
     int prev_gs = -1;
     for (int i = 0; i < REQUESTS_NUM; ++i)
@@ -52,51 +51,21 @@ void generate_processes(Process (*f)(size_t, bool))
 	//generate action
 	bool ga = true; // TEMPORARY action for a process.
 	// In future should be random between write and read.
-
-	Process p = f(gs, ga);
+	Mode gm = USER_MODE;
+	
+	Process p = f(gs, ga, gm);
 	user_proc[i] = p;
     }
 }
 
 
-void alloc_cache()
+void simulate(SchedulerType sched_t)
 {
-    cache = (Cache*) malloc(sizeof(Cache));
-    if (cache == NULL)
-    {
-        fprintf(stderr, "Memory allocation for cache failed!\n");
-        exit(1);
-    }
-
-    for (int i = 0; i < CACHE_CAP; ++i)
-    {
-        cache->buffers[i].counter = -1;
-        cache->buffers[i].sector = -1;
-        cache->buffers[i].used = false;
-    }
-}
-
-void send_request_to_hdd(Process p)
-{
-    size_t sect = 0;
-    Buffer free_buffer;
-    if (!cache_get(cache, p, &sect))
-    {
-	//perform expensive operation
-	sect = read_sector(p);	
-	cache_put(cache, &free_buffer, sect);
-    }
-}
-
-
-void simulate(SchedulerType sched_t, int *t)
-{
-    (void) t;
+    int time = 0;
     IORequestNode *request_queue;
 
     generate_processes(read_action);
     request_queue = NULL;
-    initialize_dc(&dc);
     
     for (int i = 0; i < REQUESTS_NUM; ++i)
     {
@@ -113,7 +82,7 @@ void simulate(SchedulerType sched_t, int *t)
     }
     else if (sched_t == SCHEDULER_FLOOK)
     {
-	flook_schedule(&request_queue, &dc);
+	flook_schedule(&request_queue, &dc, &time);
     }    
 }
 
@@ -122,9 +91,9 @@ void simulate(SchedulerType sched_t, int *t)
 int main()
 {
     SchedulerType sched_type = SCHEDULER_FLOOK;
-    int time = 0;
-    alloc_cache();
-    simulate(sched_type, &time);
-    cache_cleanup(cache);
+    initialize_cache();
+    initialize_dc(&dc);
+    simulate(sched_type);
+    cache_cleanup();
     return 0;
 }

@@ -4,6 +4,7 @@
 
 #include "scheduler.h"
 #include "driver.h"
+#include "cache_lfu.h"
 
 void sort_io_request_node(IORequestNode **head) {
     if (!head || !*head) return;
@@ -14,7 +15,6 @@ void sort_io_request_node(IORequestNode **head) {
     while (current) {
         IORequestNode *next = current->next;
         
-        // Insert into sorted list
         if (!sorted || sorted->process->sector >= current->process->sector) {
             current->next = sorted;
             current->prev = NULL;
@@ -43,7 +43,7 @@ int fifo_schedule(IORequestNode **rq)
     return 0;
 }
 
-int flook_schedule(IORequestNode **rq, Disk_Controler *dc)
+int flook_schedule(IORequestNode **rq, Disk_Controler *dc, int *time_worked)
 {
     IORequestNode *first_q = NULL;
     IORequestNode *second_q = NULL;
@@ -63,11 +63,11 @@ int flook_schedule(IORequestNode **rq, Disk_Controler *dc)
     srand(time(NULL));
     while (rq_request != NULL || active_queue != NULL)
     {
+	printf("[SCHEDULER] %d us (NEXT ITERATION)\n", *time_worked);
 	if (active_queue == NULL)
 	{
 	    int i;
 	    int limit = rand() % 5 + 1;
-	    printf("%d\n", limit);
 	    while (served_processes + limit > REQUESTS_NUM) limit--;
 
 	    for (i = 0; i < limit && rq_request != NULL; ++i)
@@ -80,12 +80,23 @@ int flook_schedule(IORequestNode **rq, Disk_Controler *dc)
 	}
 
 	active_request = active_queue;
+	read_process(active_request);
 	
-	int track = active_queue->process->sector/SECTORS_PER_TRACK;
-	int move_time = move_arm_to_track(track, dc);
-	printf("removed %ld node, took %d time to move\n", active_request->process->sector, move_time);
-	delete_node(&active_queue, active_request);
-
+	if (active_request->process->mode == USER_MODE)
+	{
+	    change_process_mode(active_request, KERNEL_MODE);
+	}
+	else
+	{
+	    Buffer *active_request_buffer = request_buffer_cache(active_request);
+	    int move_time = move_arm_to_track(active_request_buffer->track, dc);
+	    *time_worked += move_time;
+	    printf("removed %ld node, took %d us to move\n", active_request->process->sector, move_time);
+	    delete_node(&active_queue, active_request);
+	    //TODO: needs other logic in case when buffer was found in cache
+	    // maybe, don't call cache_put()
+	    cache_put(active_request_buffer);
+	}
 	
 	if (active_queue == NULL)
 	{
@@ -95,7 +106,6 @@ int flook_schedule(IORequestNode **rq, Disk_Controler *dc)
 	
 	
     }
-    
     
     
     return 0;
