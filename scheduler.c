@@ -89,13 +89,18 @@ int flook_schedule(IORequestNode **rq, Disk_Controler *dc, int *time_worked)
 	else
 	{
 	    Buffer *active_request_buffer = request_buffer_cache(active_request);
-	    int move_time = move_arm_to_track(active_request_buffer->track, dc);
-	    *time_worked += move_time;
-	    printf("removed %ld node, took %d us to move\n", active_request->process->sector, move_time);
+
+	    if (!active_request_buffer->used)
+	    {	
+		int move_time = move_arm_to_track(active_request_buffer->track, dc);
+		*time_worked += move_time;
+		printf("removed %ld node, took %d us to move\n", active_request->process->sector, move_time);
+		//TODO: needs other logic in case when buffer was found in cache
+		// maybe, don't call cache_put()
+		cache_put(active_request_buffer);
+	    }
+	    cache_print();
 	    delete_node(&active_queue, active_request);
-	    //TODO: needs other logic in case when buffer was found in cache
-	    // maybe, don't call cache_put()
-	    cache_put(active_request_buffer);
 	}
 	
 	if (active_queue == NULL)
@@ -106,8 +111,9 @@ int flook_schedule(IORequestNode **rq, Disk_Controler *dc, int *time_worked)
 	
 	
     }
-    
-    
+
+    printf("[SCHEDULER] %d us (NEXT ITERATION)\n", *time_worked);
+    printf("[SCHEDULER] Scheduler has nothing to do, exit\n");
     return 0;
 }
 

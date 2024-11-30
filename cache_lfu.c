@@ -51,6 +51,7 @@ Buffer* cache_get(size_t request_sector)
     {
         if (cache->buffers[i]->sector == request_sector)
         {
+	    printf("[CACHE] Sector `%ld` was found in cache\n", request_sector);
             move_buffer_to_front(i, false);
             return cache->buffers[0];
         }
@@ -59,12 +60,47 @@ Buffer* cache_get(size_t request_sector)
     return NULL;
 }
 
+void cache_print()
+{
+    printf("[CACHE] Buffer cache LFU:\n");
+    printf("\tLeft Segment  [");
+    for (int i = 0; i < LEFT_SEGMENT; ++i)
+    {
+	if (cache->buffers[i]->used)
+	{
+	    printf("(%ld:%ld),", cache->buffers[i]->track, cache->buffers[i]->sector);
+	}
+    }
+    printf("]\n");
+
+    printf("\tMid Segment   [");
+    for (int i = LEFT_SEGMENT; i < LEFT_SEGMENT + MID_SEGMENT; ++i)
+    {
+	if (cache->buffers[i]->used)
+	{
+	    printf("(%ld:%ld),", cache->buffers[i]->track, cache->buffers[i]->sector);
+	}
+    }
+    printf("]\n");
+
+    printf("\tRight Segment [");
+    for (int i = LEFT_SEGMENT + MID_SEGMENT; i < LEFT_SEGMENT + MID_SEGMENT + RIGHT_SEGMENT; ++i)
+    {
+	if (cache->buffers[i]->used)
+	{
+	    printf("(%ld:%ld),", cache->buffers[i]->track, cache->buffers[i]->sector);
+	}
+    }
+    printf("]\n");
+}
+
 void cache_put(Buffer *free_buf)
 {
     for (int i = 0; i < CACHE_CAP; ++i)
     {
 	if (cache->buffers[i]->sector == free_buf->sector)
 	{
+	    printf("[CACHE] Buffer (%ld:%ld) added to cache\n", free_buf->track, free_buf->sector);
 	    cache->buffers[i]->used = true;
 	    move_buffer_to_front(i, true);
 	}
@@ -73,10 +109,7 @@ void cache_put(Buffer *free_buf)
 
 void cache_cleanup()
 {
-    for (int i = 0; i < CACHE_CAP; ++i)
-    {
-	printf("Buffer %d:\n    counter = %d\n    sector = %ld\n    used = %b\n\n", i, cache->buffers[i]->counter, cache->buffers[i]->sector, cache->buffers[i]->used);
-    }
+    return;
 }
 
 Buffer* get_free_buffer_cache()
