@@ -12,26 +12,19 @@
 #include "driver.h"
 
 Process user_proc[REQUESTS_NUM];
-Disk_Controler dc;
-
-void initialize_dc(Disk_Controler* dc)
-{
-    dc->head_pos = 0;
-    dc->head_direction = 1;
-}
 
 size_t read_sector(Process p)
 {
     return p.sector;
 }
 
-Process read_action(size_t sector, bool action, Mode mode)
+Process read_action(size_t sector, bool action, Mode mode, State state)
 {
-    return (Process) {sector, action, mode};
+    return (Process) {sector, action, mode, state};
 }
 
 
-void generate_processes(Process (*f)(size_t, bool, Mode))
+void generate_processes(Process (*f)(size_t, bool, Mode, State))
 {
     int prev_gs = -1;
     for (int i = 0; i < REQUESTS_NUM; ++i)
@@ -52,8 +45,9 @@ void generate_processes(Process (*f)(size_t, bool, Mode))
 	bool ga = true; // TEMPORARY action for a process.
 	// In future should be random between write and read.
 	Mode gm = USER_MODE;
+	State gst = READY; 
 	
-	Process p = f(gs, ga, gm);
+	Process p = f(gs, ga, gm, gst);
 	user_proc[i] = p;
     }
 }
@@ -92,7 +86,8 @@ int main()
 {
     SchedulerType sched_type = SCHEDULER_FLOOK;
     initialize_cache();
-    initialize_dc(&dc);
+    initialize_dc();
+    intialize_schedule_queue();
     simulate(sched_type);
     cache_cleanup();
     return 0;

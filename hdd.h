@@ -6,6 +6,13 @@
 
 #include "config.h"
 
+typedef enum State {
+    READY,
+    BLOCKED,
+    WAKEUP,
+    FINISHED
+} State;
+
 typedef enum Mode {
     USER_MODE,
     KERNEL_MODE
@@ -22,6 +29,7 @@ typedef struct {
     size_t sector;
     bool is_reading;
     Mode mode;
+    State state;
 } Process;
 
 typedef struct IORequestNodeStruct {
