@@ -149,22 +149,23 @@ int flook_schedule1(IORequestNode **rq, Disk_Controler *dc, int *time_worked)
     return 0;
 }
 
-int flook_schedule(IORequestNode **request_queue, Disk_Controler *dc, int *time_worked)
+int flook_schedule(IORequestNode **run_queue, Disk_Controler *dc, int *time_worked)
 {
     IORequestNode *first_q = NULL;
     IORequestNode *second_q = NULL;
     IORequestNode *active_queue = first_q;
     IORequestNode *active_request = NULL;
 
-    bool last_request_action = (*request_queue)->process->is_reading;
+    bool last_request_action = (*run_queue)->process->is_reading;
     
-    while (*request_queue != NULL)
+    while (*run_queue != NULL)
     {
 
-	while (last_request_action && (*request_queue)->process->is_reading)
+	while (last_request_action && (*run_queue)->process->is_reading)
 	{
-	    add_request(&active_queue, (*request_queue)->process);
-	    *request_queue = (*request_queue)->next;
+	    printf("%b\n", (*run_queue)->process->is_reading);
+	    add_request(&active_queue, (*run_queue)->process);
+	    *run_queue = (*run_queue)->next;
 	}
 	
 	sort_io_request_node(&active_queue);
@@ -185,7 +186,7 @@ int flook_schedule(IORequestNode **request_queue, Disk_Controler *dc, int *time_
 	    }
 	}
 	
-	last_request_action = (*request_queue)->process->is_reading;
+	last_request_action = (*run_queue)->process->is_reading;
 	
 	if (active_queue == first_q) active_queue = second_q;
         else active_queue = first_q;
