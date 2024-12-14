@@ -22,6 +22,7 @@ void initialize_cache()
         cache->buffers[i].sector = -1;
 	cache->buffers[i].track = -1;
         cache->buffers[i].used = false;
+        cache->buffers[i].active = false;
     }
 }
 
@@ -41,7 +42,7 @@ void move_buffer_to_front(Buffer* buffer, bool new_buffer)
 
 }
 
-int cache_get(size_t request_sector)
+bool cache_get(size_t request_sector)
 {
     for (int i = 0; i < CACHE_CAP; ++i)
     {
@@ -49,11 +50,11 @@ int cache_get(size_t request_sector)
         {
 	    printf("[CACHE] Sector `%ld` was found in cache\n", request_sector);
             move_buffer_to_front(&cache->buffers[i], false);
-            return 1;
+            return true;
         }
     }
-    
-    return 0;
+    printf("[CACHE] Buffer for sector %ld not found in cache\n", request_sector);
+    return false;
 }
 
 void cache_print()
@@ -104,49 +105,61 @@ void cache_cleanup()
     return;
 }
 
-Buffer get_free_buffer_cache()
+Buffer* get_free_buffer_cache()
 {
-    Buffer found_buffer;
-    
+    printf("[CACHE] Get free buffer\n");
+
+
     for (int i = 0; i < CACHE_CAP; ++i)
     {
-	if (!cache->buffers[i].used)
-	{
-	    free_buffer_index_in_cache = i;
-	    return cache->buffers[i];
-	}
+        if (!cache->buffers[i].used)
+        {
+            free_buffer_index_in_cache = i;
+            return &cache->buffers[i];
+        }
     }
 
     int start_of_right_segment = LEFT_SEGMENT + MID_SEGMENT;
     int buffer_min_count = INT_MAX;
+    int buffer_min_index = -1;
 
     for (int i = start_of_right_segment; i < CACHE_CAP; ++i)
     {
-	if (cache->buffers[i].counter <= buffer_min_count)
-	{
-	    free_buffer_index_in_cache = i;
-	    found_buffer = cache->buffers[i];
-	    buffer_min_count = cache->buffers[i].counter;
-	}
+        if (cache->buffers[i].counter < buffer_min_count)
+        {
+            buffer_min_count = cache->buffers[i].counter;
+            buffer_min_index = i;
+        }
     }
 
-    return found_buffer;
-    
+
+    if (buffer_min_index == -1)
+    {
+        return false;
+    }
+
+
+    free_buffer_index_in_cache = buffer_min_index;
+     return &cache->buffers[buffer_min_index];
 }
 
-Buffer request_buffer_cache(IORequestNode *active_request)
+Buffer* find_buffer_in_cache(size_t sector)
 {
-    if (!cache_get(active_request->process->sector))
+    if (!cache_get(sector))
     {
-	printf("[CACHE] Buffer for sector %ld not found in cache\n", active_request->process->sector);
-	printf("[CACHE] Get free buffer\n");
-	Buffer free_buffer = get_free_buffer_cache();
-	free_buffer.counter = 1;
-	free_buffer.sector = active_request->process->sector;
-	free_buffer.track = active_request->process->sector/SECTORS_PER_TRACK;
-	free_buffer.used = false;
+	Buffer *out_buffer = get_free_buffer_cache();
+        if (out_buffer == NULL) {
+            fprintf(stderr, "No suitable buffer found\n");
+            return NULL;
+        }
+	out_buffer->counter = 1;
+	out_buffer->sector = sector;
+	out_buffer->track = sector/SECTORS_PER_TRACK;
+	out_buffer->used = false;
+	out_buffer->active = false;
 
-	return free_buffer; 
+	return out_buffer;
     }
-    
+
+    return NULL;
 }

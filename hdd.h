@@ -1,50 +1,10 @@
 #ifndef HDD_H_
 #define HDD_H_
 
-#include <stddef.h>
-#include <stdbool.h>
-
 #include "config.h"
+#include "process.h"
 
-typedef enum State {
-    READY,
-    BLOCKED,
-    WAKEUP,
-    FINISHED
-} State;
-
-typedef enum Mode {
-    USER_MODE,
-    KERNEL_MODE
-} Mode;
-
-
-typedef enum {
-    SCHEDULER_FIFO,
-    SCHEDULER_LOOK,
-    SCHEDULER_FLOOK
-} SchedulerType;
-
-typedef struct {
-    size_t sector;
-    bool is_reading;
-    Mode mode;
-    State state;
-} Process;
-
-typedef struct IORequestNodeStruct {
-    Process* process;
-    struct IORequestNodeStruct *prev;
-    struct IORequestNodeStruct *next;
-} IORequestNode;
-
-
-typedef struct {
-    int head_pos;
-    int head_direction;
-} Disk_Controler;
-
-
-void send_request_to_hdd(Process p);
-
+bool interrupt_handler(int time_spent, int next_interrupt);
+void generate_interrupt(Process *p, int time_worked);
+int get_next_interrupt();
 #endif
