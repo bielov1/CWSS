@@ -32,7 +32,9 @@ void reverse_queue(IORequestNode **list_p);
 void delete_node(IORequestNode **list_p, IORequestNode *curr_request);
 void schedule_buffer(Buffer *buffer);
 bool proccess_is_active_buffer(Process *p);
+void complete_process();
 void move_arm_to_track(Process *p, int *time_worked);
+void free_active_buffer();
 void set_active_buffer(Buffer *buffer);
 void syscall_read(Process *p, int *time_spent);
 #endif

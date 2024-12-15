@@ -6,6 +6,7 @@
 
 typedef enum State {
     READY,
+    SCHEDULED,
     BLOCKED,
     WAKEUP,
     COMPLETED

@@ -97,10 +97,10 @@ void tick(IORequestNode *curr_request, int *time_spent)
 		    *time_spent += SYSCALL_READ_TIME;
 		    syscall_read(p, time_spent);
 		    print_device_strategy(SCHEDULER_FLOOK);
-		    printf("[SCHEDULE] Block process %ld\n", p->sector);
-		    p->state = BLOCKED;
 		    if (proccess_is_active_buffer(p))
 		    {
+			printf("[SCHEDULE] Block process %ld\n", p->sector);
+			p->state = BLOCKED;
 			printf("[SCHEDULER] Next interrupt from disk will be at %d us\n", p->waits_for_next_interrupt);
 		    }
 		}
@@ -110,15 +110,30 @@ void tick(IORequestNode *curr_request, int *time_spent)
 		//}
 	    }
 	    break;
+	case SCHEDULED:
+	    if (p->is_reading)
+	    {
+		syscall_read(p, time_spent);
+		print_device_strategy(SCHEDULER_FLOOK);
+		if (proccess_is_active_buffer(p))
+		{
+		    printf("[SCHEDULE] Block process %ld\n", p->sector);
+		    p->state = BLOCKED;
+		    printf("[SCHEDULER] Next interrupt from disk will be at %d us\n", p->waits_for_next_interrupt);
+		}
+	    }
+	    break;
 	case BLOCKED:
 	    if (interrupt_handler(*time_spent, p->waits_for_next_interrupt))
 	    {
+		printf("[SCHEDULER] Disk interrupt handler was invoked\n");
+		printf("[SCHEDULER] Wake up process %ld\n", p->sector);
 		p->state = WAKEUP;
 	    }
 	    
 	    break;
 	case WAKEUP:
-	    //cache_put(p);
+	    complete_process();
 	    p->state = COMPLETED;
 	    break;
 	case COMPLETED:

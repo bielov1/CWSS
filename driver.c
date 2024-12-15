@@ -144,6 +144,14 @@ bool proccess_is_active_buffer(Process *p)
     return active_buffer.sector == p->sector ? true : false;
 }
 
+void complete_process()
+{
+    printf("[DRIVER] Interrupt from disk\n");
+    cache_put(&active_buffer);
+    cache_print();
+    free_active_buffer();
+}
+
 void move_arm_to_track(Process *p, int *time_worked)
 {
     int time = 0;
@@ -177,6 +185,12 @@ void move_arm_to_track(Process *p, int *time_worked)
     generate_interrupt(p, *time_worked);
 }
 
+void free_active_buffer()
+{
+    active_buffer_exists = false;
+    active_buffer.active = false;
+}
+
 void set_active_buffer(Buffer *buffer)
 {
     active_buffer_exists = true;
@@ -203,6 +217,7 @@ void syscall_read(Process *p, int *time_spent)
 	}
 	else
 	{
+	    p->state = SCHEDULED;
 	    schedule_buffer(out_buffer);
 	}
     }

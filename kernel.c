@@ -80,6 +80,8 @@ void start_simulation()
 	    }
 	}
     }
+
+    printf("Scheduler has nothing to do, exit\n");
 }
 
 
