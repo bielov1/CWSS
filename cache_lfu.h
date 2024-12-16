@@ -26,6 +26,6 @@ void cache_print();
 void cache_put(Buffer* free_buf);
 void cache_cleanup();
 Buffer* get_free_buffer_cache();
-Buffer* find_buffer_in_cache(size_t sector);
+bool find_buffer_in_cache(size_t sector, Buffer **out_buffer);
 
 #endif

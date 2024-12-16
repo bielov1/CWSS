@@ -5,13 +5,6 @@
 #include "cache_lfu.h"
 #include "scheduler.h"
 
-
-typedef enum {
-    SCHEDULER_FIFO,
-    SCHEDULER_LOOK,
-    SCHEDULER_FLOOK
-} SchedulerType;
-
 typedef struct {
     int head_pos;
     int head_direction;
@@ -31,10 +24,13 @@ void print_device_strategy(SchedulerType sched_t);
 void reverse_queue(IORequestNode **list_p);
 void delete_node(IORequestNode **list_p, IORequestNode *curr_request);
 void schedule_buffer(Buffer *buffer);
-bool proccess_is_active_buffer(Process *p);
+bool process_is_active_buffer(Process *p);
 void complete_process();
 void move_arm_to_track(Process *p, int *time_worked);
 void free_active_buffer();
 void set_active_buffer(Buffer *buffer);
-void syscall_read(Process *p, int *time_spent);
+int syscall_read(Process *p, int *time_spent);
+
+void fifo_schedule();
+bool is_next_process_to_serve(Process *p);
 #endif

@@ -28,6 +28,12 @@ typedef struct {
 } Process;
 
 
+typedef enum {
+    SCHEDULER_FIFO,
+    SCHEDULER_LOOK,
+    SCHEDULER_FLOOK
+} SchedulerType;
+
 typedef struct IORequestNodeStruct {
     Process* process;
     struct IORequestNodeStruct *prev;

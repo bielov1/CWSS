@@ -35,20 +35,6 @@ void sort_io_request_node(IORequestNode **head) {
 }
 
 
-int fifo_schedule(IORequestNode **rq)
-{
-    (void) rq;
-    //reverse_queue(rq);
-    return 0;
-}
-
-bool flook_schedule(Buffer *schedule_queue, Buffer *next_buffer)
-{
-    (void) schedule_queue;
-    (void) next_buffer;
-    return false;
-}
-
 void read_process(Process *curr_process)
 {
     if (curr_process->is_reading)
@@ -61,22 +47,24 @@ void read_process(Process *curr_process)
     }
 }
 
-void tick(IORequestNode *curr_request, int *time_spent)
+
+bool last_operation_was_read = true;
+void tick(IORequestNode *curr_request, int *time_spent, SchedulerType sched_t)
 {
+    int next_interrupt = get_next_interrupt();
     if (curr_request == NULL)
     {
 	printf("[SCHEDULER] RunQ is empty\n");
-	printf("[SCHEDULER] Scheduler has nothing to do for %d us\n", 4166 - *time_spent);
-	int next_interrupt = get_next_interrupt();
-	printf("next interrupt is %d us\n", next_interrupt);
+	printf("[SCHEDULER] Scheduler has nothing to do for %d us\n", next_interrupt - *time_spent);
 	if (*time_spent < next_interrupt) {
 	    *time_spent = next_interrupt;
 	}
+
 	return;
     }
 
-    
     Process *p = curr_request->process;
+    //bool current_is_read = p->is_reading;
     
     //printf("[SCHEDULER] %d us (NEXT ITERATION)\n", *time_spent);
     switch(p->state)
@@ -97,7 +85,7 @@ void tick(IORequestNode *curr_request, int *time_spent)
 		    *time_spent += SYSCALL_READ_TIME;
 		    syscall_read(p, time_spent);
 		    print_device_strategy(SCHEDULER_FLOOK);
-		    if (proccess_is_active_buffer(p))
+		    if (process_is_active_buffer(p))
 		    {
 			printf("[SCHEDULE] Block process %ld\n", p->sector);
 			p->state = BLOCKED;
@@ -111,29 +99,44 @@ void tick(IORequestNode *curr_request, int *time_spent)
 	    }
 	    break;
 	case SCHEDULED:
-	    if (p->is_reading)
+	    if (is_next_process_to_serve(p))
 	    {
-		syscall_read(p, time_spent);
-		print_device_strategy(SCHEDULER_FLOOK);
-		if (proccess_is_active_buffer(p))
+		if (syscall_read(p, time_spent) == 0)
 		{
-		    printf("[SCHEDULE] Block process %ld\n", p->sector);
-		    p->state = BLOCKED;
-		    printf("[SCHEDULER] Next interrupt from disk will be at %d us\n", p->waits_for_next_interrupt);
+		    print_device_strategy(SCHEDULER_FLOOK);
+		    if (process_is_active_buffer(p))
+		    {
+			printf("[SCHEDULE] Block process %ld\n", p->sector);
+			p->state = BLOCKED;
+			printf("[SCHEDULER] Next interrupt from disk will be at %d us\n", p->waits_for_next_interrupt);
+			
+			int next_interrupt = get_next_interrupt();
+			printf("[SCHEDULER] Process %ld waited for %d us\n", p->sector, next_interrupt - *time_spent);
+			if (*time_spent < next_interrupt) {
+			    *time_spent = next_interrupt;
+			}
+		    }
 		}
 	    }
 	    break;
 	case BLOCKED:
 	    if (interrupt_handler(*time_spent, p->waits_for_next_interrupt))
-	    {
+	    {        
 		printf("[SCHEDULER] Disk interrupt handler was invoked\n");
 		printf("[SCHEDULER] Wake up process %ld\n", p->sector);
+		
 		p->state = WAKEUP;
 	    }
 	    
 	    break;
 	case WAKEUP:
 	    complete_process();
+	    printf("[SCHEDULER] Process %ld is completed\n", p->sector);
+	    
+	    if (sched_t == SCHEDULER_FIFO)
+	    {
+		fifo_schedule();
+	    } // look flook
 	    p->state = COMPLETED;
 	    break;
 	case COMPLETED:

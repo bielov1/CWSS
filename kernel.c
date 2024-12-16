@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "kernel.h"
 
@@ -46,10 +47,11 @@ void start_simulation()
 {
     int time_worked = 0;
     int served_requests = 0;
-    SchedulerType sched_t = SCHEDULER_FLOOK;
+    SchedulerType sched_t = SCHEDULER_FIFO;
     IORequestNode *user_requests = NULL;
 
     generate_requests(new_process, &user_requests);
+
     reverse_queue(&user_requests);
     
     IORequestNode *req = user_requests;
@@ -59,7 +61,8 @@ void start_simulation()
 	
 	for (int t = 0; t < QUANTUM_TIME; ++t)
 	{
-            tick(req, &time_worked);
+	    
+            tick(req, &time_worked, sched_t);   
 	    if (req == NULL)
 	    {
 		break;
@@ -72,21 +75,24 @@ void start_simulation()
 	}
 	else
 	{
-	    if (req->process->state == COMPLETED) served_requests++;
-	    
-	    if (sched_t == SCHEDULER_FLOOK)
+	    if (req->process->state == COMPLETED)
 	    {
-		req = req->next;//flook_schedule(schedule_queue);
+		delete_node(&user_requests, req);
+		served_requests++;
 	    }
+	    
+	    req = req->next;
+	    
 	}
     }
 
-    printf("Scheduler has nothing to do, exit\n");
+    printf("Scheduler has nothing to do, exited with time: %d us\n", time_worked);
 }
 
 
 int main()
 {
+    //srand(NULL);
     initialize_cache();
     initialize_dc();
     intialize_schedule_queue();

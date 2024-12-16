@@ -5,11 +5,7 @@
 
 bool interrupt_handler(int time_spent, int next_interrupt)
 {
-    if (time_spent == next_interrupt) {
-        printf("[INTERRUPT] Handling interrupt at %d us\n", time_spent);
-        return true;
-    }
-    return false;
+    return time_spent == next_interrupt;
 }
 
 int next_interrupt = -1;

@@ -9,6 +9,8 @@ Buffer schedule_queue[REQUESTS_NUM];
 Buffer schedule_queue2[REQUESTS_NUM];
 Disk_Controler* dc = NULL;
 
+// to know what process serve next after fifo algo
+Process *next_process_to_serve = NULL;
 
 void initialize_dc()
 {
@@ -139,17 +141,19 @@ void schedule_buffer(Buffer *buffer)
     }
 }
 
-bool proccess_is_active_buffer(Process *p)
+bool process_is_active_buffer(Process *p)
 {
-    return active_buffer.sector == p->sector ? true : false;
+    return (active_buffer.sector == p->sector);
 }
 
 void complete_process()
 {
-    printf("[DRIVER] Interrupt from disk\n");
-    cache_put(&active_buffer);
+    if (active_buffer.active)
+    {
+	cache_put(&active_buffer);
+	free_active_buffer();
+    }
     cache_print();
-    free_active_buffer();
 }
 
 void move_arm_to_track(Process *p, int *time_worked)
@@ -188,6 +192,11 @@ void move_arm_to_track(Process *p, int *time_worked)
 void free_active_buffer()
 {
     active_buffer_exists = false;
+
+    active_buffer.counter = 1;
+    active_buffer.sector = -1;
+    active_buffer.track = -1;
+    active_buffer.used = false;
     active_buffer.active = false;
 }
 
@@ -203,22 +212,67 @@ void set_active_buffer(Buffer *buffer)
     active_buffer.active = buffer->active;
 }
 
-void syscall_read(Process *p, int *time_spent)
+int syscall_read(Process *p, int *time_spent)
 {
     Buffer *out_buffer;
 
-    out_buffer = find_buffer_in_cache(p->sector);
-    if (out_buffer != NULL)
+    if (!find_buffer_in_cache(p->sector, &out_buffer))
     {
-	if (!active_buffer_exists)
+        Buffer *buf = get_free_buffer_cache();
+        if (buf == NULL) {
+            fprintf(stderr, "No suitable buffer found\n");
+            exit(1);
+        }
+        buf->counter = 1;
+        buf->sector = p->sector;
+        buf->track = p->sector / SECTORS_PER_TRACK;
+        buf->used = false;
+        buf->active = false;
+        
+        out_buffer = buf;
+    }
+    else
+    {
+	p->state = WAKEUP;
+	return 1;
+    }
+
+    if (!active_buffer_exists)
+    {
+	set_active_buffer(out_buffer);
+	move_arm_to_track(p, time_spent);
+    }
+    else
+    {
+	printf("[DRIVER] Scheduled process %ld\n", p->sector);
+	p->state = SCHEDULED;
+	schedule_buffer(out_buffer);
+    }
+    return 0;
+}
+
+Process sleep_q[REQUESTS_NUM] = {0};
+
+// fifo algo fills up sleep_q with processes, that was retrieved from schedule_queue untill its empty.
+void fifo_schedule()
+{
+    for (int i = 0; i < REQUESTS_NUM; ++i)
+    {
+	if (schedule_queue[i].used)
 	{
-	    set_active_buffer(out_buffer);
-	    move_arm_to_track(p, time_spent);
-	}
-	else
-	{
-	    p->state = SCHEDULED;
-	    schedule_buffer(out_buffer);
+	    next_process_to_serve->sector = schedule_queue[i].sector;
+	    schedule_queue[i].used = false;
+	    return;
 	}
     }
+}
+
+bool is_next_process_to_serve(Process *p)
+{    
+    if (next_process_to_serve == NULL)
+    {
+	next_process_to_serve = (Process*) malloc(sizeof(Process));
+    }
+
+    return (p->sector == next_process_to_serve->sector);
 }
