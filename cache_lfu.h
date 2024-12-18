@@ -8,9 +8,9 @@
 
 typedef struct {   
     int counter;
-    size_t sector;
-    size_t track;
+    Process process;
     bool used;
+    bool duplicate;
     bool active;
 } Buffer;
 
@@ -25,7 +25,6 @@ bool cache_get(size_t request_sector);
 void cache_print();
 void cache_put(Buffer* free_buf);
 void cache_cleanup();
-Buffer* get_free_buffer_cache();
-bool find_buffer_in_cache(size_t sector, Buffer **out_buffer);
+bool find_buffer_in_cache(Buffer* buf);
 
 #endif

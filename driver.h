@@ -20,17 +20,17 @@ void initialize_dc();
 void intialize_schedule_queue();
 int add_request(IORequestNode **list_p, Process* p);
 void print_request_queue(IORequestNode *list);
-void print_device_strategy(SchedulerType sched_t);
+void print_device_strategy(const char* strategy);
 void reverse_queue(IORequestNode **list_p);
 void delete_node(IORequestNode **list_p, IORequestNode *curr_request);
-void schedule_buffer(Buffer *buffer);
-bool process_is_active_buffer(Process *p);
+void schedule_process_as_buffer(Process *process);
+bool schedule_queue_is_empty();
+bool active_buffer_exists();
+bool process_is_active_buffer(Process *process);
 void complete_process();
 void move_arm_to_track(Process *p, int *time_worked);
 void free_active_buffer();
-void set_active_buffer(Buffer *buffer);
-int syscall_read(Process *p, int *time_spent);
+void set_process_as_active_buffer(Process *process);
 
-void fifo_schedule();
-bool is_next_process_to_serve(Process *p);
+Process* fifo_schedule();
 #endif

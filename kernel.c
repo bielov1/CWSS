@@ -3,19 +3,27 @@
 
 #include "kernel.h"
 
-Process* new_process(size_t sector, bool action, int next_interrupt, Mode mode, State state)
+Process* new_process(size_t sector, size_t track, bool is_reading, bool duplicate, int next_interrupt, Mode mode, State state)
 {
     Process *p = malloc(sizeof(Process));
     if (p == NULL) {
         perror("Failed to allocate memory for process");
         exit(EXIT_FAILURE);
     }
-    *p = (Process){sector, action, next_interrupt, mode, state};
+    *p = (Process){
+	.sector = sector,
+	.track = track,
+	.is_reading = is_reading,
+	.duplicate = duplicate,
+	.waits_for_next_interrupt = next_interrupt,
+	.mode = mode,
+	.state = state
+    };
     return p;
 }
 
 
-void generate_requests(Process* (*f)(size_t, bool, int, Mode, State), IORequestNode **user_requests)
+void generate_requests(Process* (*f)(size_t, size_t, bool, bool, int, Mode, State), IORequestNode **user_requests)
 {
     Process* p;
     int prev_gs = -1;
@@ -33,10 +41,12 @@ void generate_requests(Process* (*f)(size_t, bool, int, Mode, State), IORequestN
             gs = rand() % (TOTAL_SECTORS - 1);
             prev_gs = gs;
 	}
+	int gt = gs / SECTORS_PER_TRACK;
 	//generate action
 	bool ga = true; // TEMPORARY action for a process.
 	// In future should be random between write and read.
-	p = f(gs, ga, -1, USER_MODE, READY);
+	bool gd = false; // duplicate
+	p = f(gs, gt, ga, gd, -1, USER_MODE, NEW_PROCESS);
 	printf("[SCHEDULER] Process %ld was added\n", p->sector);
 	add_request(user_requests, p);
     }
@@ -58,17 +68,11 @@ void start_simulation()
 
     while (served_requests != REQUESTS_NUM)
     {
-	
-	for (int t = 0; t < QUANTUM_TIME; ++t)
+        while (tick(req, &time_worked, sched_t) == 0)
 	{
-	    
-            tick(req, &time_worked, sched_t);   
-	    if (req == NULL)
-	    {
-		break;
-	    }
+	    printf("\n");
 	}
-
+	printf("\n");
 	if (req == NULL)
 	{
 	    req = user_requests;
@@ -79,10 +83,15 @@ void start_simulation()
 	    {
 		delete_node(&user_requests, req);
 		served_requests++;
+		printf("\t\tserved_requests: %d\n", served_requests);
 	    }
 	    
 	    req = req->next;
-	    
+	    if (req != NULL && req->process->duplicate)
+	    {
+		delete_node(&user_requests, req);
+		served_requests++;
+	    }
 	}
     }
 
@@ -95,7 +104,7 @@ int main()
     //srand(NULL);
     initialize_cache();
     initialize_dc();
-    intialize_schedule_queue();
+    //intialize_schedule_queue();
     start_simulation();
     cache_cleanup();
     return 0;

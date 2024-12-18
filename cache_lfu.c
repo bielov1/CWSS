@@ -5,7 +5,7 @@
 #include "cache_lfu.h"
 
 Cache *cache = NULL;
-int free_buffer_index_in_cache = -1;
+int active_buffer_index_in_cache = -1;
 
 void initialize_cache()
 {
@@ -19,8 +19,7 @@ void initialize_cache()
     for (int i = 0; i < CACHE_CAP; ++i)
     {
         cache->buffers[i].counter = 0;
-        cache->buffers[i].sector = -1;
-	cache->buffers[i].track = -1;
+        cache->buffers[i].process = (Process){0};
         cache->buffers[i].used = false;
         cache->buffers[i].active = false;
     }
@@ -28,12 +27,12 @@ void initialize_cache()
 
 void move_buffer_to_front(Buffer* buffer, bool new_buffer)
 {
-    if (!new_buffer && free_buffer_index_in_cache >= LEFT_SEGMENT)
+    if (!new_buffer && active_buffer_index_in_cache >= LEFT_SEGMENT)
     {
 	buffer->counter++;
     }
     
-    for (int j = free_buffer_index_in_cache; j > 0; --j)
+    for (int j = active_buffer_index_in_cache; j > 0; --j)
     {
 	Buffer temp = cache->buffers[j-1];
 	cache->buffers[j-1] = cache->buffers[j];
@@ -46,7 +45,7 @@ bool cache_get(size_t request_sector)
 {
     for (int i = 0; i < CACHE_CAP; ++i)
     {
-        if (cache->buffers[i].sector == request_sector && cache->buffers[i].used)
+        if (cache->buffers[i].process.sector == request_sector && cache->buffers[i].used)
         {
 	    printf("[CACHE] Buffer for sector %ld was found in cache\n", request_sector);
             return true;
@@ -64,7 +63,7 @@ void cache_print()
     {
 	if (cache->buffers[i].used)
 	{
-	    printf("(%ld:%ld),", cache->buffers[i].track, cache->buffers[i].sector);
+	    printf("(%ld:%ld),", cache->buffers[i].process.track, cache->buffers[i].process.sector);
 	}
     }
     printf("]\n");
@@ -74,7 +73,7 @@ void cache_print()
     {
 	if (cache->buffers[i].used)
 	{
-	    printf("(%ld:%ld),", cache->buffers[i].track, cache->buffers[i].sector);
+	    printf("(%ld:%ld),", cache->buffers[i].process.track, cache->buffers[i].process.sector);
 	}
     }
     printf("]\n");
@@ -84,37 +83,23 @@ void cache_print()
     {
 	if (cache->buffers[i].used)
 	{
-	    printf("(%ld:%ld),", cache->buffers[i].track, cache->buffers[i].sector);
+	    printf("(%ld:%ld),", cache->buffers[i].process.track, cache->buffers[i].process.sector);
 	}
     }
     printf("]\n");
 }
 
-void cache_put(Buffer* free_buf)
+void cache_put(Buffer* active_buffer)
 {
-    free_buf->used = true;
-    printf("[CACHE] Buffer (%ld:%ld) added to cache\n", free_buf->track, free_buf->sector);
-    cache->buffers[free_buffer_index_in_cache] = *free_buf;
-    move_buffer_to_front(free_buf, true);
-    
-}
-
-void cache_cleanup()
-{
-    return;
-}
-
-Buffer* get_free_buffer_cache()
-{
-    printf("[CACHE] Get free buffer\n");
-
-
+    printf("[CACHE] Buffer (%ld:%ld) was added to cache\n", active_buffer->process.track, active_buffer->process.sector);
     for (int i = 0; i < CACHE_CAP; ++i)
     {
         if (!cache->buffers[i].used)
         {
-            free_buffer_index_in_cache = i;
-            return &cache->buffers[i];
+	    active_buffer_index_in_cache = i;
+	    cache->buffers[active_buffer_index_in_cache] = *active_buffer;
+	    move_buffer_to_front(active_buffer, true);
+	    return;
         }
     }
 
@@ -131,21 +116,21 @@ Buffer* get_free_buffer_cache()
         }
     }
 
-
-    if (buffer_min_index == -1)
-    {
-        return false;
-    }
-
-
-    free_buffer_index_in_cache = buffer_min_index;
-    return &cache->buffers[buffer_min_index];
+    
+    active_buffer_index_in_cache = buffer_min_index;
+    cache->buffers[active_buffer_index_in_cache] = *active_buffer;
+    move_buffer_to_front(active_buffer, true);
+    
 }
 
-bool find_buffer_in_cache(size_t sector, Buffer **out_buffer)
+void cache_cleanup()
 {
-    if (cache_get(sector)) {
-        *out_buffer = &cache->buffers[0];
+    return;
+}
+
+bool find_buffer_in_cache(Buffer *buf)
+{
+    if (cache_get(buf->process.sector)) {
         return true;
     }
     

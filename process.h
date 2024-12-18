@@ -5,10 +5,10 @@
 #include <stdlib.h>
 
 typedef enum State {
+    NEW_PROCESS,
+    WAITING_FOR_INTERRUPT,
     READY,
-    SCHEDULED,
     BLOCKED,
-    WAKEUP,
     COMPLETED
 } State;
 
@@ -20,7 +20,9 @@ typedef enum Mode {
 
 typedef struct {
     size_t sector;
-    bool is_reading;                 
+    size_t track;
+    bool is_reading;
+    bool duplicate;
     int waits_for_next_interrupt; // process doesn't wait for interrupt in case -1(unblocked)
                                   // process is waiting for interrupt in case > -1(blocked)
     Mode mode;                    
