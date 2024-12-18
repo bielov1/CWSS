@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <assert.h>
 
 #include "scheduler.h"
 
@@ -21,7 +22,7 @@ bool last_operation_was_read = true;
 Process* process_waits_for_interrupt = NULL;
 Process* next_process_to_serve = NULL;
 
-void syscall(Process *curr_process, int* time_spent)
+void syscall(Process *curr_process, long int* time_spent)
 {    
     if (!active_buffer_exists())
     {
@@ -37,14 +38,17 @@ void syscall(Process *curr_process, int* time_spent)
 }
 
 
-int tick(IORequestNode* curr_request, int *time_spent, SchedulerType sched_t)
+int tick(IORequestNode* curr_request, long int *time_spent, SchedulerType sched_t)
 {    
-    printf("[SCHEDULER] %d us (NEXT ITERATION)\n", *time_spent);
+    printf("[SCHEDULER] %ld us (NEXT ITERATION)\n", *time_spent);
     if (curr_request == NULL)
     {
 	printf("[SCHEDULER] RunQ is empty\n");
-	printf("[SCHEDULER] Scheduler has nothing to do for %d us\n", process_waits_for_interrupt->waits_for_next_interrupt - *time_spent);
-	*time_spent = process_waits_for_interrupt->waits_for_next_interrupt;
+	if (*time_spent != process_waits_for_interrupt->waits_for_next_interrupt)
+	{
+	    printf("[SCHEDULER] Scheduler has nothing to do for %ld us\n", process_waits_for_interrupt->waits_for_next_interrupt - *time_spent);
+	    *time_spent = process_waits_for_interrupt->waits_for_next_interrupt;
+	}
 	return 1;
     }
     
@@ -72,9 +76,10 @@ int tick(IORequestNode* curr_request, int *time_spent, SchedulerType sched_t)
 	    }
 	    else
 	    {
+		read_process(curr_process);
 		if (process_waits_for_interrupt->waits_for_next_interrupt == -1)
 		{
-		    process_waits_for_interrupt->waits_for_next_interrupt = BEFORE_WRITING_TIME;
+		    process_waits_for_interrupt->waits_for_next_interrupt = *time_spent + BEFORE_WRITING_TIME;
 		}
 		
 		last_operation_was_read = !last_operation_was_read;
@@ -85,10 +90,9 @@ int tick(IORequestNode* curr_request, int *time_spent, SchedulerType sched_t)
 	    break;
 	case WAITING_FOR_INTERRUPT:
 	    printf("[SCHEDULER] User mode for process %ld\n", curr_process->sector);
-	    printf("... worked for %d us in user mode", process_waits_for_interrupt->waits_for_next_interrupt - *time_spent);
+	    printf("... worked for %ld us in user mode", process_waits_for_interrupt->waits_for_next_interrupt - *time_spent);
 
 	    *time_spent = process_waits_for_interrupt->waits_for_next_interrupt;
-	    
 	    return 1;
 	    break;
 	case READY:
@@ -101,33 +105,32 @@ int tick(IORequestNode* curr_request, int *time_spent, SchedulerType sched_t)
 	    }
 	    else if (curr_process->mode == KERNEL_MODE)
 	    {
-		if (curr_process->is_reading) // last_operation_was_read?
-		{
-		    printf("[SCHEDULER] Kernel mode (syscall) for process %ld\n", curr_process->sector);
-		    printf("... worked for %d us in system, request buffer cache\n", SYSCALL_READ_TIME);
-		    *time_spent += SYSCALL_READ_TIME;
-		    curr_process->state = BLOCKED;
-		    syscall(curr_process, time_spent);
+		printf("[SCHEDULER] Kernel mode (syscall) for process %ld\n", curr_process->sector);
+		printf("... worked for %d us in system, request buffer cache\n", SYSCALL_READ_TIME);
+		*time_spent += SYSCALL_READ_TIME;
+		curr_process->state = BLOCKED;
+		syscall(curr_process, time_spent);
 
-		    if (sched_t == SCHEDULER_FIFO)
-		    {
-			print_device_strategy("FIFO");
-		    }
-		    printf("[SCHEDULER] Blocked process %ld\n", curr_process->sector);
-		    		    
-		    if (process_is_active_buffer(curr_process))
-		    {
-			process_waits_for_interrupt = curr_process;
-			printf("[SCHEDULER] Next interrupt from disk will be at %d us\n", curr_process->waits_for_next_interrupt);
-			
-		    }
+		if (sched_t == SCHEDULER_FIFO)
+		{
+		    print_device_strategy("FIFO");
 		}
+		printf("[SCHEDULER] Blocked process %ld\n", curr_process->sector);
+		
+		if (process_is_active_buffer(curr_process))
+		{
+		    process_waits_for_interrupt = curr_process;
+		    assert(curr_process->waits_for_next_interrupt != -1);
+		    printf("[SCHEDULER] Next interrupt from disk will be at %ld us\n", curr_process->waits_for_next_interrupt);
+		    
+		}
+		
 		
 		return 1;
 	    }
 	    break;
 	case BLOCKED:
-	    printf("[SCHEDULER] Process %ld waited for %d us\n", curr_process->sector, process_waits_for_interrupt->waits_for_next_interrupt - (*time_spent));
+	    printf("[SCHEDULER] Process %ld waited for %ld us\n", curr_process->sector, process_waits_for_interrupt->waits_for_next_interrupt - (*time_spent));
 	    *time_spent = process_waits_for_interrupt->waits_for_next_interrupt;
 
 	    return 0;
@@ -148,6 +151,7 @@ int tick(IORequestNode* curr_request, int *time_spent, SchedulerType sched_t)
 	    }
 	    else
 	    {
+		process_waits_for_interrupt->waits_for_next_interrupt = -1;
 		return 1;
 	    }
 
@@ -161,7 +165,7 @@ int tick(IORequestNode* curr_request, int *time_spent, SchedulerType sched_t)
 	    if (process_is_active_buffer(next_process_to_serve))
 	    {
 		process_waits_for_interrupt = next_process_to_serve;
-		printf("[SCHEDULER] Next interrupt from disk will be at %d us\n", process_waits_for_interrupt->waits_for_next_interrupt);
+		printf("[SCHEDULER] Next interrupt from disk will be at %ld us\n", process_waits_for_interrupt->waits_for_next_interrupt);
 	    }
 	    
 	    return 1;

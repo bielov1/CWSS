@@ -23,7 +23,7 @@ typedef struct {
     size_t track;
     bool is_reading;
     bool duplicate;
-    int waits_for_next_interrupt; // process doesn't wait for interrupt in case -1(unblocked)
+    long int waits_for_next_interrupt; // process doesn't wait for interrupt in case -1(unblocked)
                                   // process is waiting for interrupt in case > -1(blocked)
     Mode mode;                    
     State state;

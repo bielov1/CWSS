@@ -6,6 +6,6 @@
 #include "driver.h"
 
 void read_process(Process *curr_process);
-int tick(IORequestNode *curr_request, int *time_spent, SchedulerType sched_t);
+int tick(IORequestNode *curr_request, long int *time_spent, SchedulerType sched_t);
 
 #endif

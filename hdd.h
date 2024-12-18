@@ -4,7 +4,7 @@
 #include "config.h"
 #include "process.h"
 
-bool interrupt_handler(int time_spent, int next_interrupt);
-void generate_interrupt(Process *p, int time_worked);
+bool interrupt_handler(long int time_spent, long int next_interrupt);
+void generate_interrupt(Process *p, long int time_worked);
 int get_next_interrupt();
 #endif

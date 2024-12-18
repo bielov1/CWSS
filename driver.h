@@ -28,7 +28,7 @@ bool schedule_queue_is_empty();
 bool active_buffer_exists();
 bool process_is_active_buffer(Process *process);
 void complete_process();
-void move_arm_to_track(Process *p, int *time_worked);
+void move_arm_to_track(Process *p, long int *time_worked);
 void free_active_buffer();
 void set_process_as_active_buffer(Process *process);
 

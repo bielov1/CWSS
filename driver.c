@@ -143,7 +143,7 @@ bool active_buffer_exists()
 
 bool process_is_active_buffer(Process *process)
 {
-    return ((active_buffer.process.sector == process->sector) && process->waits_for_next_interrupt);
+    return ((active_buffer.process.sector == process->sector) && (process->waits_for_next_interrupt > 0));
 }
 
 void complete_process()
@@ -156,9 +156,9 @@ void complete_process()
     cache_print();
 }
 
-void move_arm_to_track(Process *p, int *time_worked)
+void move_arm_to_track(Process *p, long int *time_worked)
 {
-    int time = 0;
+    long int time = 0;
     int track = p->sector/SECTORS_PER_TRACK;
     printf("[DRIVER] Best move decision for tracks %d => %d\n", dc->head_pos, track);
     while (dc->head_pos != track)
@@ -181,7 +181,7 @@ void move_arm_to_track(Process *p, int *time_worked)
     }
     else
     {
-	printf("\tmove time %d\n", time);
+	printf("\tmove time %ld\n", time);
     }
     
     *time_worked += time;

@@ -43,8 +43,7 @@ void generate_requests(Process* (*f)(size_t, size_t, bool, bool, int, Mode, Stat
 	}
 	int gt = gs / SECTORS_PER_TRACK;
 	//generate action
-	bool ga = true; // TEMPORARY action for a process.
-	// In future should be random between write and read.
+	bool ga = rand() % 2 == 0 ? true : false; 
 	bool gd = false; // duplicate
 	p = f(gs, gt, ga, gd, -1, USER_MODE, NEW_PROCESS);
 	printf("[SCHEDULER] Process %ld was added\n", p->sector);
@@ -55,7 +54,7 @@ void generate_requests(Process* (*f)(size_t, size_t, bool, bool, int, Mode, Stat
 
 void start_simulation()
 {
-    int time_worked = 0;
+    long int time_worked = 0;
     int served_requests = 0;
     SchedulerType sched_t = SCHEDULER_FIFO;
     IORequestNode *user_requests = NULL;
@@ -79,14 +78,23 @@ void start_simulation()
 	}
 	else
 	{
+	    if (req->process->state == WAITING_FOR_INTERRUPT)
+	    {
+		req->process->state = READY;
+		req = user_requests;
+		continue;
+	    }
+	    
 	    if (req->process->state == COMPLETED)
 	    {
 		delete_node(&user_requests, req);
 		served_requests++;
 		printf("\t\tserved_requests: %d\n", served_requests);
 	    }
-	    
+
 	    req = req->next;
+
+
 	    if (req != NULL && req->process->duplicate)
 	    {
 		delete_node(&user_requests, req);
@@ -95,7 +103,7 @@ void start_simulation()
 	}
     }
 
-    printf("Scheduler has nothing to do, exited with time: %d us\n", time_worked);
+    printf("Scheduler has nothing to do, exited with time: %ld us\n", time_worked);
 }
 
 
