@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <time.h>
 #include "kernel.h"
 
-Process* new_process(size_t sector, size_t track, bool is_reading, bool duplicate, int next_interrupt, Mode mode, State state)
+Process* new_process(size_t sector, size_t track, const char* action, bool duplicate, int next_interrupt, Mode mode, State state)
 {
     Process *p = malloc(sizeof(Process));
     if (p == NULL) {
@@ -13,7 +13,7 @@ Process* new_process(size_t sector, size_t track, bool is_reading, bool duplicat
     *p = (Process){
 	.sector = sector,
 	.track = track,
-	.is_reading = is_reading,
+	.action = action,
 	.duplicate = duplicate,
 	.waits_for_next_interrupt = next_interrupt,
 	.mode = mode,
@@ -23,27 +23,16 @@ Process* new_process(size_t sector, size_t track, bool is_reading, bool duplicat
 }
 
 
-void generate_requests(Process* (*f)(size_t, size_t, bool, bool, int, Mode, State), IORequestNode **user_requests)
+void generate_requests(Process* (*f)(size_t, size_t, const char*, bool, int, Mode, State), IORequestNode **user_requests)
 {
     Process* p;
-    int prev_gs = -1;
+    //srand(time(NULL));
     for (int i = 0; i < REQUESTS_NUM; ++i)
     {
-	//generate sector
-	int gs;
-
-	if (prev_gs != -1 && (rand() % 100) < 30)
-	{
-            gs = prev_gs;
-	}
-	else
-	{
-            gs = rand() % (TOTAL_SECTORS - 1);
-            prev_gs = gs;
-	}
+        int gs = rand() % (TOTAL_SECTORS - 1);
 	int gt = gs / SECTORS_PER_TRACK;
 	//generate action
-	bool ga = rand() % 2 == 0 ? true : false; 
+	const char* ga = rand() % 2 == 0 ? "READ" : "WRITE"; 
 	bool gd = false; // duplicate
 	p = f(gs, gt, ga, gd, -1, USER_MODE, NEW_PROCESS);
 	printf("[SCHEDULER] Process %ld was added\n", p->sector);
@@ -56,7 +45,7 @@ void start_simulation()
 {
     long int time_worked = 0;
     int served_requests = 0;
-    SchedulerType sched_t = SCHEDULER_FIFO;
+    SchedulerType sched_t = SCHEDULER_FLOOK;
     IORequestNode *user_requests = NULL;
 
     generate_requests(new_process, &user_requests);
@@ -109,10 +98,8 @@ void start_simulation()
 
 int main()
 {
-    //srand(NULL);
     initialize_cache();
     initialize_dc();
-    //intialize_schedule_queue();
     start_simulation();
     cache_cleanup();
     return 0;

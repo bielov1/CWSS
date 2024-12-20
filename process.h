@@ -21,7 +21,7 @@ typedef enum Mode {
 typedef struct {
     size_t sector;
     size_t track;
-    bool is_reading;
+    const char* action;
     bool duplicate;
     long int waits_for_next_interrupt; // process doesn't wait for interrupt in case -1(unblocked)
                                   // process is waiting for interrupt in case > -1(blocked)

@@ -29,7 +29,9 @@ void move_buffer_to_front(Buffer* buffer, bool new_buffer)
 {
     if (!new_buffer && active_buffer_index_in_cache >= LEFT_SEGMENT)
     {
+	printf("\t\t boba before buffer->counter = %d", buffer->counter);
 	buffer->counter++;
+	printf("\t\t boba after buffer->counter = %d", buffer->counter);
     }
     
     for (int j = active_buffer_index_in_cache; j > 0; --j)
@@ -48,6 +50,8 @@ bool cache_get(size_t request_sector)
         if (cache->buffers[i].process.sector == request_sector && cache->buffers[i].used)
         {
 	    printf("[CACHE] Buffer for sector %ld was found in cache\n", request_sector);
+	    active_buffer_index_in_cache = i;
+	    move_buffer_to_front(&cache->buffers[i], false);
             return true;
         }
     }
@@ -63,7 +67,7 @@ void cache_print()
     {
 	if (cache->buffers[i].used)
 	{
-	    printf("(%ld:%ld),", cache->buffers[i].process.track, cache->buffers[i].process.sector);
+	    printf("(%ld:%ld){ counter: %d },", cache->buffers[i].process.track, cache->buffers[i].process.sector, cache->buffers[i].counter);
 	}
     }
     printf("]\n");
@@ -73,7 +77,7 @@ void cache_print()
     {
 	if (cache->buffers[i].used)
 	{
-	    printf("(%ld:%ld),", cache->buffers[i].process.track, cache->buffers[i].process.sector);
+	    printf("(%ld:%ld){ counter: %d },", cache->buffers[i].process.track, cache->buffers[i].process.sector, cache->buffers[i].counter);
 	}
     }
     printf("]\n");
@@ -83,7 +87,7 @@ void cache_print()
     {
 	if (cache->buffers[i].used)
 	{
-	    printf("(%ld:%ld),", cache->buffers[i].process.track, cache->buffers[i].process.sector);
+	    printf("(%ld:%ld){ counter: %d },", cache->buffers[i].process.track, cache->buffers[i].process.sector, cache->buffers[i].counter);
 	}
     }
     printf("]\n");

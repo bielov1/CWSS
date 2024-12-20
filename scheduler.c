@@ -2,12 +2,13 @@
 #include <stdlib.h>
 #include <time.h>
 #include <assert.h>
+#include <string.h>
 
 #include "scheduler.h"
 
 void read_process(Process *curr_process)
 {
-    if (curr_process->is_reading)
+    if (strcmp(curr_process->action, "READ") == 0)
     {
 	printf("[SCHEDULER] Process %ld invoked read()\n", curr_process->sector);
     }
@@ -18,23 +19,24 @@ void read_process(Process *curr_process)
 }
 
 
-bool last_operation_was_read = true;
+
 Process* process_waits_for_interrupt = NULL;
+char* last_process_action = "READ";
+bool last_action_was_read = true;
 Process* next_process_to_serve = NULL;
 
 void syscall(Process *curr_process, long int* time_spent)
 {    
     if (!active_buffer_exists())
     {
-	set_process_as_active_buffer(curr_process);
 	move_arm_to_track(curr_process, time_spent);
+	set_process_as_active_buffer(curr_process);
     }
     else
     {
-	schedule_process_as_buffer(curr_process);
+	Buffer* schedule_queue = get_schedule_queue();
+	schedule_process_as_buffer(schedule_queue, curr_process);
     }
-    
-
 }
 
 
@@ -60,29 +62,76 @@ int tick(IORequestNode* curr_request, long int *time_spent, SchedulerType sched_
 	printf("[SCHEDULER] Switch context to %ld\n", process_waits_for_interrupt->sector);
 	process_waits_for_interrupt->state = COMPLETED;
 	curr_process = process_waits_for_interrupt;
-	curr_request->process = curr_process;
+	if (sched_t != SCHEDULER_FLOOK)
+	{
+	    curr_request->process = curr_process;
+	}
+	else
+	{
+	    IORequestNode* save_request = curr_request;
+	    bool moved = false;
+	    while (save_request->process->sector != curr_process->sector)
+	    {
+		moved = true;
+		save_request = save_request->next;
+	    }
+	    if (moved)
+	    {
+		save_request->process = curr_process;
+		
+		IORequestNode *curr_request_prev = curr_request->prev; // null
+		IORequestNode *curr_request_next = curr_request->next; // 900
+		IORequestNode *save_request_prev = save_request->prev; // 4391
+		IORequestNode *save_request_next = save_request->next; // 2000
+
+		save_request->prev = curr_request_prev;
+		save_request->next = save_request_prev;
+		
+		curr_request = save_request;
+
+		curr_request->next->prev = curr_request_next;
+		curr_request->next->next = save_request_next;
+		curr_request->next->next->prev = save_request_prev; 
+	    }
+	    else
+	    {
+		curr_request->process = curr_process;
+	    }
+
+	    moved = false;
+	    
+	}
     }
     
-    bool curr_process_is_reading = curr_process->is_reading;
-
+    
+    const char *curr_process_action = curr_process->action;
+    
     switch(curr_process->state)
     {
 	case NEW_PROCESS:
-	    // тут можна слідкувати за діями процесів і назначати щось
-	    if (last_operation_was_read && curr_process_is_reading)
+	    if (strcmp(curr_process_action, last_process_action) == 0)
 	    {
 		printf("[SCHEDULER] Process %ld is ready\n", curr_process->sector);
 		curr_process->state = READY;
 	    }
 	    else
 	    {
+		// 4391 переключив read на write
+		// після чого спрацьовує переривання, яке закінчує
+		// виконнаня 4820 і новий активний буфер стає 976
+		// який згенерував новий час для переривання що більше
+		// минулий
+		// виконує read дію. і тому не виконується контекс свіч
+		// і дія з реквесто 4391 продовжує своє виконання.
+		// тут виходить хуйня що last_process_action
+		// стає "WRITE", хоч в активному буфері все ще
+		// знаходиться процес read.
+		// така хуйня, малята.
 		read_process(curr_process);
-		if (process_waits_for_interrupt->waits_for_next_interrupt == -1)
-		{
-		    process_waits_for_interrupt->waits_for_next_interrupt = *time_spent + BEFORE_WRITING_TIME;
-		}
 		
-		last_operation_was_read = !last_operation_was_read;
+		last_action_was_read = !last_action_was_read;
+		if (!last_action_was_read) last_process_action = "WRITE";
+		else last_process_action = "READ";
 		curr_process->state = WAITING_FOR_INTERRUPT;
 	    }
 	    
@@ -90,9 +139,17 @@ int tick(IORequestNode* curr_request, long int *time_spent, SchedulerType sched_
 	    break;
 	case WAITING_FOR_INTERRUPT:
 	    printf("[SCHEDULER] User mode for process %ld\n", curr_process->sector);
-	    printf("... worked for %ld us in user mode", process_waits_for_interrupt->waits_for_next_interrupt - *time_spent);
-
-	    *time_spent = process_waits_for_interrupt->waits_for_next_interrupt;
+	    if (process_waits_for_interrupt != NULL)
+	    {
+		printf("... worked for %ld us in user mode", process_waits_for_interrupt->waits_for_next_interrupt - *time_spent);
+		*time_spent = process_waits_for_interrupt->waits_for_next_interrupt;
+	    }
+	    else
+	    {
+		printf("... worked for %d us in user mode", BEFORE_WRITING_TIME);
+		*time_spent += BEFORE_WRITING_TIME;
+	    }
+	    curr_process->mode = KERNEL_MODE;
 	    return 1;
 	    break;
 	case READY:
@@ -113,7 +170,15 @@ int tick(IORequestNode* curr_request, long int *time_spent, SchedulerType sched_
 
 		if (sched_t == SCHEDULER_FIFO)
 		{
-		    print_device_strategy("FIFO");
+		    print_device_strategy("FIFO", sched_t);
+		}
+		else if (sched_t == SCHEDULER_LOOK)
+		{
+		    print_device_strategy("LOOK", sched_t);
+		}
+		else if (sched_t == SCHEDULER_FLOOK)
+		{
+		    print_device_strategy("FLOOK", sched_t);
 		}
 		printf("[SCHEDULER] Blocked process %ld\n", curr_process->sector);
 		
@@ -143,6 +208,14 @@ int tick(IORequestNode* curr_request, long int *time_spent, SchedulerType sched_
 	    {
 		next_process_to_serve = fifo_schedule();
 	    }
+	    else if (sched_t == SCHEDULER_LOOK)
+	    {
+		next_process_to_serve = look_schedule();
+	    }
+	    else if (sched_t == SCHEDULER_FLOOK)
+	    {
+		next_process_to_serve = flook_schedule(curr_request);
+	    }
 
 	    if (next_process_to_serve != NULL)
 	    {
@@ -159,7 +232,15 @@ int tick(IORequestNode* curr_request, long int *time_spent, SchedulerType sched_
 	    
 	    if (sched_t == SCHEDULER_FIFO)
 	    {
-		print_device_strategy("FIFO");
+		print_device_strategy("FIFO", sched_t);
+	    }
+	    else if (sched_t == SCHEDULER_LOOK)
+	    {
+		print_device_strategy("LOOK", sched_t);
+	    }
+	    else if (sched_t == SCHEDULER_FLOOK)
+	    {
+		print_device_strategy("FLOOK", sched_t);
 	    }
 
 	    if (process_is_active_buffer(next_process_to_serve))

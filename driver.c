@@ -1,16 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
+#include <string.h>
 
 #include "driver.h"
 
 Buffer active_buffer = {0};
 Buffer schedule_queue[REQUESTS_NUM] = {0};
 Buffer schedule_queue2[REQUESTS_NUM] = {0};
-Disk_Controler* dc = NULL;
+
+Disk_Controller* dc = NULL;
 
 void initialize_dc()
 {
-    dc = (Disk_Controler*) malloc(sizeof(Disk_Controler));
+    dc = (Disk_Controller*) malloc(sizeof(Disk_Controller));
     if (dc == NULL)
     {
         fprintf(stderr, "Memory allocation for cache failed!\n");
@@ -57,7 +60,7 @@ void print_request_queue(IORequestNode *list)
     }
 }
 
-void print_device_strategy(const char* strategy)
+void print_device_strategy(const char* strategy, SchedulerType sched_t)
 {
     printf("[DRIVER] Device strategy ");
     printf("%s", strategy);
@@ -76,6 +79,19 @@ void print_device_strategy(const char* strategy)
 	}
     }
     printf("]\n");
+
+    if (sched_t == SCHEDULER_FLOOK)
+    {
+	printf("\tSchedule queue_2 [");
+	for (int i = 0; i < REQUESTS_NUM; ++i)
+	{
+	    if (schedule_queue2[i].used)
+	    {
+		printf("(%ld:%ld), ", schedule_queue2[i].process.track, schedule_queue2[i].process.sector);
+	    }
+	}
+	printf("]\n");
+    }
 }
 
 void reverse_queue(IORequestNode **list_p)
@@ -107,17 +123,17 @@ void delete_node(IORequestNode **list_p, IORequestNode *curr_request)
     free(curr_request);
 }
 
-void schedule_process_as_buffer(Process *process)
+void schedule_process_as_buffer(Buffer *queue, Process *process)
 {
     printf("[DRIVER] Buffer (%ld:%ld) scheduled\n", process->track, process->sector);
     for (int i = 0; i < REQUESTS_NUM; ++i)
     {
         if (!schedule_queue[i].used)
         {
-            schedule_queue[i].counter = 1;
-            schedule_queue[i].process = *process;
-            schedule_queue[i].used = true;
-            schedule_queue[i].active = false;
+            queue[i].counter = 1;
+            queue[i].process = *process;
+            queue[i].used = true;
+            queue[i].active = false;
 	    return;
         }
     }
@@ -192,10 +208,17 @@ void move_arm_to_track(Process *p, long int *time_worked)
 void free_active_buffer()
 {
     active_buffer.counter = 1;
-    active_buffer.process = (Process){0};
     active_buffer.process.waits_for_next_interrupt = -1;
     active_buffer.used = false;
     active_buffer.active = false;
+}
+
+void clear_queue(Buffer* queue)
+{
+    for (int i = 0; i < REQUESTS_NUM; ++i)
+    {
+	queue[i].process = (Process){0};
+    }
 }
 
 void set_process_as_active_buffer(Process *process)
@@ -204,6 +227,16 @@ void set_process_as_active_buffer(Process *process)
     active_buffer.process = *process;
     active_buffer.used = true;
     active_buffer.active = true;
+}
+
+Buffer* get_schedule_queue()
+{
+    return schedule_queue;
+}
+
+Buffer* get_active_buffer()
+{
+    return &active_buffer;
 }
 
 Buffer sleep_q[REQUESTS_NUM] = {0};
@@ -225,4 +258,175 @@ Process* fifo_schedule()
     }
     
     return NULL;
+}
+
+bool schedule_queue_is_sorted = false;
+
+int compare_buffers(const void *a, const void *b) {
+    const Buffer *buffer_a = (const Buffer *)a;
+    const Buffer *buffer_b = (const Buffer *)b;
+
+    if (buffer_a->process.sector < buffer_b->process.sector)
+    return -1;
+    else if (buffer_a->process.sector > buffer_b->process.sector)
+    return 1;
+    else
+    return 0;
+}
+
+
+bool queue_is_empty(Buffer *queue)
+{
+    for (int i = 0; i < REQUESTS_NUM; i++)
+    {
+        if (queue[i].used) return false;
+    }
+    return true;
+}
+
+size_t last_track = -1;
+int posx = 0;
+bool reversed = false;
+Process* look_schedule()
+{
+    qsort(schedule_queue, REQUESTS_NUM, sizeof(Buffer), compare_buffers);
+    
+    while (!queue_is_empty(schedule_queue))
+    {
+	if (!reversed)
+	{
+	    for (int i = posx; i < REQUESTS_NUM; ++i)
+	    {
+		if (schedule_queue[i].used)
+		{
+		    if (last_track != schedule_queue[i].process.track)
+		    {
+			if (find_buffer_in_cache(&schedule_queue[i]))
+			{
+			    schedule_queue[i].process.duplicate = true;
+			}
+			
+			schedule_queue[i].used = false;
+			last_track = schedule_queue[i].process.track;
+			posx = i+1;
+			return &schedule_queue[i].process;	    
+		    }
+		    else
+		    {
+			printf("[DRIVER] Too many I/O requests for one track, skip buffer (%ld:%ld)\n", schedule_queue[i].process.track, schedule_queue[i].process.sector);
+		    }
+		}
+	    }
+	    posx = REQUESTS_NUM - 1;
+	    reversed = true;
+	}
+	else
+	{
+	    for (int i = posx; i >= 0; i--)
+	    {
+		if (schedule_queue[i].used)
+		{
+		    if (last_track != schedule_queue[i].process.track)
+		    {
+			if (find_buffer_in_cache(&schedule_queue[i]))
+			{
+			    schedule_queue[i].process.duplicate = true;
+			}
+			
+			schedule_queue[i].used = false;
+			last_track = schedule_queue[i].process.track;
+			posx = i-1;
+			return &schedule_queue[i].process;
+		    }
+		    else
+		    {
+			printf("[DRIVER] Too many I/O requests for one track, skip buffer (%ld:%ld)\n", schedule_queue[i].process.track, schedule_queue[i].process.sector);
+		    }
+		}
+	    }
+	    posx = 0;
+	    reversed = false;
+	}
+
+	// in case when last_track has the same track number as last unused buffer in schedule.
+	// This may cause infinite loop.
+	last_track = -1;
+    }
+
+    return NULL;
+}
+
+
+Buffer *active_queue = schedule_queue;
+Buffer *inactive_queue = schedule_queue2;
+
+bool not_in_active_queue(size_t sector)
+{
+    for (int i = 0; i < REQUESTS_NUM; ++i)
+    {
+	if (sector == active_queue[i].process.sector)
+	{
+	    return false;
+	}
+    }
+    return true;
+}
+
+bool fill_inactive_queue = true;
+Process* flook_schedule(IORequestNode *req)
+{
+    
+    if (queue_is_empty(active_queue))
+    {
+	//clear_queue(active_queue);
+	fill_inactive_queue = !fill_inactive_queue;
+        Buffer *tmp = active_queue;
+        active_queue = inactive_queue;
+        inactive_queue = tmp;
+
+
+        if (queue_is_empty(active_queue)) {
+            return NULL;
+        }
+    }
+
+    qsort(active_queue, REQUESTS_NUM, sizeof(Buffer), compare_buffers);
+
+    int selected_index = -1;
+    int curr_dc_head_pos = dc->head_pos;
+    while (selected_index < 0)
+    {
+	for (int i = 0; i < REQUESTS_NUM; i++)
+	{
+            if (active_queue[i].used && (int)active_queue[i].process.track >= curr_dc_head_pos)
+            {
+		selected_index = i;
+		break;
+            }
+	}
+
+	curr_dc_head_pos = 0;
+    }
+
+    IORequestNode* next_req = req->next;
+    while (next_req != NULL)
+    {
+	if (fill_inactive_queue && not_in_active_queue(next_req->process->sector))
+	{
+	    next_req->process->state = WAITING_FOR_INTERRUPT;
+	    if (strcmp(active_buffer.process.action, next_req->process->action) == 0)
+	    {
+		read_process(next_req->process);
+		next_req->process->state = BLOCKED;
+		printf("[DRIVER] Buffer (%ld:%ld) was added to inactive queue\n", next_req->process->track, next_req->process->sector);
+		schedule_process_as_buffer(inactive_queue, next_req->process);
+		break;
+	    }
+	}
+
+	next_req = next_req->next;
+    }
+    
+    active_queue[selected_index].used = false;
+    return &active_queue[selected_index].process;
 }
