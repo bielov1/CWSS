@@ -129,7 +129,10 @@ void cache_put(Buffer* active_buffer)
 //----------------------------------------------------------------------------
 void cache_cleanup()
 {
-    return;
+    for (int i = 0; i < CACHE_CAP; ++i)
+    {
+	printf("[CACHE] Buffer (%ld:%ld) removed from cache\n", cache->buffers[i].process.track, cache->buffers[i].process.sector);
+    }
 }
 //----------------------------------------------------------------------------
 bool find_buffer_in_cache(Buffer *buf)

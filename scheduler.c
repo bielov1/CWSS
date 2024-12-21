@@ -81,12 +81,8 @@ int tick(IORequestNode** curr_request, long int *time_spent, SchedulerType sched
 		{
 		    for (int j = 0; j < push_count; ++j)
 		    {
-			//a b c d e f g -> a b g c d e f
-			//a b d c e f g
-			//a b d e c f g
-			//a b d e f c g
-			IORequestNode *curr_request_prev = (*curr_request)->prev; // null
-			IORequestNode *curr_request_next = (*curr_request)->next; // 900
+			IORequestNode *curr_request_prev = (*curr_request)->prev; 
+			IORequestNode *curr_request_next = (*curr_request)->next;
 			IORequestNode *curr_request_next_next;
 			
 			if (curr_request_next != NULL)
@@ -171,8 +167,11 @@ int tick(IORequestNode** curr_request, long int *time_spent, SchedulerType sched
 	    printf("[SCHEDULER] User mode for process %ld\n", curr_process->sector);
 	    if (process_waits_for_interrupt != NULL)
 	    {
-		printf("... worked for %ld us in user mode", process_waits_for_interrupt->waits_for_next_interrupt - *time_spent);
-		*time_spent = process_waits_for_interrupt->waits_for_next_interrupt;
+		if (process_waits_for_interrupt->waits_for_next_interrupt > -1)
+		{
+		    printf("... worked for %ld us in user mode", process_waits_for_interrupt->waits_for_next_interrupt - *time_spent);
+		    *time_spent = process_waits_for_interrupt->waits_for_next_interrupt;
+		}
 	    }
 	    else
 	    {
@@ -232,6 +231,7 @@ int tick(IORequestNode** curr_request, long int *time_spent, SchedulerType sched
 	    break;
 	case COMPLETED:
 	    complete_process();
+	    curr_process->finish_time = *time_spent;
 	    printf("[SCHEDULER] Process %ld is completed\n", curr_process->sector);
 	    
 	    if (sched_t == SCHEDULER_FIFO)

@@ -1,7 +1,7 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-#define REQUESTS_NUM 100
+#define REQUESTS_NUM 200
 #define TOTAL_SECTORS TRACKS*SECTORS_PER_TRACK
 #define CACHE_CAP 4
 #define LEFT_SEGMENT 1
