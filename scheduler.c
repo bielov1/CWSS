@@ -5,7 +5,7 @@
 #include <string.h>
 
 #include "scheduler.h"
-
+//----------------------------------------------------------------------------
 void read_process(Process *curr_process)
 {
     if (strcmp(curr_process->action, "READ") == 0)
@@ -17,9 +17,7 @@ void read_process(Process *curr_process)
 	printf("[SCHEDULER] Process %ld invoked write()\n", curr_process->sector);
     }
 }
-
-
-
+//----------------------------------------------------------------------------
 Process* process_waits_for_interrupt = NULL;
 char* last_process_action = "READ";
 bool last_action_was_read = true;
@@ -39,11 +37,10 @@ void syscall(Process *curr_process, long int* time_spent)
     }
 }
 
-
-int tick(IORequestNode* curr_request, long int *time_spent, SchedulerType sched_t)
+int tick(IORequestNode** curr_request, long int *time_spent, SchedulerType sched_t)
 {    
     printf("[SCHEDULER] %ld us (NEXT ITERATION)\n", *time_spent);
-    if (curr_request == NULL)
+    if ((*curr_request) == NULL)
     {
 	printf("[SCHEDULER] RunQ is empty\n");
 	if (*time_spent != process_waits_for_interrupt->waits_for_next_interrupt)
@@ -54,7 +51,7 @@ int tick(IORequestNode* curr_request, long int *time_spent, SchedulerType sched_
 	return 1;
     }
     
-    Process *curr_process = curr_request->process;
+    Process *curr_process = (*curr_request)->process;
     
     if (process_waits_for_interrupt != NULL && interrupt_handler(*time_spent, process_waits_for_interrupt->waits_for_next_interrupt))
     {
@@ -64,38 +61,71 @@ int tick(IORequestNode* curr_request, long int *time_spent, SchedulerType sched_
 	curr_process = process_waits_for_interrupt;
 	if (sched_t != SCHEDULER_FLOOK)
 	{
-	    curr_request->process = curr_process;
+	    (*curr_request)->process = curr_process;
 	}
 	else
 	{
-	    IORequestNode* save_request = curr_request;
+	    IORequestNode* save_request = (*curr_request);
 	    bool moved = false;
+	    int push_count = 0;
 	    while (save_request->process->sector != curr_process->sector)
 	    {
 		moved = true;
+		push_count++;
 		save_request = save_request->next;
 	    }
 	    if (moved)
 	    {
 		save_request->process = curr_process;
-		
-		IORequestNode *curr_request_prev = curr_request->prev; // null
-		IORequestNode *curr_request_next = curr_request->next; // 900
-		IORequestNode *save_request_prev = save_request->prev; // 4391
-		IORequestNode *save_request_next = save_request->next; // 2000
+		for (int i = 0; i < push_count; ++i)
+		{
+		    for (int j = 0; j < push_count; ++j)
+		    {
+			//a b c d e f g -> a b g c d e f
+			//a b d c e f g
+			//a b d e c f g
+			//a b d e f c g
+			IORequestNode *curr_request_prev = (*curr_request)->prev; // null
+			IORequestNode *curr_request_next = (*curr_request)->next; // 900
+			IORequestNode *curr_request_next_next;
+			
+			if (curr_request_next != NULL)
+			{
+			    curr_request_next_next = curr_request_next->next;
+			}
 
-		save_request->prev = curr_request_prev;
-		save_request->next = save_request_prev;
-		
-		curr_request = save_request;
+			
+			(*curr_request)->next = curr_request_next_next;
+			(*curr_request)->prev = curr_request_next;
+			if (curr_request_next_next != NULL)
+			{
+			    curr_request_next_next->prev = (*curr_request);
+			}
 
-		curr_request->next->prev = curr_request_next;
-		curr_request->next->next = save_request_next;
-		curr_request->next->next->prev = save_request_prev; 
+			if (curr_request_prev != NULL)
+			{
+			    curr_request_prev->next = curr_request_next;
+			}
+
+			curr_request_next->next = (*curr_request);
+			curr_request_next->prev = curr_request_prev;
+
+			//(*curr_request) = (*curr_request)->prev;
+
+			//(*curr_request) = (*curr_request)->next;
+			
+		    }
+		    
+		    for (int k = 0; k < push_count; ++k)
+		    {
+			(*curr_request) = (*curr_request)->prev;
+		    }
+		}
+		
 	    }
 	    else
 	    {
-		curr_request->process = curr_process;
+		(*curr_request)->process = curr_process;
 	    }
 
 	    moved = false;
@@ -214,7 +244,7 @@ int tick(IORequestNode* curr_request, long int *time_spent, SchedulerType sched_
 	    }
 	    else if (sched_t == SCHEDULER_FLOOK)
 	    {
-		next_process_to_serve = flook_schedule(curr_request);
+		next_process_to_serve = flook_schedule((*curr_request));
 	    }
 
 	    if (next_process_to_serve != NULL)
@@ -256,3 +286,4 @@ int tick(IORequestNode* curr_request, long int *time_spent, SchedulerType sched_
 	
     return 1;
 }
+//----------------------------------------------------------------------------

@@ -10,7 +10,7 @@ Buffer schedule_queue[REQUESTS_NUM] = {0};
 Buffer schedule_queue2[REQUESTS_NUM] = {0};
 
 Disk_Controller* dc = NULL;
-
+//----------------------------------------------------------------------------
 void initialize_dc()
 {
     dc = (Disk_Controller*) malloc(sizeof(Disk_Controller));
@@ -23,7 +23,7 @@ void initialize_dc()
     dc->head_pos = 0;
     dc->head_direction = 1;
 }
-
+//----------------------------------------------------------------------------
 int add_request(IORequestNode **list_p, Process *p)
 {
     IORequestNode *new_request;
@@ -39,8 +39,7 @@ int add_request(IORequestNode **list_p, Process *p)
 
     return 0;
 }
-
-
+//----------------------------------------------------------------------------
 void print_request_queue(IORequestNode *list)
 {
     IORequestNode *request;
@@ -59,7 +58,7 @@ void print_request_queue(IORequestNode *list)
 	printf("]\n");
     }
 }
-
+//----------------------------------------------------------------------------
 void print_device_strategy(const char* strategy, SchedulerType sched_t)
 {
     printf("[DRIVER] Device strategy ");
@@ -93,7 +92,7 @@ void print_device_strategy(const char* strategy, SchedulerType sched_t)
 	printf("]\n");
     }
 }
-
+//----------------------------------------------------------------------------
 void reverse_queue(IORequestNode **list_p)
 {
     IORequestNode *temp = NULL;
@@ -109,7 +108,7 @@ void reverse_queue(IORequestNode **list_p)
 
     if (temp != NULL) *list_p = temp->prev;
 }
-
+//----------------------------------------------------------------------------
 void delete_node(IORequestNode **list_p, IORequestNode *curr_request)
 {
     if (*list_p == NULL || curr_request == NULL) return;
@@ -122,13 +121,13 @@ void delete_node(IORequestNode **list_p, IORequestNode *curr_request)
 
     free(curr_request);
 }
-
+//----------------------------------------------------------------------------
 void schedule_process_as_buffer(Buffer *queue, Process *process)
 {
     printf("[DRIVER] Buffer (%ld:%ld) scheduled\n", process->track, process->sector);
     for (int i = 0; i < REQUESTS_NUM; ++i)
     {
-        if (!schedule_queue[i].used)
+        if (!queue[i].used)
         {
             queue[i].counter = 1;
             queue[i].process = *process;
@@ -138,7 +137,7 @@ void schedule_process_as_buffer(Buffer *queue, Process *process)
         }
     }
 }
-
+//----------------------------------------------------------------------------
 bool schedule_queue_is_empty()
 {
     for (int i = 0; i < REQUESTS_NUM; ++i)
@@ -151,17 +150,17 @@ bool schedule_queue_is_empty()
 
     return true;
 }
-
+//----------------------------------------------------------------------------
 bool active_buffer_exists()
 {
     return active_buffer.active;
 }
-
+//----------------------------------------------------------------------------
 bool process_is_active_buffer(Process *process)
 {
     return ((active_buffer.process.sector == process->sector) && (process->waits_for_next_interrupt > 0));
 }
-
+//----------------------------------------------------------------------------
 void complete_process()
 {
     if (active_buffer.active)
@@ -171,7 +170,7 @@ void complete_process()
     }
     cache_print();
 }
-
+//----------------------------------------------------------------------------
 void move_arm_to_track(Process *p, long int *time_worked)
 {
     long int time = 0;
@@ -186,8 +185,16 @@ void move_arm_to_track(Process *p, long int *time_worked)
 	}
 	else
 	{
-	    dc->head_pos++;
-	    time += TRACK_SEEK_TIME;
+	    if (dc->head_pos < track)
+	    {
+		dc->head_pos++;
+		time += TRACK_SEEK_TIME;
+	    }
+	    else
+	    {
+		dc->head_pos--;
+		time += TRACK_SEEK_TIME;
+	    }
 	}
     }
     
@@ -204,7 +211,7 @@ void move_arm_to_track(Process *p, long int *time_worked)
     
     generate_interrupt(p, *time_worked);
 }
-
+//----------------------------------------------------------------------------
 void free_active_buffer()
 {
     active_buffer.counter = 1;
@@ -212,15 +219,7 @@ void free_active_buffer()
     active_buffer.used = false;
     active_buffer.active = false;
 }
-
-void clear_queue(Buffer* queue)
-{
-    for (int i = 0; i < REQUESTS_NUM; ++i)
-    {
-	queue[i].process = (Process){0};
-    }
-}
-
+//----------------------------------------------------------------------------
 void set_process_as_active_buffer(Process *process)
 {    
     active_buffer.counter = 1;
@@ -228,17 +227,22 @@ void set_process_as_active_buffer(Process *process)
     active_buffer.used = true;
     active_buffer.active = true;
 }
-
+//----------------------------------------------------------------------------
 Buffer* get_schedule_queue()
 {
     return schedule_queue;
 }
-
+//----------------------------------------------------------------------------
+Buffer* get_schedule_queue2()
+{
+    return schedule_queue2;
+}
+//----------------------------------------------------------------------------
 Buffer* get_active_buffer()
 {
     return &active_buffer;
 }
-
+//----------------------------------------------------------------------------
 Buffer sleep_q[REQUESTS_NUM] = {0};
 
 // fifo algo fills up sleep_q with processes, that was retrieved from schedule_queue untill its empty.
@@ -259,7 +263,7 @@ Process* fifo_schedule()
     
     return NULL;
 }
-
+//----------------------------------------------------------------------------
 bool schedule_queue_is_sorted = false;
 
 int compare_buffers(const void *a, const void *b) {
@@ -355,21 +359,46 @@ Process* look_schedule()
 
     return NULL;
 }
-
-
+//----------------------------------------------------------------------------
 Buffer *active_queue = schedule_queue;
 Buffer *inactive_queue = schedule_queue2;
 
-bool not_in_active_queue(size_t sector)
+bool not_in_queue(Buffer *queue, size_t sector)
 {
     for (int i = 0; i < REQUESTS_NUM; ++i)
     {
-	if (sector == active_queue[i].process.sector)
+	if (sector == queue[i].process.sector)
 	{
 	    return false;
 	}
     }
     return true;
+}
+
+bool can_add_process_in_second_queue(IORequestNode* requests)
+{
+    IORequestNode* next_req = requests->next;
+    bool first_interrupt_set = false;
+    while (next_req != NULL)
+    {
+	if (not_in_queue(active_queue, next_req->process->sector) && not_in_queue(inactive_queue, next_req->process->sector))
+	{
+	    if (strcmp(active_buffer.process.action, next_req->process->action) != 0)
+	    {
+		if (!first_interrupt_set)
+		{
+		    first_interrupt_set = true;
+		    next_req->process->state = WAITING_FOR_INTERRUPT;
+		}
+	    }
+	    else
+	    {
+		return true;
+	    }
+	}
+	next_req = next_req->next;
+    }
+    return false;
 }
 
 bool fill_inactive_queue = true;
@@ -408,25 +437,35 @@ Process* flook_schedule(IORequestNode *req)
 	curr_dc_head_pos = 0;
     }
 
-    IORequestNode* next_req = req->next;
-    while (next_req != NULL)
+    if (can_add_process_in_second_queue(req))
     {
-	if (fill_inactive_queue && not_in_active_queue(next_req->process->sector))
+	IORequestNode* next_req = req->next;
+	while (next_req != NULL)
 	{
-	    next_req->process->state = WAITING_FOR_INTERRUPT;
-	    if (strcmp(active_buffer.process.action, next_req->process->action) == 0)
+	    if (fill_inactive_queue)
 	    {
-		read_process(next_req->process);
-		next_req->process->state = BLOCKED;
-		printf("[DRIVER] Buffer (%ld:%ld) was added to inactive queue\n", next_req->process->track, next_req->process->sector);
-		schedule_process_as_buffer(inactive_queue, next_req->process);
-		break;
+		if (not_in_queue(active_queue, next_req->process->sector) && not_in_queue(inactive_queue, next_req->process->sector))
+		{
+		    if (strcmp(active_buffer.process.action, next_req->process->action) == 0)
+		    {
+			read_process(next_req->process);
+			next_req->process->state = BLOCKED;
+			printf("[DRIVER] Buffer (%ld:%ld) was added to inactive queue\n", next_req->process->track, next_req->process->sector);
+			schedule_process_as_buffer(inactive_queue, next_req->process);
+			break;
+		    }
+		}
 	    }
-	}
 
-	next_req = next_req->next;
+	    next_req = next_req->next;
+	}
     }
-    
+
+    if (find_buffer_in_cache(&active_queue[selected_index]))
+    {
+	active_queue[selected_index].process.duplicate = true;
+    }
     active_queue[selected_index].used = false;
     return &active_queue[selected_index].process;
 }
+//----------------------------------------------------------------------------

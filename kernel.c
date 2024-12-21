@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "kernel.h"
-
+//----------------------------------------------------------------------------
 Process* new_process(size_t sector, size_t track, const char* action, bool duplicate, int next_interrupt, Mode mode, State state)
 {
     Process *p = malloc(sizeof(Process));
@@ -21,8 +21,7 @@ Process* new_process(size_t sector, size_t track, const char* action, bool dupli
     };
     return p;
 }
-
-
+//----------------------------------------------------------------------------
 void generate_requests(Process* (*f)(size_t, size_t, const char*, bool, int, Mode, State), IORequestNode **user_requests)
 {
     Process* p;
@@ -32,15 +31,14 @@ void generate_requests(Process* (*f)(size_t, size_t, const char*, bool, int, Mod
         int gs = rand() % (TOTAL_SECTORS - 1);
 	int gt = gs / SECTORS_PER_TRACK;
 	//generate action
-	const char* ga = rand() % 2 == 0 ? "READ" : "WRITE"; 
+	const char* ga = rand() % 3 == 0 ? "READ" : "WRITE"; 
 	bool gd = false; // duplicate
 	p = f(gs, gt, ga, gd, -1, USER_MODE, NEW_PROCESS);
-	printf("[SCHEDULER] Process %ld was added\n", p->sector);
+	printf("[SCHEDULER] Process %ld was added witch action %s\n", p->sector, p->action);
 	add_request(user_requests, p);
     }
 }
-
-
+//----------------------------------------------------------------------------
 void start_simulation()
 {
     long int time_worked = 0;
@@ -56,7 +54,7 @@ void start_simulation()
 
     while (served_requests != REQUESTS_NUM)
     {
-        while (tick(req, &time_worked, sched_t) == 0)
+        while (tick(&req, &time_worked, sched_t) == 0)
 	{
 	    printf("\n");
 	}
@@ -94,8 +92,11 @@ void start_simulation()
 
     printf("Scheduler has nothing to do, exited with time: %ld us\n", time_worked);
 }
+//----------------------------------------------------------------------------
 
-
+//
+//----------------------------------------------------------------------------
+//
 int main()
 {
     initialize_cache();
@@ -104,4 +105,7 @@ int main()
     cache_cleanup();
     return 0;
 }
+//
+//----------------------------------------------------------------------------
+//
 

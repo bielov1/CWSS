@@ -6,7 +6,7 @@
 
 Cache *cache = NULL;
 int active_buffer_index_in_cache = -1;
-
+//----------------------------------------------------------------------------
 void initialize_cache()
 {
     cache = (Cache*) malloc(sizeof(Cache));
@@ -24,7 +24,7 @@ void initialize_cache()
         cache->buffers[i].active = false;
     }
 }
-
+//----------------------------------------------------------------------------
 void move_buffer_to_front(Buffer* buffer, bool new_buffer)
 {
     if (!new_buffer && active_buffer_index_in_cache >= LEFT_SEGMENT)
@@ -42,7 +42,7 @@ void move_buffer_to_front(Buffer* buffer, bool new_buffer)
     }
 
 }
-
+//----------------------------------------------------------------------------
 bool cache_get(size_t request_sector)
 {
     for (int i = 0; i < CACHE_CAP; ++i)
@@ -58,7 +58,7 @@ bool cache_get(size_t request_sector)
     printf("[CACHE] Buffer for sector %ld not found in cache\n", request_sector);
     return false;
 }
-
+//----------------------------------------------------------------------------
 void cache_print()
 {
     printf("[CACHE] Buffer cache LFU:\n");
@@ -92,7 +92,7 @@ void cache_print()
     }
     printf("]\n");
 }
-
+//----------------------------------------------------------------------------
 void cache_put(Buffer* active_buffer)
 {
     printf("[CACHE] Buffer (%ld:%ld) was added to cache\n", active_buffer->process.track, active_buffer->process.sector);
@@ -126,12 +126,12 @@ void cache_put(Buffer* active_buffer)
     move_buffer_to_front(active_buffer, true);
     
 }
-
+//----------------------------------------------------------------------------
 void cache_cleanup()
 {
     return;
 }
-
+//----------------------------------------------------------------------------
 bool find_buffer_in_cache(Buffer *buf)
 {
     if (cache_get(buf->process.sector)) {
@@ -140,3 +140,4 @@ bool find_buffer_in_cache(Buffer *buf)
     
     return false;    
 }
+//----------------------------------------------------------------------------
