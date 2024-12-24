@@ -1,0 +1,3693 @@
+[SCHEDULER] Process 2293 was added witch action READ
+[SCHEDULER] Process 4169 was added witch action WRITE
+[SCHEDULER] Process 2736 was added witch action WRITE
+[SCHEDULER] Process 3760 was added witch action WRITE
+[SCHEDULER] Process 2266 was added witch action WRITE
+[SCHEDULER] Process 2726 was added witch action WRITE
+[SCHEDULER] Process 4015 was added witch action READ
+[SCHEDULER] Process 2705 was added witch action READ
+[SCHEDULER] Process 1994 was added witch action WRITE
+[SCHEDULER] Process 1926 was added witch action READ
+[SCHEDULER] Process 4475 was added witch action WRITE
+[SCHEDULER] Process 1379 was added witch action WRITE
+[SCHEDULER] Process 626 was added witch action WRITE
+[SCHEDULER] Process 2015 was added witch action READ
+[SCHEDULER] Process 3307 was added witch action READ
+[SCHEDULER] Process 2761 was added witch action READ
+[SCHEDULER] Process 1884 was added witch action WRITE
+[SCHEDULER] Process 4563 was added witch action READ
+[SCHEDULER] Process 1190 was added witch action READ
+[SCHEDULER] Process 2908 was added witch action READ
+[SCHEDULER] Process 615 was added witch action WRITE
+[SCHEDULER] Process 2370 was added witch action READ
+[SCHEDULER] Process 3283 was added witch action WRITE
+[SCHEDULER] Process 891 was added witch action READ
+[SCHEDULER] Process 1672 was added witch action READ
+[SCHEDULER] Process 812 was added witch action WRITE
+[SCHEDULER] Process 1292 was added witch action WRITE
+[SCHEDULER] Process 1542 was added witch action WRITE
+[SCHEDULER] Process 911 was added witch action WRITE
+[SCHEDULER] Process 257 was added witch action WRITE
+[SCHEDULER] Process 1010 was added witch action READ
+[SCHEDULER] Process 3355 was added witch action WRITE
+[SCHEDULER] Process 1717 was added witch action WRITE
+[SCHEDULER] Process 1053 was added witch action WRITE
+[SCHEDULER] Process 3011 was added witch action WRITE
+[SCHEDULER] Process 3131 was added witch action READ
+[SCHEDULER] Process 3132 was added witch action READ
+[SCHEDULER] Process 1795 was added witch action WRITE
+[SCHEDULER] Process 4114 was added witch action WRITE
+[SCHEDULER] Process 3460 was added witch action WRITE
+[SCHEDULER] Process 2271 was added witch action READ
+[SCHEDULER] Process 3702 was added witch action WRITE
+[SCHEDULER] Process 3231 was added witch action WRITE
+[SCHEDULER] Process 4017 was added witch action READ
+[SCHEDULER] Process 2338 was added witch action WRITE
+[SCHEDULER] Process 1897 was added witch action WRITE
+[SCHEDULER] Process 4061 was added witch action WRITE
+[SCHEDULER] Process 4780 was added witch action WRITE
+[SCHEDULER] Process 1708 was added witch action READ
+[SCHEDULER] Process 454 was added witch action WRITE
+[SCHEDULER] Process 1562 was added witch action READ
+[SCHEDULER] Process 3653 was added witch action READ
+[SCHEDULER] Process 2623 was added witch action READ
+[SCHEDULER] Process 2878 was added witch action WRITE
+[SCHEDULER] Process 4901 was added witch action READ
+[SCHEDULER] Process 2523 was added witch action READ
+[SCHEDULER] Process 2379 was added witch action READ
+[SCHEDULER] Process 4272 was added witch action READ
+[SCHEDULER] Process 8 was added witch action WRITE
+[SCHEDULER] Process 1520 was added witch action WRITE
+[SCHEDULER] Process 1103 was added witch action READ
+[SCHEDULER] Process 4231 was added witch action READ
+[SCHEDULER] Process 3975 was added witch action WRITE
+[SCHEDULER] Process 2710 was added witch action READ
+[SCHEDULER] Process 1613 was added witch action WRITE
+[SCHEDULER] Process 710 was added witch action WRITE
+[SCHEDULER] Process 3516 was added witch action WRITE
+[SCHEDULER] Process 1407 was added witch action WRITE
+[SCHEDULER] Process 1579 was added witch action WRITE
+[SCHEDULER] Process 2876 was added witch action READ
+[SCHEDULER] Process 4160 was added witch action READ
+[SCHEDULER] Process 2191 was added witch action WRITE
+[SCHEDULER] Process 163 was added witch action WRITE
+[SCHEDULER] Process 2148 was added witch action READ
+[SCHEDULER] Process 3292 was added witch action READ
+[SCHEDULER] Process 1053 was added witch action WRITE
+[SCHEDULER] Process 2391 was added witch action WRITE
+[SCHEDULER] Process 1327 was added witch action READ
+[SCHEDULER] Process 1065 was added witch action WRITE
+[SCHEDULER] Process 588 was added witch action WRITE
+[SCHEDULER] Process 3969 was added witch action WRITE
+[SCHEDULER] Process 4390 was added witch action WRITE
+[SCHEDULER] Process 660 was added witch action WRITE
+[SCHEDULER] Process 2163 was added witch action WRITE
+[SCHEDULER] Process 3619 was added witch action READ
+[SCHEDULER] Process 488 was added witch action WRITE
+[SCHEDULER] Process 3976 was added witch action WRITE
+[SCHEDULER] Process 4318 was added witch action READ
+[SCHEDULER] Process 912 was added witch action WRITE
+[SCHEDULER] Process 4615 was added witch action WRITE
+[SCHEDULER] Process 442 was added witch action WRITE
+[SCHEDULER] Process 367 was added witch action WRITE
+[SCHEDULER] Process 2722 was added witch action READ
+[SCHEDULER] Process 2737 was added witch action WRITE
+[SCHEDULER] Process 2498 was added witch action WRITE
+[SCHEDULER] Process 3 was added witch action WRITE
+[SCHEDULER] Process 4621 was added witch action READ
+[SCHEDULER] Process 2491 was added witch action WRITE
+[SCHEDULER] Process 1959 was added witch action READ
+[SCHEDULER] Process 4287 was added witch action WRITE
+Settings:
+	tracks_num:          10
+	sectors_per_track:   500
+	track_seek_time:     500
+	rotation_delay_time: 4000
+	sector_access_time:  16
+	syscall_read_time:   150
+	syscall_write_time:  150
+	before_writing_time: 7000
+	after_reading_time:  7000
+	disk_intr_time:      50
+	buffers num:         7
+	left segment:        2
+	mid segment:         2
+	right segment:       3
+[SCHEDULER] 0 us (NEXT ITERATION)
+[SCHEDULER] Process 2293 is ready
+
+[SCHEDULER] 0 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2293
+[SCHEDULER] Process 2293 invoked read()
+
+[SCHEDULER] 0 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2293
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 0 => 4
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2293)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 2293
+[SCHEDULER] Next interrupt from disk will be at 6166 us
+
+[SCHEDULER] 2150 us (NEXT ITERATION)
+[SCHEDULER] Process 4169 invoked write()
+
+[SCHEDULER] 2150 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4169
+... worked for 4016 us in user mode
+
+[SCHEDULER] 6166 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2293
+[CACHE] Buffer (4:2293) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(4:2293){ counter: 1 },]
+	Mid Segment   []
+	Right Segment []
+[SCHEDULER] Process 2293 is completed
+
+		served_requests: 1
+[SCHEDULER] 6166 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4169
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 4 => 8
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4169)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 4169
+[SCHEDULER] Next interrupt from disk will be at 12332 us
+
+[SCHEDULER] 8316 us (NEXT ITERATION)
+[SCHEDULER] Process 2736 is ready
+
+[SCHEDULER] 8316 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2736
+[SCHEDULER] Process 2736 invoked write()
+
+[SCHEDULER] 8316 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2736
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (5:2736) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4169)
+	Schedule queue_1 [(5:2736), ]
+[SCHEDULER] Blocked process 2736
+
+[SCHEDULER] 8466 us (NEXT ITERATION)
+[SCHEDULER] Process 3760 is ready
+
+[SCHEDULER] 8466 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3760
+[SCHEDULER] Process 3760 invoked write()
+
+[SCHEDULER] 8466 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3760
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (7:3760) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4169)
+	Schedule queue_1 [(5:2736), (7:3760), ]
+[SCHEDULER] Blocked process 3760
+
+[SCHEDULER] 8616 us (NEXT ITERATION)
+[SCHEDULER] Process 2266 is ready
+
+[SCHEDULER] 8616 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2266
+[SCHEDULER] Process 2266 invoked write()
+
+[SCHEDULER] 8616 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2266
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (4:2266) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4169)
+	Schedule queue_1 [(5:2736), (7:3760), (4:2266), ]
+[SCHEDULER] Blocked process 2266
+
+[SCHEDULER] 8766 us (NEXT ITERATION)
+[SCHEDULER] Process 2726 is ready
+
+[SCHEDULER] 8766 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2726
+[SCHEDULER] Process 2726 invoked write()
+
+[SCHEDULER] 8766 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2726
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (5:2726) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4169)
+	Schedule queue_1 [(5:2736), (7:3760), (4:2266), (5:2726), ]
+[SCHEDULER] Blocked process 2726
+
+[SCHEDULER] 8916 us (NEXT ITERATION)
+[SCHEDULER] Process 4015 invoked read()
+
+[SCHEDULER] 8916 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4015
+... worked for 3416 us in user mode
+
+[SCHEDULER] 12332 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4169
+[CACHE] Buffer (8:4169) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(8:4169){ counter: 1 },(4:2293){ counter: 1 },]
+	Mid Segment   []
+	Right Segment []
+[SCHEDULER] Process 4169 is completed
+[CACHE] Buffer for sector 2266 not found in cache
+[DRIVER] Best move decision for tracks 8 => 4
+
+[SCHEDULER] User mode for process 2293
+... worked for 834 us in user mode (completed)
+[SCHEDULER] process 2293 exited
+
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2266)
+	Schedule queue_1 [(5:2726), (5:2736), (7:3760), ]
+[SCHEDULER] Next interrupt from disk will be at 19182 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 2
+[SCHEDULER] 15216 us (NEXT ITERATION)
+[SCHEDULER] Process 2736 waited for 3966 us
+
+[SCHEDULER] 19182 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2266
+[CACHE] Buffer (4:2266) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(4:2266){ counter: 1 },(8:4169){ counter: 1 },]
+	Mid Segment   [(4:2293){ counter: 1 },]
+	Right Segment []
+[SCHEDULER] Process 2266 is completed
+[CACHE] Buffer for sector 2726 not found in cache
+[DRIVER] Best move decision for tracks 4 => 5
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (5:2726)
+	Schedule queue_1 [(5:2736), (7:3760), ]
+[SCHEDULER] Next interrupt from disk will be at 23698 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 3
+[SCHEDULER] 19732 us (NEXT ITERATION)
+[SCHEDULER] Process 3760 waited for 3966 us
+
+[SCHEDULER] 23698 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2726
+[CACHE] Buffer (5:2726) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(5:2726){ counter: 1 },(4:2266){ counter: 1 },]
+	Mid Segment   [(8:4169){ counter: 1 },(4:2293){ counter: 1 },]
+	Right Segment []
+[SCHEDULER] Process 2726 is completed
+[DRIVER] Too many I/O requests for one track, skip buffer (5:2736)
+[CACHE] Buffer for sector 3760 not found in cache
+[DRIVER] Best move decision for tracks 5 => 7
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (7:3760)
+	Schedule queue_1 [(5:2736), ]
+[SCHEDULER] Next interrupt from disk will be at 28714 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 4
+[SCHEDULER] 24748 us (NEXT ITERATION)
+[SCHEDULER] Process 2266 waited for 3966 us
+
+[SCHEDULER] 28714 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3760
+[CACHE] Buffer (7:3760) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(7:3760){ counter: 1 },(5:2726){ counter: 1 },]
+	Mid Segment   [(4:2266){ counter: 1 },(8:4169){ counter: 1 },]
+	Right Segment [(4:2293){ counter: 1 },]
+[SCHEDULER] Process 3760 is completed
+[CACHE] Buffer for sector 2736 not found in cache
+[DRIVER] Best move decision for tracks 7 => 5
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (5:2736)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 33730 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 5
+[SCHEDULER] 29764 us (NEXT ITERATION)
+[SCHEDULER] Process 2726 waited for 3966 us
+
+[SCHEDULER] 33730 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2736
+[CACHE] Buffer (5:2736) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(5:2736){ counter: 1 },(7:3760){ counter: 1 },]
+	Mid Segment   [(5:2726){ counter: 1 },(4:2266){ counter: 1 },]
+	Right Segment [(8:4169){ counter: 1 },(4:2293){ counter: 1 },]
+[SCHEDULER] Process 2736 is completed
+
+		served_requests: 6
+[SCHEDULER] 33730 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4015
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 5 => 8
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4015)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 4015
+[SCHEDULER] Next interrupt from disk will be at 39396 us
+
+[SCHEDULER] 35380 us (NEXT ITERATION)
+[SCHEDULER] Process 2705 is ready
+
+[SCHEDULER] 35380 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2705
+[SCHEDULER] Process 2705 invoked read()
+
+[SCHEDULER] 35380 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2705
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (5:2705) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4015)
+	Schedule queue_1 [(5:2705), ]
+[SCHEDULER] Blocked process 2705
+
+[SCHEDULER] 35530 us (NEXT ITERATION)
+[SCHEDULER] Process 1994 invoked write()
+
+[SCHEDULER] 35530 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1994
+... worked for 3866 us in user mode
+
+[SCHEDULER] 39396 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4015
+[CACHE] Buffer (8:4015) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(8:4015){ counter: 1 },(5:2736){ counter: 1 },]
+	Mid Segment   [(7:3760){ counter: 1 },(5:2726){ counter: 1 },]
+	Right Segment [(4:2266){ counter: 1 },(8:4169){ counter: 1 },(4:2293){ counter: 1 },]
+[SCHEDULER] Process 4015 is completed
+[DRIVER] Too many I/O requests for one track, skip buffer (5:2705)
+[CACHE] Buffer for sector 2705 not found in cache
+[DRIVER] Best move decision for tracks 8 => 5
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (5:2705)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 44912 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 7
+[SCHEDULER] 40946 us (NEXT ITERATION)
+[SCHEDULER] Process 2705 waited for 3966 us
+
+[SCHEDULER] 44912 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2705
+[CACHE] Buffer (5:2705) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(5:2705){ counter: 1 },(8:4015){ counter: 1 },]
+	Mid Segment   [(5:2736){ counter: 1 },(7:3760){ counter: 1 },]
+	Right Segment [(5:2726){ counter: 1 },(4:2266){ counter: 1 },(8:4169){ counter: 1 },]
+[SCHEDULER] Process 2705 is completed
+
+		served_requests: 8
+[SCHEDULER] 44912 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1994
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 5 => 3
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1994)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 1994
+[SCHEDULER] Next interrupt from disk will be at 50078 us
+
+[SCHEDULER] 46062 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4015
+... worked for 334 us in user mode (completed)
+[SCHEDULER] process 4015 exited
+
+[SCHEDULER] 46396 us (NEXT ITERATION)
+[SCHEDULER] Process 1926 invoked read()
+
+[SCHEDULER] 46396 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1926
+... worked for 3682 us in user mode
+
+[SCHEDULER] 50078 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1994
+[CACHE] Buffer (3:1994) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(3:1994){ counter: 1 },(5:2705){ counter: 1 },]
+	Mid Segment   [(8:4015){ counter: 1 },(5:2736){ counter: 1 },]
+	Right Segment [(7:3760){ counter: 1 },(5:2726){ counter: 1 },(4:2266){ counter: 1 },]
+[SCHEDULER] Process 1994 is completed
+
+		served_requests: 9
+[SCHEDULER] 50078 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1926
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 3 => 3
+	not to move, that is 0 us
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1926)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 1926
+[SCHEDULER] Next interrupt from disk will be at 54244 us
+
+[SCHEDULER] 50228 us (NEXT ITERATION)
+[SCHEDULER] Process 4475 invoked write()
+
+[SCHEDULER] 50228 us (NEXT ITERATION)
+
+[SCHEDULER] User mode for process 2705
+... worked for 1684 us in user mode (completed)
+[SCHEDULER] process 2705 exited
+
+[SCHEDULER] User mode for process 4475
+... worked for 2332 us in user mode
+
+[SCHEDULER] 54244 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1926
+[CACHE] Buffer (3:1926) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(3:1926){ counter: 1 },(3:1994){ counter: 1 },]
+	Mid Segment   [(5:2705){ counter: 1 },(8:4015){ counter: 1 },]
+	Right Segment [(5:2736){ counter: 1 },(7:3760){ counter: 1 },(5:2726){ counter: 1 },]
+[SCHEDULER] Process 1926 is completed
+
+		served_requests: 10
+[SCHEDULER] 54244 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4475
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 3 => 8
+	move time 2500
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4475)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 4475
+[SCHEDULER] Next interrupt from disk will be at 60910 us
+
+[SCHEDULER] 56894 us (NEXT ITERATION)
+[SCHEDULER] Process 1379 is ready
+
+[SCHEDULER] 56894 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1379
+[SCHEDULER] Process 1379 invoked write()
+
+[SCHEDULER] 56894 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1379
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (2:1379) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4475)
+	Schedule queue_1 [(2:1379), ]
+[SCHEDULER] Blocked process 1379
+
+[SCHEDULER] 57044 us (NEXT ITERATION)
+[SCHEDULER] Process 626 is ready
+
+[SCHEDULER] 57044 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 626
+[SCHEDULER] Process 626 invoked write()
+
+[SCHEDULER] 57044 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 626
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (1:626) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4475)
+	Schedule queue_1 [(2:1379), (1:626), ]
+[SCHEDULER] Blocked process 626
+
+[SCHEDULER] 57194 us (NEXT ITERATION)
+[SCHEDULER] Process 2015 invoked read()
+
+[SCHEDULER] 57194 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2015
+... worked for 3716 us in user mode
+
+[SCHEDULER] 60910 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4475
+[CACHE] Buffer (8:4475) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(8:4475){ counter: 1 },(3:1926){ counter: 1 },]
+	Mid Segment   [(3:1994){ counter: 1 },(5:2705){ counter: 1 },]
+	Right Segment [(8:4015){ counter: 1 },(5:2736){ counter: 1 },(7:3760){ counter: 1 },]
+[SCHEDULER] Process 4475 is completed
+[CACHE] Buffer for sector 1379 not found in cache
+[DRIVER] Best move decision for tracks 8 => 2
+
+[SCHEDULER] User mode for process 1926
+... worked for 334 us in user mode (completed)
+[SCHEDULER] process 1926 exited
+
+	move time 3000
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1379)
+	Schedule queue_1 [(1:626), ]
+[SCHEDULER] Next interrupt from disk will be at 68260 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 11
+[SCHEDULER] 64294 us (NEXT ITERATION)
+[SCHEDULER] Process 1379 waited for 3966 us
+
+[SCHEDULER] 68260 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1379
+[CACHE] Buffer (2:1379) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(2:1379){ counter: 1 },(8:4475){ counter: 1 },]
+	Mid Segment   [(3:1926){ counter: 1 },(3:1994){ counter: 1 },]
+	Right Segment [(5:2705){ counter: 1 },(8:4015){ counter: 1 },(5:2736){ counter: 1 },]
+[SCHEDULER] Process 1379 is completed
+[CACHE] Buffer for sector 626 not found in cache
+[DRIVER] Best move decision for tracks 2 => 1
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:626)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 72776 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 12
+[SCHEDULER] 68810 us (NEXT ITERATION)
+[SCHEDULER] Process 626 waited for 3966 us
+
+[SCHEDULER] 72776 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 626
+[CACHE] Buffer (1:626) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(1:626){ counter: 1 },(2:1379){ counter: 1 },]
+	Mid Segment   [(8:4475){ counter: 1 },(3:1926){ counter: 1 },]
+	Right Segment [(3:1994){ counter: 1 },(5:2705){ counter: 1 },(8:4015){ counter: 1 },]
+[SCHEDULER] Process 626 is completed
+
+		served_requests: 13
+[SCHEDULER] 72776 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2015
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 1 => 4
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2015)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 2015
+[SCHEDULER] Next interrupt from disk will be at 78442 us
+
+[SCHEDULER] 74426 us (NEXT ITERATION)
+[SCHEDULER] Process 3307 is ready
+
+[SCHEDULER] 74426 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3307
+[SCHEDULER] Process 3307 invoked read()
+
+[SCHEDULER] 74426 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3307
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (6:3307) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2015)
+	Schedule queue_1 [(6:3307), ]
+[SCHEDULER] Blocked process 3307
+
+[SCHEDULER] 74576 us (NEXT ITERATION)
+[SCHEDULER] Process 2761 is ready
+
+[SCHEDULER] 74576 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2761
+[SCHEDULER] Process 2761 invoked read()
+
+[SCHEDULER] 74576 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2761
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (5:2761) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2015)
+	Schedule queue_1 [(6:3307), (5:2761), ]
+[SCHEDULER] Blocked process 2761
+
+[SCHEDULER] 74726 us (NEXT ITERATION)
+[SCHEDULER] Process 1884 invoked write()
+
+[SCHEDULER] 74726 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1884
+... worked for 3716 us in user mode
+
+[SCHEDULER] 78442 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2015
+[CACHE] Buffer (4:2015) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(4:2015){ counter: 1 },(1:626){ counter: 1 },]
+	Mid Segment   [(2:1379){ counter: 1 },(8:4475){ counter: 1 },]
+	Right Segment [(3:1926){ counter: 1 },(3:1994){ counter: 1 },(5:2705){ counter: 1 },]
+[SCHEDULER] Process 2015 is completed
+[CACHE] Buffer for sector 2761 not found in cache
+[DRIVER] Best move decision for tracks 4 => 5
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (5:2761)
+	Schedule queue_1 [(6:3307), ]
+[SCHEDULER] Next interrupt from disk will be at 82958 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 14
+[SCHEDULER] 78992 us (NEXT ITERATION)
+[SCHEDULER] Process 3307 waited for 3966 us
+
+[SCHEDULER] 82958 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2761
+[CACHE] Buffer (5:2761) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(5:2761){ counter: 1 },(4:2015){ counter: 1 },]
+	Mid Segment   [(1:626){ counter: 1 },(2:1379){ counter: 1 },]
+	Right Segment [(8:4475){ counter: 1 },(3:1926){ counter: 1 },(3:1994){ counter: 1 },]
+[SCHEDULER] Process 2761 is completed
+[CACHE] Buffer for sector 3307 not found in cache
+[DRIVER] Best move decision for tracks 5 => 6
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (6:3307)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 87474 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 15
+[SCHEDULER] 83508 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2015
+... worked for 1934 us in user mode (completed)
+[SCHEDULER] process 2015 exited
+
+[SCHEDULER] 85442 us (NEXT ITERATION)
+[SCHEDULER] Process 2761 waited for 2032 us
+
+[SCHEDULER] 87474 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3307
+[CACHE] Buffer (6:3307) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(6:3307){ counter: 1 },(5:2761){ counter: 1 },]
+	Mid Segment   [(4:2015){ counter: 1 },(1:626){ counter: 1 },]
+	Right Segment [(2:1379){ counter: 1 },(8:4475){ counter: 1 },(3:1926){ counter: 1 },]
+[SCHEDULER] Process 3307 is completed
+
+		served_requests: 16
+[SCHEDULER] 87474 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1884
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 6 => 3
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1884)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 1884
+[SCHEDULER] Next interrupt from disk will be at 93140 us
+
+[SCHEDULER] 89124 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2761
+... worked for 834 us in user mode (completed)
+[SCHEDULER] process 2761 exited
+
+[SCHEDULER] 89958 us (NEXT ITERATION)
+[SCHEDULER] Process 4563 invoked read()
+
+[SCHEDULER] 89958 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4563
+... worked for 3182 us in user mode
+
+[SCHEDULER] 93140 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1884
+[CACHE] Buffer (3:1884) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(3:1884){ counter: 1 },(6:3307){ counter: 1 },]
+	Mid Segment   [(5:2761){ counter: 1 },(4:2015){ counter: 1 },]
+	Right Segment [(1:626){ counter: 1 },(2:1379){ counter: 1 },(8:4475){ counter: 1 },]
+[SCHEDULER] Process 1884 is completed
+
+		served_requests: 17
+[SCHEDULER] 93140 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4563
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 3 => 9
+
+[SCHEDULER] User mode for process 3307
+... worked for 1184 us in user mode (completed)
+[SCHEDULER] process 3307 exited
+
+	move time 3000
+[DRIVER] Device strategy LOOK
+	Active_buffer (9:4563)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 4563
+[SCHEDULER] Next interrupt from disk will be at 101490 us
+
+[SCHEDULER] 97474 us (NEXT ITERATION)
+[SCHEDULER] Process 1190 is ready
+
+[SCHEDULER] 97474 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1190
+[SCHEDULER] Process 1190 invoked read()
+
+[SCHEDULER] 97474 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1190
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (2:1190) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (9:4563)
+	Schedule queue_1 [(2:1190), ]
+[SCHEDULER] Blocked process 1190
+
+[SCHEDULER] 97624 us (NEXT ITERATION)
+[SCHEDULER] Process 2908 is ready
+
+[SCHEDULER] 97624 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2908
+[SCHEDULER] Process 2908 invoked read()
+
+[SCHEDULER] 97624 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2908
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (5:2908) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (9:4563)
+	Schedule queue_1 [(2:1190), (5:2908), ]
+[SCHEDULER] Blocked process 2908
+
+[SCHEDULER] 97774 us (NEXT ITERATION)
+[SCHEDULER] Process 615 invoked write()
+
+[SCHEDULER] 97774 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 615
+... worked for 3716 us in user mode
+
+[SCHEDULER] 101490 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4563
+[CACHE] Buffer (9:4563) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(9:4563){ counter: 1 },(3:1884){ counter: 1 },]
+	Mid Segment   [(6:3307){ counter: 1 },(5:2761){ counter: 1 },]
+	Right Segment [(4:2015){ counter: 1 },(1:626){ counter: 1 },(2:1379){ counter: 1 },]
+[SCHEDULER] Process 4563 is completed
+[CACHE] Buffer for sector 2908 not found in cache
+[DRIVER] Best move decision for tracks 9 => 5
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (5:2908)
+	Schedule queue_1 [(2:1190), ]
+[SCHEDULER] Next interrupt from disk will be at 107506 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 18
+[SCHEDULER] 103540 us (NEXT ITERATION)
+[SCHEDULER] Process 1190 waited for 3966 us
+
+[SCHEDULER] 107506 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2908
+[CACHE] Buffer (5:2908) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(5:2908){ counter: 1 },(9:4563){ counter: 1 },]
+	Mid Segment   [(3:1884){ counter: 1 },(6:3307){ counter: 1 },]
+	Right Segment [(5:2761){ counter: 1 },(4:2015){ counter: 1 },(1:626){ counter: 1 },]
+[SCHEDULER] Process 2908 is completed
+[CACHE] Buffer for sector 1190 not found in cache
+[DRIVER] Best move decision for tracks 5 => 2
+
+[SCHEDULER] User mode for process 4563
+... worked for 984 us in user mode (completed)
+[SCHEDULER] process 4563 exited
+
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1190)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 114006 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 19
+[SCHEDULER] 110040 us (NEXT ITERATION)
+[SCHEDULER] Process 2908 waited for 3966 us
+
+[SCHEDULER] 114006 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1190
+[CACHE] Buffer (2:1190) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(2:1190){ counter: 1 },(5:2908){ counter: 1 },]
+	Mid Segment   [(9:4563){ counter: 1 },(3:1884){ counter: 1 },]
+	Right Segment [(6:3307){ counter: 1 },(5:2761){ counter: 1 },(4:2015){ counter: 1 },]
+[SCHEDULER] Process 1190 is completed
+
+		served_requests: 20
+[SCHEDULER] 114006 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 615
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 2 => 1
+
+[SCHEDULER] User mode for process 2908
+... worked for 350 us in user mode (completed)
+[SCHEDULER] process 2908 exited
+
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:615)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 615
+[SCHEDULER] Next interrupt from disk will be at 119022 us
+
+[SCHEDULER] 115006 us (NEXT ITERATION)
+[SCHEDULER] Process 2370 invoked read()
+
+[SCHEDULER] 115006 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2370
+... worked for 4016 us in user mode
+
+[SCHEDULER] 119022 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 615
+[CACHE] Buffer (1:615) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(1:615){ counter: 1 },(2:1190){ counter: 1 },]
+	Mid Segment   [(5:2908){ counter: 1 },(9:4563){ counter: 1 },]
+	Right Segment [(3:1884){ counter: 1 },(6:3307){ counter: 1 },(5:2761){ counter: 1 },]
+[SCHEDULER] Process 615 is completed
+
+		served_requests: 21
+[SCHEDULER] 119022 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2370
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 1 => 4
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2370)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 2370
+[SCHEDULER] Next interrupt from disk will be at 124688 us
+
+[SCHEDULER] 120672 us (NEXT ITERATION)
+[SCHEDULER] Process 3283 invoked write()
+
+[SCHEDULER] 120672 us (NEXT ITERATION)
+
+[SCHEDULER] User mode for process 1190
+... worked for 334 us in user mode (completed)
+[SCHEDULER] process 1190 exited
+
+[SCHEDULER] User mode for process 3283
+... worked for 3682 us in user mode
+
+[SCHEDULER] 124688 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2370
+[CACHE] Buffer (4:2370) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(4:2370){ counter: 1 },(1:615){ counter: 1 },]
+	Mid Segment   [(2:1190){ counter: 1 },(5:2908){ counter: 1 },]
+	Right Segment [(9:4563){ counter: 1 },(3:1884){ counter: 1 },(6:3307){ counter: 1 },]
+[SCHEDULER] Process 2370 is completed
+
+		served_requests: 22
+[SCHEDULER] 124688 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3283
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 4 => 6
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (6:3283)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 3283
+[SCHEDULER] Next interrupt from disk will be at 129854 us
+
+[SCHEDULER] 125838 us (NEXT ITERATION)
+[SCHEDULER] Process 891 invoked read()
+
+[SCHEDULER] 125838 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 891
+... worked for 4016 us in user mode
+
+[SCHEDULER] 129854 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3283
+[CACHE] Buffer (6:3283) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(6:3283){ counter: 1 },(4:2370){ counter: 1 },]
+	Mid Segment   [(1:615){ counter: 1 },(2:1190){ counter: 1 },]
+	Right Segment [(5:2908){ counter: 1 },(9:4563){ counter: 1 },(3:1884){ counter: 1 },]
+[SCHEDULER] Process 3283 is completed
+
+		served_requests: 23
+[SCHEDULER] 129854 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 891
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 6 => 1
+
+[SCHEDULER] User mode for process 2370
+... worked for 1684 us in user mode (completed)
+[SCHEDULER] process 2370 exited
+
+	move time 2500
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:891)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 891
+[SCHEDULER] Next interrupt from disk will be at 138204 us
+
+[SCHEDULER] 134188 us (NEXT ITERATION)
+[SCHEDULER] Process 1672 is ready
+
+[SCHEDULER] 134188 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1672
+[SCHEDULER] Process 1672 invoked read()
+
+[SCHEDULER] 134188 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1672
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (3:1672) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:891)
+	Schedule queue_1 [(3:1672), ]
+[SCHEDULER] Blocked process 1672
+
+[SCHEDULER] 134338 us (NEXT ITERATION)
+[SCHEDULER] Process 812 invoked write()
+
+[SCHEDULER] 134338 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 812
+... worked for 3866 us in user mode
+
+[SCHEDULER] 138204 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 891
+[CACHE] Buffer (1:891) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(1:891){ counter: 1 },(6:3283){ counter: 1 },]
+	Mid Segment   [(4:2370){ counter: 1 },(1:615){ counter: 1 },]
+	Right Segment [(2:1190){ counter: 1 },(5:2908){ counter: 1 },(9:4563){ counter: 1 },]
+[SCHEDULER] Process 891 is completed
+[CACHE] Buffer for sector 1672 not found in cache
+[DRIVER] Best move decision for tracks 1 => 3
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1672)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 143220 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 24
+[SCHEDULER] 139254 us (NEXT ITERATION)
+[SCHEDULER] Process 1672 waited for 3966 us
+
+[SCHEDULER] 143220 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1672
+[CACHE] Buffer (3:1672) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(3:1672){ counter: 1 },(1:891){ counter: 1 },]
+	Mid Segment   [(6:3283){ counter: 1 },(4:2370){ counter: 1 },]
+	Right Segment [(1:615){ counter: 1 },(2:1190){ counter: 1 },(5:2908){ counter: 1 },]
+[SCHEDULER] Process 1672 is completed
+
+		served_requests: 25
+[SCHEDULER] 143220 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 812
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 3 => 1
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:812)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 812
+[SCHEDULER] Next interrupt from disk will be at 148386 us
+
+[SCHEDULER] 144370 us (NEXT ITERATION)
+[SCHEDULER] Process 1292 is ready
+
+[SCHEDULER] 144370 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1292
+[SCHEDULER] Process 1292 invoked write()
+
+[SCHEDULER] 144370 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1292
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (2:1292) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:812)
+	Schedule queue_1 [(2:1292), ]
+[SCHEDULER] Blocked process 1292
+
+[SCHEDULER] 144520 us (NEXT ITERATION)
+[SCHEDULER] Process 1542 is ready
+
+[SCHEDULER] 144520 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1542
+[SCHEDULER] Process 1542 invoked write()
+
+[SCHEDULER] 144520 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1542
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (3:1542) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:812)
+	Schedule queue_1 [(2:1292), (3:1542), ]
+[SCHEDULER] Blocked process 1542
+
+[SCHEDULER] 144670 us (NEXT ITERATION)
+[SCHEDULER] Process 911 is ready
+
+[SCHEDULER] 144670 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 911
+[SCHEDULER] Process 911 invoked write()
+
+[SCHEDULER] 144670 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 911
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (1:911) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:812)
+	Schedule queue_1 [(2:1292), (3:1542), (1:911), ]
+[SCHEDULER] Blocked process 911
+
+[SCHEDULER] 144820 us (NEXT ITERATION)
+[SCHEDULER] Process 257 is ready
+
+[SCHEDULER] 144820 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 257
+[SCHEDULER] Process 257 invoked write()
+
+[SCHEDULER] 144820 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 257
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (0:257) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:812)
+	Schedule queue_1 [(2:1292), (3:1542), (1:911), (0:257), ]
+[SCHEDULER] Blocked process 257
+
+[SCHEDULER] 144970 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 891
+... worked for 234 us in user mode (completed)
+[SCHEDULER] process 891 exited
+
+[SCHEDULER] 145204 us (NEXT ITERATION)
+[SCHEDULER] Process 1010 invoked read()
+
+[SCHEDULER] 145204 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1010
+... worked for 3182 us in user mode
+
+[SCHEDULER] 148386 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 812
+[CACHE] Buffer (1:812) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(1:812){ counter: 1 },(3:1672){ counter: 1 },]
+	Mid Segment   [(1:891){ counter: 1 },(6:3283){ counter: 1 },]
+	Right Segment [(4:2370){ counter: 1 },(1:615){ counter: 1 },(2:1190){ counter: 1 },]
+[SCHEDULER] Process 812 is completed
+[CACHE] Buffer for sector 1542 not found in cache
+[DRIVER] Best move decision for tracks 1 => 3
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1542)
+	Schedule queue_1 [(0:257), (1:911), (2:1292), ]
+[SCHEDULER] Next interrupt from disk will be at 153402 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 26
+[SCHEDULER] 149436 us (NEXT ITERATION)
+
+[SCHEDULER] User mode for process 1672
+... worked for 784 us in user mode (completed)
+[SCHEDULER] process 1672 exited
+
+[SCHEDULER] Process 1292 waited for 3182 us
+
+[SCHEDULER] 153402 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1542
+[CACHE] Buffer (3:1542) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(3:1542){ counter: 1 },(1:812){ counter: 1 },]
+	Mid Segment   [(3:1672){ counter: 1 },(1:891){ counter: 1 },]
+	Right Segment [(6:3283){ counter: 1 },(4:2370){ counter: 1 },(1:615){ counter: 1 },]
+[SCHEDULER] Process 1542 is completed
+[CACHE] Buffer for sector 1292 not found in cache
+[DRIVER] Best move decision for tracks 3 => 2
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1292)
+	Schedule queue_1 [(0:257), (1:911), ]
+[SCHEDULER] Next interrupt from disk will be at 157918 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 27
+[SCHEDULER] 153952 us (NEXT ITERATION)
+[SCHEDULER] Process 1542 waited for 3966 us
+
+[SCHEDULER] 157918 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1292
+[CACHE] Buffer (2:1292) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(2:1292){ counter: 1 },(3:1542){ counter: 1 },]
+	Mid Segment   [(1:812){ counter: 1 },(3:1672){ counter: 1 },]
+	Right Segment [(1:891){ counter: 1 },(6:3283){ counter: 1 },(4:2370){ counter: 1 },]
+[SCHEDULER] Process 1292 is completed
+[CACHE] Buffer for sector 911 not found in cache
+[DRIVER] Best move decision for tracks 2 => 1
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:911)
+	Schedule queue_1 [(0:257), ]
+[SCHEDULER] Next interrupt from disk will be at 162434 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 28
+[SCHEDULER] 158468 us (NEXT ITERATION)
+[SCHEDULER] Process 911 waited for 3966 us
+
+[SCHEDULER] 162434 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 911
+[CACHE] Buffer (1:911) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(1:911){ counter: 1 },(2:1292){ counter: 1 },]
+	Mid Segment   [(3:1542){ counter: 1 },(1:812){ counter: 1 },]
+	Right Segment [(3:1672){ counter: 1 },(1:891){ counter: 1 },(6:3283){ counter: 1 },]
+[SCHEDULER] Process 911 is completed
+[CACHE] Buffer for sector 257 not found in cache
+[DRIVER] Best move decision for tracks 1 => 0
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (0:257)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 166950 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 29
+[SCHEDULER] 162984 us (NEXT ITERATION)
+[SCHEDULER] Process 257 waited for 3966 us
+
+[SCHEDULER] 166950 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 257
+[CACHE] Buffer (0:257) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(0:257){ counter: 1 },(1:911){ counter: 1 },]
+	Mid Segment   [(2:1292){ counter: 1 },(3:1542){ counter: 1 },]
+	Right Segment [(1:812){ counter: 1 },(3:1672){ counter: 1 },(1:891){ counter: 1 },]
+[SCHEDULER] Process 257 is completed
+
+		served_requests: 30
+[SCHEDULER] 166950 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1010
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 0 => 2
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1010)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 1010
+[SCHEDULER] Next interrupt from disk will be at 172116 us
+
+[SCHEDULER] 168100 us (NEXT ITERATION)
+[SCHEDULER] Process 3355 invoked write()
+
+[SCHEDULER] 168100 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3355
+... worked for 4016 us in user mode
+
+[SCHEDULER] 172116 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1010
+[CACHE] Buffer (2:1010) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(2:1010){ counter: 1 },(0:257){ counter: 1 },]
+	Mid Segment   [(1:911){ counter: 1 },(2:1292){ counter: 1 },]
+	Right Segment [(3:1542){ counter: 1 },(1:812){ counter: 1 },(3:1672){ counter: 1 },]
+[SCHEDULER] Process 1010 is completed
+
+		served_requests: 31
+[SCHEDULER] 172116 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3355
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 2 => 6
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (6:3355)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 3355
+[SCHEDULER] Next interrupt from disk will be at 178282 us
+
+[SCHEDULER] 174266 us (NEXT ITERATION)
+[SCHEDULER] Process 1717 is ready
+
+[SCHEDULER] 174266 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1717
+[SCHEDULER] Process 1717 invoked write()
+
+[SCHEDULER] 174266 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1717
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (3:1717) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (6:3355)
+	Schedule queue_1 [(3:1717), ]
+[SCHEDULER] Blocked process 1717
+
+[SCHEDULER] 174416 us (NEXT ITERATION)
+[SCHEDULER] Process 1053 is ready
+
+[SCHEDULER] 174416 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1053
+[SCHEDULER] Process 1053 invoked write()
+
+[SCHEDULER] 174416 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1053
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (2:1053) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (6:3355)
+	Schedule queue_1 [(3:1717), (2:1053), ]
+[SCHEDULER] Blocked process 1053
+
+[SCHEDULER] 174566 us (NEXT ITERATION)
+[SCHEDULER] Process 3011 is ready
+
+[SCHEDULER] 174566 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3011
+[SCHEDULER] Process 3011 invoked write()
+
+[SCHEDULER] 174566 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3011
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (6:3011) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (6:3355)
+	Schedule queue_1 [(3:1717), (2:1053), (6:3011), ]
+[SCHEDULER] Blocked process 3011
+
+[SCHEDULER] 174716 us (NEXT ITERATION)
+[SCHEDULER] Process 3131 invoked read()
+
+[SCHEDULER] 174716 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3131
+... worked for 3566 us in user mode
+
+[SCHEDULER] 178282 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3355
+[CACHE] Buffer (6:3355) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(6:3355){ counter: 1 },(2:1010){ counter: 1 },]
+	Mid Segment   [(0:257){ counter: 1 },(1:911){ counter: 1 },]
+	Right Segment [(2:1292){ counter: 1 },(3:1542){ counter: 1 },(1:812){ counter: 1 },]
+[SCHEDULER] Process 3355 is completed
+[CACHE] Buffer for sector 1053 not found in cache
+[DRIVER] Best move decision for tracks 6 => 2
+
+[SCHEDULER] User mode for process 1010
+... worked for 834 us in user mode (completed)
+[SCHEDULER] process 1010 exited
+
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1053)
+	Schedule queue_1 [(3:1717), (6:3011), ]
+[SCHEDULER] Next interrupt from disk will be at 185132 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 32
+[SCHEDULER] 181166 us (NEXT ITERATION)
+[SCHEDULER] Process 1717 waited for 3966 us
+
+[SCHEDULER] 185132 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1053
+[CACHE] Buffer (2:1053) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(2:1053){ counter: 1 },(6:3355){ counter: 1 },]
+	Mid Segment   [(2:1010){ counter: 1 },(0:257){ counter: 1 },]
+	Right Segment [(1:911){ counter: 1 },(2:1292){ counter: 1 },(3:1542){ counter: 1 },]
+[SCHEDULER] Process 1053 is completed
+[CACHE] Buffer for sector 1717 not found in cache
+[DRIVER] Best move decision for tracks 2 => 3
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1717)
+	Schedule queue_1 [(6:3011), ]
+[SCHEDULER] Next interrupt from disk will be at 189648 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 33
+[SCHEDULER] 185682 us (NEXT ITERATION)
+[SCHEDULER] Process 1053 waited for 3966 us
+
+[SCHEDULER] 189648 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1717
+[CACHE] Buffer (3:1717) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(3:1717){ counter: 1 },(2:1053){ counter: 1 },]
+	Mid Segment   [(6:3355){ counter: 1 },(2:1010){ counter: 1 },]
+	Right Segment [(0:257){ counter: 1 },(1:911){ counter: 1 },(2:1292){ counter: 1 },]
+[SCHEDULER] Process 1717 is completed
+[CACHE] Buffer for sector 3011 not found in cache
+[DRIVER] Best move decision for tracks 3 => 6
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (6:3011)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 195164 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 34
+[SCHEDULER] 191198 us (NEXT ITERATION)
+[SCHEDULER] Process 3011 waited for 3966 us
+
+[SCHEDULER] 195164 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3011
+[CACHE] Buffer (6:3011) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(6:3011){ counter: 1 },(3:1717){ counter: 1 },]
+	Mid Segment   [(2:1053){ counter: 1 },(6:3355){ counter: 1 },]
+	Right Segment [(2:1010){ counter: 1 },(0:257){ counter: 1 },(1:911){ counter: 1 },]
+[SCHEDULER] Process 3011 is completed
+
+		served_requests: 35
+[SCHEDULER] 195164 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3131
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 6 => 6
+	not to move, that is 0 us
+[DRIVER] Device strategy LOOK
+	Active_buffer (6:3131)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 3131
+[SCHEDULER] Next interrupt from disk will be at 199330 us
+
+[SCHEDULER] 195314 us (NEXT ITERATION)
+[SCHEDULER] Process 3132 is ready
+
+[SCHEDULER] 195314 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3132
+[SCHEDULER] Process 3132 invoked read()
+
+[SCHEDULER] 195314 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3132
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (6:3132) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (6:3131)
+	Schedule queue_1 [(6:3132), ]
+[SCHEDULER] Blocked process 3132
+
+[SCHEDULER] 195464 us (NEXT ITERATION)
+[SCHEDULER] Process 1795 invoked write()
+
+[SCHEDULER] 195464 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1795
+... worked for 3866 us in user mode
+
+[SCHEDULER] 199330 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3131
+[CACHE] Buffer (6:3131) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(6:3131){ counter: 1 },(6:3011){ counter: 1 },]
+	Mid Segment   [(3:1717){ counter: 1 },(2:1053){ counter: 1 },]
+	Right Segment [(6:3355){ counter: 1 },(2:1010){ counter: 1 },(0:257){ counter: 1 },]
+[SCHEDULER] Process 3131 is completed
+[CACHE] Buffer for sector 3132 not found in cache
+[DRIVER] Best move decision for tracks 6 => 6
+	not to move, that is 0 us
+[DRIVER] Device strategy LOOK
+	Active_buffer (6:3132)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 203346 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 36
+[SCHEDULER] 199380 us (NEXT ITERATION)
+[SCHEDULER] Process 3132 waited for 3966 us
+
+[SCHEDULER] 203346 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3132
+[CACHE] Buffer (6:3132) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(6:3132){ counter: 1 },(6:3131){ counter: 1 },]
+	Mid Segment   [(6:3011){ counter: 1 },(3:1717){ counter: 1 },]
+	Right Segment [(2:1053){ counter: 1 },(6:3355){ counter: 1 },(2:1010){ counter: 1 },]
+[SCHEDULER] Process 3132 is completed
+
+		served_requests: 37
+[SCHEDULER] 203346 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1795
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 6 => 3
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1795)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 1795
+[SCHEDULER] Next interrupt from disk will be at 209012 us
+
+[SCHEDULER] 204996 us (NEXT ITERATION)
+[SCHEDULER] Process 4114 is ready
+
+[SCHEDULER] 204996 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4114
+[SCHEDULER] Process 4114 invoked write()
+
+[SCHEDULER] 204996 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4114
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (8:4114) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1795)
+	Schedule queue_1 [(8:4114), ]
+[SCHEDULER] Blocked process 4114
+
+[SCHEDULER] 205146 us (NEXT ITERATION)
+[SCHEDULER] Process 3460 is ready
+
+[SCHEDULER] 205146 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3460
+[SCHEDULER] Process 3460 invoked write()
+
+[SCHEDULER] 205146 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3460
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (6:3460) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1795)
+	Schedule queue_1 [(8:4114), (6:3460), ]
+[SCHEDULER] Blocked process 3460
+
+[SCHEDULER] 205296 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3131
+... worked for 1034 us in user mode (completed)
+[SCHEDULER] process 3131 exited
+
+[SCHEDULER] 206330 us (NEXT ITERATION)
+[SCHEDULER] Process 2271 invoked read()
+
+[SCHEDULER] 206330 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2271
+... worked for 2682 us in user mode
+
+[SCHEDULER] 209012 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1795
+[CACHE] Buffer (3:1795) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(3:1795){ counter: 1 },(6:3132){ counter: 1 },]
+	Mid Segment   [(6:3131){ counter: 1 },(6:3011){ counter: 1 },]
+	Right Segment [(3:1717){ counter: 1 },(2:1053){ counter: 1 },(6:3355){ counter: 1 },]
+[SCHEDULER] Process 1795 is completed
+[CACHE] Buffer for sector 3460 not found in cache
+[DRIVER] Best move decision for tracks 3 => 6
+
+[SCHEDULER] User mode for process 3132
+... worked for 1334 us in user mode (completed)
+[SCHEDULER] process 3132 exited
+
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (6:3460)
+	Schedule queue_1 [(8:4114), ]
+[SCHEDULER] Next interrupt from disk will be at 215862 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 38
+[SCHEDULER] 211896 us (NEXT ITERATION)
+[SCHEDULER] Process 4114 waited for 3966 us
+
+[SCHEDULER] 215862 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3460
+[CACHE] Buffer (6:3460) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(6:3460){ counter: 1 },(3:1795){ counter: 1 },]
+	Mid Segment   [(6:3132){ counter: 1 },(6:3131){ counter: 1 },]
+	Right Segment [(6:3011){ counter: 1 },(3:1717){ counter: 1 },(2:1053){ counter: 1 },]
+[SCHEDULER] Process 3460 is completed
+[CACHE] Buffer for sector 4114 not found in cache
+[DRIVER] Best move decision for tracks 6 => 8
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4114)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 220878 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 39
+[SCHEDULER] 216912 us (NEXT ITERATION)
+[SCHEDULER] Process 3460 waited for 3966 us
+
+[SCHEDULER] 220878 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4114
+[CACHE] Buffer (8:4114) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(8:4114){ counter: 1 },(6:3460){ counter: 1 },]
+	Mid Segment   [(3:1795){ counter: 1 },(6:3132){ counter: 1 },]
+	Right Segment [(6:3131){ counter: 1 },(6:3011){ counter: 1 },(3:1717){ counter: 1 },]
+[SCHEDULER] Process 4114 is completed
+
+		served_requests: 40
+[SCHEDULER] 220878 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2271
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 8 => 4
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2271)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 2271
+[SCHEDULER] Next interrupt from disk will be at 227044 us
+
+[SCHEDULER] 223028 us (NEXT ITERATION)
+[SCHEDULER] Process 3702 invoked write()
+
+[SCHEDULER] 223028 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3702
+... worked for 4016 us in user mode
+
+[SCHEDULER] 227044 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2271
+[CACHE] Buffer (4:2271) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(4:2271){ counter: 1 },(8:4114){ counter: 1 },]
+	Mid Segment   [(6:3460){ counter: 1 },(3:1795){ counter: 1 },]
+	Right Segment [(6:3132){ counter: 1 },(6:3131){ counter: 1 },(6:3011){ counter: 1 },]
+[SCHEDULER] Process 2271 is completed
+
+		served_requests: 41
+[SCHEDULER] 227044 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3702
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 4 => 7
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (7:3702)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 3702
+[SCHEDULER] Next interrupt from disk will be at 232710 us
+
+[SCHEDULER] 228694 us (NEXT ITERATION)
+[SCHEDULER] Process 3231 is ready
+
+[SCHEDULER] 228694 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3231
+[SCHEDULER] Process 3231 invoked write()
+
+[SCHEDULER] 228694 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3231
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (6:3231) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (7:3702)
+	Schedule queue_1 [(6:3231), ]
+[SCHEDULER] Blocked process 3231
+
+[SCHEDULER] 228844 us (NEXT ITERATION)
+[SCHEDULER] Process 4017 invoked read()
+
+[SCHEDULER] 228844 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4017
+... worked for 3866 us in user mode
+
+[SCHEDULER] 232710 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3702
+[CACHE] Buffer (7:3702) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(7:3702){ counter: 1 },(4:2271){ counter: 1 },]
+	Mid Segment   [(8:4114){ counter: 1 },(6:3460){ counter: 1 },]
+	Right Segment [(3:1795){ counter: 1 },(6:3132){ counter: 1 },(6:3131){ counter: 1 },]
+[SCHEDULER] Process 3702 is completed
+[CACHE] Buffer for sector 3231 not found in cache
+[DRIVER] Best move decision for tracks 7 => 6
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (6:3231)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 237226 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 42
+[SCHEDULER] 233260 us (NEXT ITERATION)
+
+[SCHEDULER] User mode for process 2271
+... worked for 784 us in user mode (completed)
+[SCHEDULER] process 2271 exited
+
+[SCHEDULER] Process 3231 waited for 3182 us
+
+[SCHEDULER] 237226 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3231
+[CACHE] Buffer (6:3231) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(6:3231){ counter: 1 },(7:3702){ counter: 1 },]
+	Mid Segment   [(4:2271){ counter: 1 },(8:4114){ counter: 1 },]
+	Right Segment [(6:3460){ counter: 1 },(3:1795){ counter: 1 },(6:3132){ counter: 1 },]
+[SCHEDULER] Process 3231 is completed
+
+		served_requests: 43
+[SCHEDULER] 237226 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4017
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 6 => 8
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4017)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 4017
+[SCHEDULER] Next interrupt from disk will be at 242392 us
+
+[SCHEDULER] 238376 us (NEXT ITERATION)
+[SCHEDULER] Process 2338 invoked write()
+
+[SCHEDULER] 238376 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2338
+... worked for 4016 us in user mode
+
+[SCHEDULER] 242392 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4017
+[CACHE] Buffer (8:4017) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(8:4017){ counter: 1 },(6:3231){ counter: 1 },]
+	Mid Segment   [(7:3702){ counter: 1 },(4:2271){ counter: 1 },]
+	Right Segment [(8:4114){ counter: 1 },(6:3460){ counter: 1 },(3:1795){ counter: 1 },]
+[SCHEDULER] Process 4017 is completed
+
+		served_requests: 44
+[SCHEDULER] 242392 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2338
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 8 => 4
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2338)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 2338
+[SCHEDULER] Next interrupt from disk will be at 248558 us
+
+[SCHEDULER] 244542 us (NEXT ITERATION)
+[SCHEDULER] Process 1897 is ready
+
+[SCHEDULER] 244542 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1897
+[SCHEDULER] Process 1897 invoked write()
+
+[SCHEDULER] 244542 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1897
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (3:1897) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2338)
+	Schedule queue_1 [(3:1897), ]
+[SCHEDULER] Blocked process 1897
+
+[SCHEDULER] 244692 us (NEXT ITERATION)
+[SCHEDULER] Process 4061 is ready
+
+[SCHEDULER] 244692 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4061
+[SCHEDULER] Process 4061 invoked write()
+
+[SCHEDULER] 244692 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4061
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (8:4061) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2338)
+	Schedule queue_1 [(3:1897), (8:4061), ]
+[SCHEDULER] Blocked process 4061
+
+[SCHEDULER] 244842 us (NEXT ITERATION)
+[SCHEDULER] Process 4780 is ready
+
+[SCHEDULER] 244842 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4780
+[SCHEDULER] Process 4780 invoked write()
+
+[SCHEDULER] 244842 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4780
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (9:4780) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2338)
+	Schedule queue_1 [(3:1897), (8:4061), (9:4780), ]
+[SCHEDULER] Blocked process 4780
+
+[SCHEDULER] 244992 us (NEXT ITERATION)
+[SCHEDULER] Process 1708 invoked read()
+
+[SCHEDULER] 244992 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1708
+... worked for 3566 us in user mode
+
+[SCHEDULER] 248558 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2338
+[CACHE] Buffer (4:2338) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(4:2338){ counter: 1 },(8:4017){ counter: 1 },]
+	Mid Segment   [(6:3231){ counter: 1 },(7:3702){ counter: 1 },]
+	Right Segment [(4:2271){ counter: 1 },(8:4114){ counter: 1 },(6:3460){ counter: 1 },]
+[SCHEDULER] Process 2338 is completed
+[CACHE] Buffer for sector 1897 not found in cache
+[DRIVER] Best move decision for tracks 4 => 3
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1897)
+	Schedule queue_1 [(8:4061), (9:4780), ]
+[SCHEDULER] Next interrupt from disk will be at 253074 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 45
+[SCHEDULER] 249108 us (NEXT ITERATION)
+
+[SCHEDULER] User mode for process 4017
+... worked for 284 us in user mode (completed)
+[SCHEDULER] process 4017 exited
+
+[SCHEDULER] Process 1897 waited for 3682 us
+
+[SCHEDULER] 253074 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1897
+[CACHE] Buffer (3:1897) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(3:1897){ counter: 1 },(4:2338){ counter: 1 },]
+	Mid Segment   [(8:4017){ counter: 1 },(6:3231){ counter: 1 },]
+	Right Segment [(7:3702){ counter: 1 },(4:2271){ counter: 1 },(8:4114){ counter: 1 },]
+[SCHEDULER] Process 1897 is completed
+[CACHE] Buffer for sector 4061 not found in cache
+[DRIVER] Best move decision for tracks 3 => 8
+	move time 2500
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4061)
+	Schedule queue_1 [(9:4780), ]
+[SCHEDULER] Next interrupt from disk will be at 259590 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 46
+[SCHEDULER] 255624 us (NEXT ITERATION)
+[SCHEDULER] Process 4061 waited for 3966 us
+
+[SCHEDULER] 259590 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4061
+[CACHE] Buffer (8:4061) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(8:4061){ counter: 1 },(3:1897){ counter: 1 },]
+	Mid Segment   [(4:2338){ counter: 1 },(8:4017){ counter: 1 },]
+	Right Segment [(6:3231){ counter: 1 },(7:3702){ counter: 1 },(4:2271){ counter: 1 },]
+[SCHEDULER] Process 4061 is completed
+[CACHE] Buffer for sector 4780 not found in cache
+[DRIVER] Best move decision for tracks 8 => 9
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (9:4780)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 264106 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 47
+[SCHEDULER] 260140 us (NEXT ITERATION)
+[SCHEDULER] Process 4780 waited for 3966 us
+
+[SCHEDULER] 264106 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4780
+[CACHE] Buffer (9:4780) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(9:4780){ counter: 1 },(8:4061){ counter: 1 },]
+	Mid Segment   [(3:1897){ counter: 1 },(4:2338){ counter: 1 },]
+	Right Segment [(8:4017){ counter: 1 },(6:3231){ counter: 1 },(7:3702){ counter: 1 },]
+[SCHEDULER] Process 4780 is completed
+
+		served_requests: 48
+[SCHEDULER] 264106 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1708
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 9 => 3
+	move time 3000
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1708)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 1708
+[SCHEDULER] Next interrupt from disk will be at 271272 us
+
+[SCHEDULER] 267256 us (NEXT ITERATION)
+[SCHEDULER] Process 454 invoked write()
+
+[SCHEDULER] 267256 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 454
+... worked for 4016 us in user mode
+
+[SCHEDULER] 271272 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1708
+[CACHE] Buffer (3:1708) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(3:1708){ counter: 1 },(9:4780){ counter: 1 },]
+	Mid Segment   [(8:4061){ counter: 1 },(3:1897){ counter: 1 },]
+	Right Segment [(4:2338){ counter: 1 },(8:4017){ counter: 1 },(6:3231){ counter: 1 },]
+[SCHEDULER] Process 1708 is completed
+
+		served_requests: 49
+[SCHEDULER] 271272 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 454
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 3 => 0
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (0:454)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 454
+[SCHEDULER] Next interrupt from disk will be at 276938 us
+
+[SCHEDULER] 272922 us (NEXT ITERATION)
+[SCHEDULER] Process 1562 invoked read()
+
+[SCHEDULER] 272922 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1562
+... worked for 4016 us in user mode
+
+[SCHEDULER] 276938 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 454
+[CACHE] Buffer (0:454) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(0:454){ counter: 1 },(3:1708){ counter: 1 },]
+	Mid Segment   [(9:4780){ counter: 1 },(8:4061){ counter: 1 },]
+	Right Segment [(3:1897){ counter: 1 },(4:2338){ counter: 1 },(8:4017){ counter: 1 },]
+[SCHEDULER] Process 454 is completed
+
+		served_requests: 50
+[SCHEDULER] 276938 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1562
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 0 => 3
+
+[SCHEDULER] User mode for process 1708
+... worked for 1184 us in user mode (completed)
+[SCHEDULER] process 1708 exited
+
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1562)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 1562
+[SCHEDULER] Next interrupt from disk will be at 283788 us
+
+[SCHEDULER] 279772 us (NEXT ITERATION)
+[SCHEDULER] Process 3653 is ready
+
+[SCHEDULER] 279772 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3653
+[SCHEDULER] Process 3653 invoked read()
+
+[SCHEDULER] 279772 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3653
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (7:3653) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1562)
+	Schedule queue_1 [(7:3653), ]
+[SCHEDULER] Blocked process 3653
+
+[SCHEDULER] 279922 us (NEXT ITERATION)
+[SCHEDULER] Process 2623 is ready
+
+[SCHEDULER] 279922 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2623
+[SCHEDULER] Process 2623 invoked read()
+
+[SCHEDULER] 279922 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2623
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (5:2623) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1562)
+	Schedule queue_1 [(7:3653), (5:2623), ]
+[SCHEDULER] Blocked process 2623
+
+[SCHEDULER] 280072 us (NEXT ITERATION)
+[SCHEDULER] Process 2878 invoked write()
+
+[SCHEDULER] 280072 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2878
+... worked for 3716 us in user mode
+
+[SCHEDULER] 283788 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1562
+[CACHE] Buffer (3:1562) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(3:1562){ counter: 1 },(0:454){ counter: 1 },]
+	Mid Segment   [(3:1708){ counter: 1 },(9:4780){ counter: 1 },]
+	Right Segment [(8:4061){ counter: 1 },(3:1897){ counter: 1 },(4:2338){ counter: 1 },]
+[SCHEDULER] Process 1562 is completed
+[CACHE] Buffer for sector 3653 not found in cache
+[DRIVER] Best move decision for tracks 3 => 7
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (7:3653)
+	Schedule queue_1 [(5:2623), ]
+[SCHEDULER] Next interrupt from disk will be at 289804 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 51
+[SCHEDULER] 285838 us (NEXT ITERATION)
+[SCHEDULER] Process 3653 waited for 3966 us
+
+[SCHEDULER] 289804 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3653
+[CACHE] Buffer (7:3653) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(7:3653){ counter: 1 },(3:1562){ counter: 1 },]
+	Mid Segment   [(0:454){ counter: 1 },(3:1708){ counter: 1 },]
+	Right Segment [(9:4780){ counter: 1 },(8:4061){ counter: 1 },(3:1897){ counter: 1 },]
+[SCHEDULER] Process 3653 is completed
+[CACHE] Buffer for sector 2623 not found in cache
+[DRIVER] Best move decision for tracks 7 => 5
+
+[SCHEDULER] User mode for process 1562
+... worked for 984 us in user mode (completed)
+[SCHEDULER] process 1562 exited
+
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (5:2623)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 295804 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 52
+[SCHEDULER] 291838 us (NEXT ITERATION)
+[SCHEDULER] Process 2623 waited for 3966 us
+
+[SCHEDULER] 295804 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2623
+[CACHE] Buffer (5:2623) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(5:2623){ counter: 1 },(7:3653){ counter: 1 },]
+	Mid Segment   [(3:1562){ counter: 1 },(0:454){ counter: 1 },]
+	Right Segment [(3:1708){ counter: 1 },(9:4780){ counter: 1 },(8:4061){ counter: 1 },]
+[SCHEDULER] Process 2623 is completed
+
+		served_requests: 53
+[SCHEDULER] 295804 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2878
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 5 => 5
+	not to move, that is 0 us
+[DRIVER] Device strategy LOOK
+	Active_buffer (5:2878)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 2878
+[SCHEDULER] Next interrupt from disk will be at 299970 us
+
+[SCHEDULER] 295954 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3653
+... worked for 850 us in user mode (completed)
+[SCHEDULER] process 3653 exited
+
+[SCHEDULER] 296804 us (NEXT ITERATION)
+[SCHEDULER] Process 4901 invoked read()
+
+[SCHEDULER] 296804 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4901
+... worked for 3166 us in user mode
+
+[SCHEDULER] 299970 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2878
+[CACHE] Buffer (5:2878) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(5:2878){ counter: 1 },(5:2623){ counter: 1 },]
+	Mid Segment   [(7:3653){ counter: 1 },(3:1562){ counter: 1 },]
+	Right Segment [(0:454){ counter: 1 },(3:1708){ counter: 1 },(9:4780){ counter: 1 },]
+[SCHEDULER] Process 2878 is completed
+
+		served_requests: 54
+[SCHEDULER] 299970 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4901
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 5 => 9
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (9:4901)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 4901
+[SCHEDULER] Next interrupt from disk will be at 306136 us
+
+[SCHEDULER] 302120 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2623
+... worked for 684 us in user mode (completed)
+[SCHEDULER] process 2623 exited
+
+[SCHEDULER] 302804 us (NEXT ITERATION)
+[SCHEDULER] Process 2523 is ready
+
+[SCHEDULER] 302804 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2523
+[SCHEDULER] Process 2523 invoked read()
+
+[SCHEDULER] 302804 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2523
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (5:2523) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (9:4901)
+	Schedule queue_1 [(5:2523), ]
+[SCHEDULER] Blocked process 2523
+
+[SCHEDULER] 302954 us (NEXT ITERATION)
+[SCHEDULER] Process 2379 is ready
+
+[SCHEDULER] 302954 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2379
+[SCHEDULER] Process 2379 invoked read()
+
+[SCHEDULER] 302954 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2379
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (4:2379) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (9:4901)
+	Schedule queue_1 [(5:2523), (4:2379), ]
+[SCHEDULER] Blocked process 2379
+
+[SCHEDULER] 303104 us (NEXT ITERATION)
+[SCHEDULER] Process 4272 is ready
+
+[SCHEDULER] 303104 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4272
+[SCHEDULER] Process 4272 invoked read()
+
+[SCHEDULER] 303104 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4272
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (8:4272) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (9:4901)
+	Schedule queue_1 [(5:2523), (4:2379), (8:4272), ]
+[SCHEDULER] Blocked process 4272
+
+[SCHEDULER] 303254 us (NEXT ITERATION)
+[SCHEDULER] Process 8 invoked write()
+
+[SCHEDULER] 303254 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 8
+... worked for 2882 us in user mode
+
+[SCHEDULER] 306136 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4901
+[CACHE] Buffer (9:4901) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(9:4901){ counter: 1 },(5:2878){ counter: 1 },]
+	Mid Segment   [(5:2623){ counter: 1 },(7:3653){ counter: 1 },]
+	Right Segment [(3:1562){ counter: 1 },(0:454){ counter: 1 },(3:1708){ counter: 1 },]
+[SCHEDULER] Process 4901 is completed
+[DRIVER] Too many I/O requests for one track, skip buffer (5:2523)
+[CACHE] Buffer for sector 2379 not found in cache
+[DRIVER] Best move decision for tracks 9 => 4
+	move time 2500
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2379)
+	Schedule queue_1 [(5:2523), (8:4272), ]
+[SCHEDULER] Next interrupt from disk will be at 312652 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 55
+[SCHEDULER] 308686 us (NEXT ITERATION)
+[SCHEDULER] Process 2523 waited for 3966 us
+
+[SCHEDULER] 312652 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2379
+[CACHE] Buffer (4:2379) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(4:2379){ counter: 1 },(9:4901){ counter: 1 },]
+	Mid Segment   [(5:2878){ counter: 1 },(5:2623){ counter: 1 },]
+	Right Segment [(7:3653){ counter: 1 },(3:1562){ counter: 1 },(0:454){ counter: 1 },]
+[SCHEDULER] Process 2379 is completed
+[CACHE] Buffer for sector 2523 not found in cache
+[DRIVER] Best move decision for tracks 4 => 5
+
+[SCHEDULER] User mode for process 4901
+... worked for 484 us in user mode (completed)
+[SCHEDULER] process 4901 exited
+
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (5:2523)
+	Schedule queue_1 [(8:4272), ]
+[SCHEDULER] Next interrupt from disk will be at 317652 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 56
+[SCHEDULER] 313686 us (NEXT ITERATION)
+[SCHEDULER] Process 2379 waited for 3966 us
+
+[SCHEDULER] 317652 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2523
+[CACHE] Buffer (5:2523) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(5:2523){ counter: 1 },(4:2379){ counter: 1 },]
+	Mid Segment   [(9:4901){ counter: 1 },(5:2878){ counter: 1 },]
+	Right Segment [(5:2623){ counter: 1 },(7:3653){ counter: 1 },(3:1562){ counter: 1 },]
+[SCHEDULER] Process 2523 is completed
+[CACHE] Buffer for sector 4272 not found in cache
+[DRIVER] Best move decision for tracks 5 => 8
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4272)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 323168 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 57
+[SCHEDULER] 319202 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2379
+... worked for 450 us in user mode (completed)
+[SCHEDULER] process 2379 exited
+
+[SCHEDULER] 319652 us (NEXT ITERATION)
+[SCHEDULER] Process 4272 waited for 3516 us
+
+[SCHEDULER] 323168 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4272
+[CACHE] Buffer (8:4272) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(8:4272){ counter: 1 },(5:2523){ counter: 1 },]
+	Mid Segment   [(4:2379){ counter: 1 },(9:4901){ counter: 1 },]
+	Right Segment [(5:2878){ counter: 1 },(5:2623){ counter: 1 },(7:3653){ counter: 1 },]
+[SCHEDULER] Process 4272 is completed
+
+		served_requests: 58
+[SCHEDULER] 323168 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 8
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 8 => 0
+
+[SCHEDULER] User mode for process 2523
+... worked for 1334 us in user mode (completed)
+[SCHEDULER] process 2523 exited
+
+	move time 4000
+[DRIVER] Device strategy LOOK
+	Active_buffer (0:8)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 8
+[SCHEDULER] Next interrupt from disk will be at 332668 us
+
+[SCHEDULER] 328652 us (NEXT ITERATION)
+[SCHEDULER] Process 1520 is ready
+
+[SCHEDULER] 328652 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1520
+[SCHEDULER] Process 1520 invoked write()
+
+[SCHEDULER] 328652 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1520
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (3:1520) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (0:8)
+	Schedule queue_1 [(3:1520), ]
+[SCHEDULER] Blocked process 1520
+
+[SCHEDULER] 328802 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4272
+... worked for 1366 us in user mode (completed)
+[SCHEDULER] process 4272 exited
+
+[SCHEDULER] 330168 us (NEXT ITERATION)
+[SCHEDULER] Process 1103 invoked read()
+
+[SCHEDULER] 330168 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1103
+... worked for 2500 us in user mode
+
+[SCHEDULER] 332668 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 8
+[CACHE] Buffer (0:8) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(0:8){ counter: 1 },(8:4272){ counter: 1 },]
+	Mid Segment   [(5:2523){ counter: 1 },(4:2379){ counter: 1 },]
+	Right Segment [(9:4901){ counter: 1 },(5:2878){ counter: 1 },(5:2623){ counter: 1 },]
+[SCHEDULER] Process 8 is completed
+[CACHE] Buffer for sector 1520 not found in cache
+[DRIVER] Best move decision for tracks 0 => 3
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1520)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 338184 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 59
+[SCHEDULER] 334218 us (NEXT ITERATION)
+[SCHEDULER] Process 1520 waited for 3966 us
+
+[SCHEDULER] 338184 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1520
+[CACHE] Buffer (3:1520) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(3:1520){ counter: 1 },(0:8){ counter: 1 },]
+	Mid Segment   [(8:4272){ counter: 1 },(5:2523){ counter: 1 },]
+	Right Segment [(4:2379){ counter: 1 },(9:4901){ counter: 1 },(5:2878){ counter: 1 },]
+[SCHEDULER] Process 1520 is completed
+
+		served_requests: 60
+[SCHEDULER] 338184 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1103
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 3 => 2
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1103)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 1103
+[SCHEDULER] Next interrupt from disk will be at 342850 us
+
+[SCHEDULER] 338834 us (NEXT ITERATION)
+[SCHEDULER] Process 4231 is ready
+
+[SCHEDULER] 338834 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4231
+[SCHEDULER] Process 4231 invoked read()
+
+[SCHEDULER] 338834 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4231
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (8:4231) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1103)
+	Schedule queue_1 [(8:4231), ]
+[SCHEDULER] Blocked process 4231
+
+[SCHEDULER] 338984 us (NEXT ITERATION)
+[SCHEDULER] Process 3975 invoked write()
+
+[SCHEDULER] 338984 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3975
+... worked for 3866 us in user mode
+
+[SCHEDULER] 342850 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1103
+[CACHE] Buffer (2:1103) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(2:1103){ counter: 1 },(3:1520){ counter: 1 },]
+	Mid Segment   [(0:8){ counter: 1 },(8:4272){ counter: 1 },]
+	Right Segment [(5:2523){ counter: 1 },(4:2379){ counter: 1 },(9:4901){ counter: 1 },]
+[SCHEDULER] Process 1103 is completed
+[CACHE] Buffer for sector 4231 not found in cache
+[DRIVER] Best move decision for tracks 2 => 8
+	move time 3000
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4231)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 349866 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 61
+[SCHEDULER] 345900 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1103
+... worked for 3950 us in user mode (completed)
+[SCHEDULER] process 1103 exited
+
+[SCHEDULER] 349850 us (NEXT ITERATION)
+[SCHEDULER] Process 4231 waited for 16 us
+
+[SCHEDULER] 349866 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4231
+[CACHE] Buffer (8:4231) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(8:4231){ counter: 1 },(2:1103){ counter: 1 },]
+	Mid Segment   [(3:1520){ counter: 1 },(0:8){ counter: 1 },]
+	Right Segment [(8:4272){ counter: 1 },(5:2523){ counter: 1 },(4:2379){ counter: 1 },]
+[SCHEDULER] Process 4231 is completed
+
+		served_requests: 62
+[SCHEDULER] 349866 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3975
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 8 => 7
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (7:3975)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 3975
+[SCHEDULER] Next interrupt from disk will be at 354532 us
+
+[SCHEDULER] 350516 us (NEXT ITERATION)
+[SCHEDULER] Process 2710 invoked read()
+
+[SCHEDULER] 350516 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2710
+... worked for 4016 us in user mode
+
+[SCHEDULER] 354532 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3975
+[CACHE] Buffer (7:3975) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(7:3975){ counter: 1 },(8:4231){ counter: 1 },]
+	Mid Segment   [(2:1103){ counter: 1 },(3:1520){ counter: 1 },]
+	Right Segment [(0:8){ counter: 1 },(8:4272){ counter: 1 },(5:2523){ counter: 1 },]
+[SCHEDULER] Process 3975 is completed
+
+		served_requests: 63
+[SCHEDULER] 354532 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2710
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 7 => 5
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (5:2710)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 2710
+[SCHEDULER] Next interrupt from disk will be at 359698 us
+
+[SCHEDULER] 355682 us (NEXT ITERATION)
+[SCHEDULER] Process 1613 invoked write()
+
+[SCHEDULER] 355682 us (NEXT ITERATION)
+
+[SCHEDULER] User mode for process 4231
+... worked for 1184 us in user mode (completed)
+[SCHEDULER] process 4231 exited
+
+[SCHEDULER] User mode for process 1613
+... worked for 2832 us in user mode
+
+[SCHEDULER] 359698 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2710
+[CACHE] Buffer (5:2710) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(5:2710){ counter: 1 },(7:3975){ counter: 1 },]
+	Mid Segment   [(8:4231){ counter: 1 },(2:1103){ counter: 1 },]
+	Right Segment [(3:1520){ counter: 1 },(0:8){ counter: 1 },(8:4272){ counter: 1 },]
+[SCHEDULER] Process 2710 is completed
+
+		served_requests: 64
+[SCHEDULER] 359698 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1613
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 5 => 3
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1613)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 1613
+[SCHEDULER] Next interrupt from disk will be at 364864 us
+
+[SCHEDULER] 360848 us (NEXT ITERATION)
+[SCHEDULER] Process 710 is ready
+
+[SCHEDULER] 360848 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 710
+[SCHEDULER] Process 710 invoked write()
+
+[SCHEDULER] 360848 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 710
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (1:710) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1613)
+	Schedule queue_1 [(1:710), ]
+[SCHEDULER] Blocked process 710
+
+[SCHEDULER] 360998 us (NEXT ITERATION)
+[SCHEDULER] Process 3516 is ready
+
+[SCHEDULER] 360998 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3516
+[SCHEDULER] Process 3516 invoked write()
+
+[SCHEDULER] 360998 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3516
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (7:3516) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1613)
+	Schedule queue_1 [(1:710), (7:3516), ]
+[SCHEDULER] Blocked process 3516
+
+[SCHEDULER] 361148 us (NEXT ITERATION)
+[SCHEDULER] Process 1407 is ready
+
+[SCHEDULER] 361148 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1407
+[SCHEDULER] Process 1407 invoked write()
+
+[SCHEDULER] 361148 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1407
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (2:1407) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1613)
+	Schedule queue_1 [(1:710), (7:3516), (2:1407), ]
+[SCHEDULER] Blocked process 1407
+
+[SCHEDULER] 361298 us (NEXT ITERATION)
+[SCHEDULER] Process 1579 is ready
+
+[SCHEDULER] 361298 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1579
+[SCHEDULER] Process 1579 invoked write()
+
+[SCHEDULER] 361298 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1579
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (3:1579) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1613)
+	Schedule queue_1 [(1:710), (7:3516), (2:1407), (3:1579), ]
+[SCHEDULER] Blocked process 1579
+
+[SCHEDULER] 361448 us (NEXT ITERATION)
+[SCHEDULER] Process 2876 invoked read()
+
+[SCHEDULER] 361448 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2876
+... worked for 3416 us in user mode
+
+[SCHEDULER] 364864 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1613
+[CACHE] Buffer (3:1613) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(3:1613){ counter: 1 },(5:2710){ counter: 1 },]
+	Mid Segment   [(7:3975){ counter: 1 },(8:4231){ counter: 1 },]
+	Right Segment [(2:1103){ counter: 1 },(3:1520){ counter: 1 },(0:8){ counter: 1 },]
+[SCHEDULER] Process 1613 is completed
+[CACHE] Buffer for sector 3516 not found in cache
+[DRIVER] Best move decision for tracks 3 => 7
+
+[SCHEDULER] User mode for process 2710
+... worked for 1834 us in user mode (completed)
+[SCHEDULER] process 2710 exited
+
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (7:3516)
+	Schedule queue_1 [(1:710), (2:1407), (3:1579), ]
+[SCHEDULER] Next interrupt from disk will be at 372714 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 65
+[SCHEDULER] 368748 us (NEXT ITERATION)
+[SCHEDULER] Process 710 waited for 3966 us
+
+[SCHEDULER] 372714 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3516
+[CACHE] Buffer (7:3516) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(7:3516){ counter: 1 },(3:1613){ counter: 1 },]
+	Mid Segment   [(5:2710){ counter: 1 },(7:3975){ counter: 1 },]
+	Right Segment [(8:4231){ counter: 1 },(2:1103){ counter: 1 },(3:1520){ counter: 1 },]
+[SCHEDULER] Process 3516 is completed
+[CACHE] Buffer for sector 1579 not found in cache
+[DRIVER] Best move decision for tracks 7 => 3
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1579)
+	Schedule queue_1 [(1:710), (2:1407), ]
+[SCHEDULER] Next interrupt from disk will be at 378730 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 66
+[SCHEDULER] 374764 us (NEXT ITERATION)
+[SCHEDULER] Process 3516 waited for 3966 us
+
+[SCHEDULER] 378730 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1579
+[CACHE] Buffer (3:1579) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(3:1579){ counter: 1 },(7:3516){ counter: 1 },]
+	Mid Segment   [(3:1613){ counter: 1 },(5:2710){ counter: 1 },]
+	Right Segment [(7:3975){ counter: 1 },(8:4231){ counter: 1 },(2:1103){ counter: 1 },]
+[SCHEDULER] Process 1579 is completed
+[CACHE] Buffer for sector 1407 not found in cache
+[DRIVER] Best move decision for tracks 3 => 2
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1407)
+	Schedule queue_1 [(1:710), ]
+[SCHEDULER] Next interrupt from disk will be at 383246 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 67
+[SCHEDULER] 379280 us (NEXT ITERATION)
+[SCHEDULER] Process 1407 waited for 3966 us
+
+[SCHEDULER] 383246 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1407
+[CACHE] Buffer (2:1407) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(2:1407){ counter: 1 },(3:1579){ counter: 1 },]
+	Mid Segment   [(7:3516){ counter: 1 },(3:1613){ counter: 1 },]
+	Right Segment [(5:2710){ counter: 1 },(7:3975){ counter: 1 },(8:4231){ counter: 1 },]
+[SCHEDULER] Process 1407 is completed
+[CACHE] Buffer for sector 710 not found in cache
+[DRIVER] Best move decision for tracks 2 => 1
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:710)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 387762 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 68
+[SCHEDULER] 383796 us (NEXT ITERATION)
+[SCHEDULER] Process 1579 waited for 3966 us
+
+[SCHEDULER] 387762 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 710
+[CACHE] Buffer (1:710) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(1:710){ counter: 1 },(2:1407){ counter: 1 },]
+	Mid Segment   [(3:1579){ counter: 1 },(7:3516){ counter: 1 },]
+	Right Segment [(3:1613){ counter: 1 },(5:2710){ counter: 1 },(7:3975){ counter: 1 },]
+[SCHEDULER] Process 710 is completed
+
+		served_requests: 69
+[SCHEDULER] 387762 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2876
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 1 => 5
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (5:2876)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 2876
+[SCHEDULER] Next interrupt from disk will be at 393928 us
+
+[SCHEDULER] 389912 us (NEXT ITERATION)
+[SCHEDULER] Process 4160 is ready
+
+[SCHEDULER] 389912 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4160
+[SCHEDULER] Process 4160 invoked read()
+
+[SCHEDULER] 389912 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4160
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (8:4160) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (5:2876)
+	Schedule queue_1 [(8:4160), ]
+[SCHEDULER] Blocked process 4160
+
+[SCHEDULER] 390062 us (NEXT ITERATION)
+[SCHEDULER] Process 2191 invoked write()
+
+[SCHEDULER] 390062 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2191
+... worked for 3866 us in user mode
+
+[SCHEDULER] 393928 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2876
+[CACHE] Buffer (5:2876) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(5:2876){ counter: 1 },(1:710){ counter: 1 },]
+	Mid Segment   [(2:1407){ counter: 1 },(3:1579){ counter: 1 },]
+	Right Segment [(7:3516){ counter: 1 },(3:1613){ counter: 1 },(5:2710){ counter: 1 },]
+[SCHEDULER] Process 2876 is completed
+[CACHE] Buffer for sector 4160 not found in cache
+[DRIVER] Best move decision for tracks 5 => 8
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4160)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 399444 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 70
+[SCHEDULER] 395478 us (NEXT ITERATION)
+[SCHEDULER] Process 4160 waited for 3966 us
+
+[SCHEDULER] 399444 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4160
+[CACHE] Buffer (8:4160) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(8:4160){ counter: 1 },(5:2876){ counter: 1 },]
+	Mid Segment   [(1:710){ counter: 1 },(2:1407){ counter: 1 },]
+	Right Segment [(3:1579){ counter: 1 },(7:3516){ counter: 1 },(3:1613){ counter: 1 },]
+[SCHEDULER] Process 4160 is completed
+
+		served_requests: 71
+[SCHEDULER] 399444 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2191
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 8 => 4
+
+[SCHEDULER] User mode for process 2876
+... worked for 1334 us in user mode (completed)
+[SCHEDULER] process 2876 exited
+
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2191)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 2191
+[SCHEDULER] Next interrupt from disk will be at 406944 us
+
+[SCHEDULER] 402928 us (NEXT ITERATION)
+[SCHEDULER] Process 163 is ready
+
+[SCHEDULER] 402928 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 163
+[SCHEDULER] Process 163 invoked write()
+
+[SCHEDULER] 402928 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 163
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (0:163) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2191)
+	Schedule queue_1 [(0:163), ]
+[SCHEDULER] Blocked process 163
+
+[SCHEDULER] 403078 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4160
+... worked for 3366 us in user mode (completed)
+[SCHEDULER] process 4160 exited
+
+[SCHEDULER] 406444 us (NEXT ITERATION)
+[SCHEDULER] Process 2148 invoked read()
+
+[SCHEDULER] 406444 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2148
+... worked for 500 us in user mode
+
+[SCHEDULER] 406944 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2191
+[CACHE] Buffer (4:2191) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(4:2191){ counter: 1 },(8:4160){ counter: 1 },]
+	Mid Segment   [(5:2876){ counter: 1 },(1:710){ counter: 1 },]
+	Right Segment [(2:1407){ counter: 1 },(3:1579){ counter: 1 },(7:3516){ counter: 1 },]
+[SCHEDULER] Process 2191 is completed
+[CACHE] Buffer for sector 163 not found in cache
+[DRIVER] Best move decision for tracks 4 => 0
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (0:163)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 412960 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 72
+[SCHEDULER] 408994 us (NEXT ITERATION)
+[SCHEDULER] Process 163 waited for 3966 us
+
+[SCHEDULER] 412960 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 163
+[CACHE] Buffer (0:163) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(0:163){ counter: 1 },(4:2191){ counter: 1 },]
+	Mid Segment   [(8:4160){ counter: 1 },(5:2876){ counter: 1 },]
+	Right Segment [(1:710){ counter: 1 },(2:1407){ counter: 1 },(3:1579){ counter: 1 },]
+[SCHEDULER] Process 163 is completed
+
+		served_requests: 73
+[SCHEDULER] 412960 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2148
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 0 => 4
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2148)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 2148
+[SCHEDULER] Next interrupt from disk will be at 419126 us
+
+[SCHEDULER] 415110 us (NEXT ITERATION)
+[SCHEDULER] Process 3292 is ready
+
+[SCHEDULER] 415110 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3292
+[SCHEDULER] Process 3292 invoked read()
+
+[SCHEDULER] 415110 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3292
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (6:3292) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2148)
+	Schedule queue_1 [(6:3292), ]
+[SCHEDULER] Blocked process 3292
+
+[SCHEDULER] 415260 us (NEXT ITERATION)
+[SCHEDULER] Process 1053 invoked write()
+
+[SCHEDULER] 415260 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1053
+... worked for 3866 us in user mode
+
+[SCHEDULER] 419126 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2148
+[CACHE] Buffer (4:2148) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(4:2148){ counter: 1 },(0:163){ counter: 1 },]
+	Mid Segment   [(4:2191){ counter: 1 },(8:4160){ counter: 1 },]
+	Right Segment [(5:2876){ counter: 1 },(1:710){ counter: 1 },(2:1407){ counter: 1 },]
+[SCHEDULER] Process 2148 is completed
+[CACHE] Buffer for sector 3292 not found in cache
+[DRIVER] Best move decision for tracks 4 => 6
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (6:3292)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 424142 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 74
+[SCHEDULER] 420176 us (NEXT ITERATION)
+[SCHEDULER] Process 3292 waited for 3966 us
+
+[SCHEDULER] 424142 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3292
+[CACHE] Buffer (6:3292) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(6:3292){ counter: 1 },(4:2148){ counter: 1 },]
+	Mid Segment   [(0:163){ counter: 1 },(4:2191){ counter: 1 },]
+	Right Segment [(8:4160){ counter: 1 },(5:2876){ counter: 1 },(1:710){ counter: 1 },]
+[SCHEDULER] Process 3292 is completed
+
+		served_requests: 75
+[SCHEDULER] 424142 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1053
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 6 => 2
+
+[SCHEDULER] User mode for process 2148
+... worked for 1834 us in user mode (completed)
+[SCHEDULER] process 2148 exited
+
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1053)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 1053
+[SCHEDULER] Next interrupt from disk will be at 432142 us
+
+[SCHEDULER] 428126 us (NEXT ITERATION)
+[SCHEDULER] Process 2391 is ready
+
+[SCHEDULER] 428126 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2391
+[SCHEDULER] Process 2391 invoked write()
+
+[SCHEDULER] 428126 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2391
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (4:2391) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1053)
+	Schedule queue_1 [(4:2391), ]
+[SCHEDULER] Blocked process 2391
+
+[SCHEDULER] 428276 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3292
+... worked for 2866 us in user mode (completed)
+[SCHEDULER] process 3292 exited
+
+[SCHEDULER] 431142 us (NEXT ITERATION)
+[SCHEDULER] Process 1327 invoked read()
+
+[SCHEDULER] 431142 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1327
+... worked for 1000 us in user mode
+
+[SCHEDULER] 432142 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1053
+[CACHE] Buffer (2:1053) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(2:1053){ counter: 1 },(6:3292){ counter: 1 },]
+	Mid Segment   [(4:2148){ counter: 1 },(0:163){ counter: 1 },]
+	Right Segment [(4:2191){ counter: 1 },(8:4160){ counter: 1 },(5:2876){ counter: 1 },]
+[SCHEDULER] Process 1053 is completed
+[CACHE] Buffer for sector 2391 not found in cache
+[DRIVER] Best move decision for tracks 2 => 4
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2391)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 437158 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 76
+[SCHEDULER] 433192 us (NEXT ITERATION)
+[SCHEDULER] Process 2391 waited for 3966 us
+
+[SCHEDULER] 437158 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2391
+[CACHE] Buffer (4:2391) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(4:2391){ counter: 1 },(2:1053){ counter: 1 },]
+	Mid Segment   [(6:3292){ counter: 1 },(4:2148){ counter: 1 },]
+	Right Segment [(0:163){ counter: 1 },(4:2191){ counter: 1 },(8:4160){ counter: 1 },]
+[SCHEDULER] Process 2391 is completed
+
+		served_requests: 77
+[SCHEDULER] 437158 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1327
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 4 => 2
+	move time 1000
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1327)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 1327
+[SCHEDULER] Next interrupt from disk will be at 442324 us
+
+[SCHEDULER] 438308 us (NEXT ITERATION)
+[SCHEDULER] Process 1065 invoked write()
+
+[SCHEDULER] 438308 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1065
+... worked for 4016 us in user mode
+
+[SCHEDULER] 442324 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1327
+[CACHE] Buffer (2:1327) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(2:1327){ counter: 1 },(4:2391){ counter: 1 },]
+	Mid Segment   [(2:1053){ counter: 1 },(6:3292){ counter: 1 },]
+	Right Segment [(4:2148){ counter: 1 },(0:163){ counter: 1 },(4:2191){ counter: 1 },]
+[SCHEDULER] Process 1327 is completed
+
+		served_requests: 78
+[SCHEDULER] 442324 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1065
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 2 => 2
+	not to move, that is 0 us
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1065)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 1065
+[SCHEDULER] Next interrupt from disk will be at 446490 us
+
+[SCHEDULER] 442474 us (NEXT ITERATION)
+[SCHEDULER] Process 588 is ready
+
+[SCHEDULER] 442474 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 588
+[SCHEDULER] Process 588 invoked write()
+
+[SCHEDULER] 442474 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 588
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (1:588) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1065)
+	Schedule queue_1 [(1:588), ]
+[SCHEDULER] Blocked process 588
+
+[SCHEDULER] 442624 us (NEXT ITERATION)
+[SCHEDULER] Process 3969 is ready
+
+[SCHEDULER] 442624 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3969
+[SCHEDULER] Process 3969 invoked write()
+
+[SCHEDULER] 442624 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3969
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (7:3969) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1065)
+	Schedule queue_1 [(1:588), (7:3969), ]
+[SCHEDULER] Blocked process 3969
+
+[SCHEDULER] 442774 us (NEXT ITERATION)
+[SCHEDULER] Process 4390 is ready
+
+[SCHEDULER] 442774 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4390
+[SCHEDULER] Process 4390 invoked write()
+
+[SCHEDULER] 442774 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4390
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (8:4390) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1065)
+	Schedule queue_1 [(1:588), (7:3969), (8:4390), ]
+[SCHEDULER] Blocked process 4390
+
+[SCHEDULER] 442924 us (NEXT ITERATION)
+[SCHEDULER] Process 660 is ready
+
+[SCHEDULER] 442924 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 660
+[SCHEDULER] Process 660 invoked write()
+
+[SCHEDULER] 442924 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 660
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (1:660) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1065)
+	Schedule queue_1 [(1:588), (7:3969), (8:4390), (1:660), ]
+[SCHEDULER] Blocked process 660
+
+[SCHEDULER] 443074 us (NEXT ITERATION)
+[SCHEDULER] Process 2163 is ready
+
+[SCHEDULER] 443074 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2163
+[SCHEDULER] Process 2163 invoked write()
+
+[SCHEDULER] 443074 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2163
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (4:2163) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (2:1065)
+	Schedule queue_1 [(1:588), (7:3969), (8:4390), (1:660), (4:2163), ]
+[SCHEDULER] Blocked process 2163
+
+[SCHEDULER] 443224 us (NEXT ITERATION)
+[SCHEDULER] Process 3619 invoked read()
+
+[SCHEDULER] 443224 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3619
+... worked for 3266 us in user mode
+
+[SCHEDULER] 446490 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1065
+[CACHE] Buffer (2:1065) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(2:1065){ counter: 1 },(2:1327){ counter: 1 },]
+	Mid Segment   [(4:2391){ counter: 1 },(2:1053){ counter: 1 },]
+	Right Segment [(6:3292){ counter: 1 },(4:2148){ counter: 1 },(0:163){ counter: 1 },]
+[SCHEDULER] Process 1065 is completed
+[DRIVER] Too many I/O requests for one track, skip buffer (4:2163)
+[CACHE] Buffer for sector 660 not found in cache
+[DRIVER] Best move decision for tracks 2 => 1
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:660)
+	Schedule queue_1 [(1:588), (4:2163), (7:3969), (8:4390), ]
+[SCHEDULER] Next interrupt from disk will be at 451006 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 79
+[SCHEDULER] 447040 us (NEXT ITERATION)
+
+[SCHEDULER] User mode for process 1327
+... worked for 2284 us in user mode (completed)
+[SCHEDULER] process 1327 exited
+
+[SCHEDULER] Process 588 waited for 1682 us
+
+[SCHEDULER] 451006 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 660
+[CACHE] Buffer (1:660) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(1:660){ counter: 1 },(2:1065){ counter: 1 },]
+	Mid Segment   [(2:1327){ counter: 1 },(4:2391){ counter: 1 },]
+	Right Segment [(2:1053){ counter: 1 },(6:3292){ counter: 1 },(4:2148){ counter: 1 },]
+[SCHEDULER] Process 660 is completed
+[DRIVER] Too many I/O requests for one track, skip buffer (1:588)
+[CACHE] Buffer for sector 588 not found in cache
+[DRIVER] Best move decision for tracks 1 => 1
+	not to move, that is 0 us
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:588)
+	Schedule queue_1 [(4:2163), (7:3969), (8:4390), ]
+[SCHEDULER] Next interrupt from disk will be at 455022 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 80
+[SCHEDULER] 451056 us (NEXT ITERATION)
+[SCHEDULER] Process 3969 waited for 3966 us
+
+[SCHEDULER] 455022 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 588
+[CACHE] Buffer (1:588) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(1:588){ counter: 1 },(1:660){ counter: 1 },]
+	Mid Segment   [(2:1065){ counter: 1 },(2:1327){ counter: 1 },]
+	Right Segment [(4:2391){ counter: 1 },(2:1053){ counter: 1 },(6:3292){ counter: 1 },]
+[SCHEDULER] Process 588 is completed
+[CACHE] Buffer for sector 2163 not found in cache
+[DRIVER] Best move decision for tracks 1 => 4
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2163)
+	Schedule queue_1 [(7:3969), (8:4390), ]
+[SCHEDULER] Next interrupt from disk will be at 460538 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 81
+[SCHEDULER] 456572 us (NEXT ITERATION)
+[SCHEDULER] Process 4390 waited for 3966 us
+
+[SCHEDULER] 460538 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2163
+[CACHE] Buffer (4:2163) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(4:2163){ counter: 1 },(1:588){ counter: 1 },]
+	Mid Segment   [(1:660){ counter: 1 },(2:1065){ counter: 1 },]
+	Right Segment [(2:1327){ counter: 1 },(4:2391){ counter: 1 },(2:1053){ counter: 1 },]
+[SCHEDULER] Process 2163 is completed
+[CACHE] Buffer for sector 3969 not found in cache
+[DRIVER] Best move decision for tracks 4 => 7
+	move time 1500
+[DRIVER] Device strategy LOOK
+	Active_buffer (7:3969)
+	Schedule queue_1 [(8:4390), ]
+[SCHEDULER] Next interrupt from disk will be at 466054 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 82
+[SCHEDULER] 462088 us (NEXT ITERATION)
+[SCHEDULER] Process 660 waited for 3966 us
+
+[SCHEDULER] 466054 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3969
+[CACHE] Buffer (7:3969) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(7:3969){ counter: 1 },(4:2163){ counter: 1 },]
+	Mid Segment   [(1:588){ counter: 1 },(1:660){ counter: 1 },]
+	Right Segment [(2:1065){ counter: 1 },(2:1327){ counter: 1 },(4:2391){ counter: 1 },]
+[SCHEDULER] Process 3969 is completed
+[CACHE] Buffer for sector 4390 not found in cache
+[DRIVER] Best move decision for tracks 7 => 8
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4390)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 470570 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 83
+[SCHEDULER] 466604 us (NEXT ITERATION)
+[SCHEDULER] Process 2163 waited for 3966 us
+
+[SCHEDULER] 470570 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4390
+[CACHE] Buffer (8:4390) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(8:4390){ counter: 1 },(7:3969){ counter: 1 },]
+	Mid Segment   [(4:2163){ counter: 1 },(1:588){ counter: 1 },]
+	Right Segment [(1:660){ counter: 1 },(2:1065){ counter: 1 },(2:1327){ counter: 1 },]
+[SCHEDULER] Process 4390 is completed
+
+		served_requests: 84
+[SCHEDULER] 470570 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3619
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 8 => 7
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (7:3619)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 3619
+[SCHEDULER] Next interrupt from disk will be at 475236 us
+
+[SCHEDULER] 471220 us (NEXT ITERATION)
+[SCHEDULER] Process 488 invoked write()
+
+[SCHEDULER] 471220 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 488
+... worked for 4016 us in user mode
+
+[SCHEDULER] 475236 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3619
+[CACHE] Buffer (7:3619) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(7:3619){ counter: 1 },(8:4390){ counter: 1 },]
+	Mid Segment   [(7:3969){ counter: 1 },(4:2163){ counter: 1 },]
+	Right Segment [(1:588){ counter: 1 },(1:660){ counter: 1 },(2:1065){ counter: 1 },]
+[SCHEDULER] Process 3619 is completed
+
+		served_requests: 85
+[SCHEDULER] 475236 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 488
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 7 => 0
+	move time 3500
+[DRIVER] Device strategy LOOK
+	Active_buffer (0:488)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 488
+[SCHEDULER] Next interrupt from disk will be at 482902 us
+
+[SCHEDULER] 478886 us (NEXT ITERATION)
+[SCHEDULER] Process 3976 is ready
+
+[SCHEDULER] 478886 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3976
+[SCHEDULER] Process 3976 invoked write()
+
+[SCHEDULER] 478886 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3976
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (7:3976) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (0:488)
+	Schedule queue_1 [(7:3976), ]
+[SCHEDULER] Blocked process 3976
+
+[SCHEDULER] 479036 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3619
+... worked for 3200 us in user mode (completed)
+[SCHEDULER] process 3619 exited
+
+[SCHEDULER] 482236 us (NEXT ITERATION)
+[SCHEDULER] Process 4318 invoked read()
+
+[SCHEDULER] 482236 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4318
+... worked for 666 us in user mode
+
+[SCHEDULER] 482902 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 488
+[CACHE] Buffer (0:488) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(0:488){ counter: 1 },(7:3619){ counter: 1 },]
+	Mid Segment   [(8:4390){ counter: 1 },(7:3969){ counter: 1 },]
+	Right Segment [(4:2163){ counter: 1 },(1:588){ counter: 1 },(1:660){ counter: 1 },]
+[SCHEDULER] Process 488 is completed
+[CACHE] Buffer for sector 3976 not found in cache
+[DRIVER] Best move decision for tracks 0 => 7
+	move time 3500
+[DRIVER] Device strategy LOOK
+	Active_buffer (7:3976)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 490418 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 86
+[SCHEDULER] 486452 us (NEXT ITERATION)
+[SCHEDULER] Process 3976 waited for 3966 us
+
+[SCHEDULER] 490418 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3976
+[CACHE] Buffer (7:3976) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(7:3976){ counter: 1 },(0:488){ counter: 1 },]
+	Mid Segment   [(7:3619){ counter: 1 },(8:4390){ counter: 1 },]
+	Right Segment [(7:3969){ counter: 1 },(4:2163){ counter: 1 },(1:588){ counter: 1 },]
+[SCHEDULER] Process 3976 is completed
+
+		served_requests: 87
+[SCHEDULER] 490418 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4318
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 7 => 8
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4318)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 4318
+[SCHEDULER] Next interrupt from disk will be at 495084 us
+
+[SCHEDULER] 491068 us (NEXT ITERATION)
+[SCHEDULER] Process 912 invoked write()
+
+[SCHEDULER] 491068 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 912
+... worked for 4016 us in user mode
+
+[SCHEDULER] 495084 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4318
+[CACHE] Buffer (8:4318) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(8:4318){ counter: 1 },(7:3976){ counter: 1 },]
+	Mid Segment   [(0:488){ counter: 1 },(7:3619){ counter: 1 },]
+	Right Segment [(8:4390){ counter: 1 },(7:3969){ counter: 1 },(4:2163){ counter: 1 },]
+[SCHEDULER] Process 4318 is completed
+
+		served_requests: 88
+[SCHEDULER] 495084 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 912
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 8 => 1
+	move time 3500
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:912)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 912
+[SCHEDULER] Next interrupt from disk will be at 502750 us
+
+[SCHEDULER] 498734 us (NEXT ITERATION)
+[SCHEDULER] Process 4615 is ready
+
+[SCHEDULER] 498734 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4615
+[SCHEDULER] Process 4615 invoked write()
+
+[SCHEDULER] 498734 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4615
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (9:4615) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:912)
+	Schedule queue_1 [(9:4615), ]
+[SCHEDULER] Blocked process 4615
+
+[SCHEDULER] 498884 us (NEXT ITERATION)
+[SCHEDULER] Process 442 is ready
+
+[SCHEDULER] 498884 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 442
+[SCHEDULER] Process 442 invoked write()
+
+[SCHEDULER] 498884 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 442
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (0:442) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:912)
+	Schedule queue_1 [(9:4615), (0:442), ]
+[SCHEDULER] Blocked process 442
+
+[SCHEDULER] 499034 us (NEXT ITERATION)
+[SCHEDULER] Process 367 is ready
+
+[SCHEDULER] 499034 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 367
+[SCHEDULER] Process 367 invoked write()
+
+[SCHEDULER] 499034 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 367
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (0:367) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (1:912)
+	Schedule queue_1 [(9:4615), (0:442), (0:367), ]
+[SCHEDULER] Blocked process 367
+
+[SCHEDULER] 499184 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4318
+... worked for 2900 us in user mode (completed)
+[SCHEDULER] process 4318 exited
+
+[SCHEDULER] 502084 us (NEXT ITERATION)
+[SCHEDULER] Process 2722 invoked read()
+
+[SCHEDULER] 502084 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2722
+... worked for 666 us in user mode
+
+[SCHEDULER] 502750 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 912
+[CACHE] Buffer (1:912) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(1:912){ counter: 1 },(8:4318){ counter: 1 },]
+	Mid Segment   [(7:3976){ counter: 1 },(0:488){ counter: 1 },]
+	Right Segment [(7:3619){ counter: 1 },(8:4390){ counter: 1 },(7:3969){ counter: 1 },]
+[SCHEDULER] Process 912 is completed
+[CACHE] Buffer for sector 442 not found in cache
+[DRIVER] Best move decision for tracks 1 => 0
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (0:442)
+	Schedule queue_1 [(0:367), (9:4615), ]
+[SCHEDULER] Next interrupt from disk will be at 507266 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 89
+[SCHEDULER] 503300 us (NEXT ITERATION)
+[SCHEDULER] Process 4615 waited for 3966 us
+
+[SCHEDULER] 507266 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 442
+[CACHE] Buffer (0:442) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(0:442){ counter: 1 },(1:912){ counter: 1 },]
+	Mid Segment   [(8:4318){ counter: 1 },(7:3976){ counter: 1 },]
+	Right Segment [(0:488){ counter: 1 },(7:3619){ counter: 1 },(8:4390){ counter: 1 },]
+[SCHEDULER] Process 442 is completed
+[DRIVER] Too many I/O requests for one track, skip buffer (0:367)
+[CACHE] Buffer for sector 367 not found in cache
+[DRIVER] Best move decision for tracks 0 => 0
+	not to move, that is 0 us
+[DRIVER] Device strategy LOOK
+	Active_buffer (0:367)
+	Schedule queue_1 [(9:4615), ]
+[SCHEDULER] Next interrupt from disk will be at 511282 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 90
+[SCHEDULER] 507316 us (NEXT ITERATION)
+[SCHEDULER] Process 442 waited for 3966 us
+
+[SCHEDULER] 511282 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 367
+[CACHE] Buffer (0:367) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(0:367){ counter: 1 },(0:442){ counter: 1 },]
+	Mid Segment   [(1:912){ counter: 1 },(8:4318){ counter: 1 },]
+	Right Segment [(7:3976){ counter: 1 },(0:488){ counter: 1 },(7:3619){ counter: 1 },]
+[SCHEDULER] Process 367 is completed
+[CACHE] Buffer for sector 4615 not found in cache
+[DRIVER] Best move decision for tracks 0 => 9
+	move time 4500
+[DRIVER] Device strategy LOOK
+	Active_buffer (9:4615)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 519798 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 91
+[SCHEDULER] 515832 us (NEXT ITERATION)
+[SCHEDULER] Process 367 waited for 3966 us
+
+[SCHEDULER] 519798 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4615
+[CACHE] Buffer (9:4615) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(9:4615){ counter: 1 },(0:367){ counter: 1 },]
+	Mid Segment   [(0:442){ counter: 1 },(1:912){ counter: 1 },]
+	Right Segment [(8:4318){ counter: 1 },(7:3976){ counter: 1 },(0:488){ counter: 1 },]
+[SCHEDULER] Process 4615 is completed
+
+		served_requests: 92
+[SCHEDULER] 519798 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2722
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 9 => 5
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (5:2722)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 2722
+[SCHEDULER] Next interrupt from disk will be at 525964 us
+
+[SCHEDULER] 521948 us (NEXT ITERATION)
+[SCHEDULER] Process 2737 invoked write()
+
+[SCHEDULER] 521948 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2737
+... worked for 4016 us in user mode
+
+[SCHEDULER] 525964 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2722
+[CACHE] Buffer (5:2722) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(5:2722){ counter: 1 },(9:4615){ counter: 1 },]
+	Mid Segment   [(0:367){ counter: 1 },(0:442){ counter: 1 },]
+	Right Segment [(1:912){ counter: 1 },(8:4318){ counter: 1 },(7:3976){ counter: 1 },]
+[SCHEDULER] Process 2722 is completed
+
+		served_requests: 93
+[SCHEDULER] 525964 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2737
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 5 => 5
+	not to move, that is 0 us
+[DRIVER] Device strategy LOOK
+	Active_buffer (5:2737)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 2737
+[SCHEDULER] Next interrupt from disk will be at 530130 us
+
+[SCHEDULER] 526114 us (NEXT ITERATION)
+[SCHEDULER] Process 2498 is ready
+
+[SCHEDULER] 526114 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2498
+[SCHEDULER] Process 2498 invoked write()
+
+[SCHEDULER] 526114 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2498
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (4:2498) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (5:2737)
+	Schedule queue_1 [(4:2498), ]
+[SCHEDULER] Blocked process 2498
+
+[SCHEDULER] 526264 us (NEXT ITERATION)
+[SCHEDULER] Process 3 is ready
+
+[SCHEDULER] 526264 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 3
+[SCHEDULER] Process 3 invoked write()
+
+[SCHEDULER] 526264 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 3
+... worked for 150 us in system, request buffer cache
+[DRIVER] Buffer (0:3) scheduled
+[DRIVER] Device strategy LOOK
+	Active_buffer (5:2737)
+	Schedule queue_1 [(4:2498), (0:3), ]
+[SCHEDULER] Blocked process 3
+
+[SCHEDULER] 526414 us (NEXT ITERATION)
+[SCHEDULER] Process 4621 invoked read()
+
+[SCHEDULER] 526414 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4621
+... worked for 3716 us in user mode
+
+[SCHEDULER] 530130 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2737
+[CACHE] Buffer (5:2737) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(5:2737){ counter: 1 },(5:2722){ counter: 1 },]
+	Mid Segment   [(9:4615){ counter: 1 },(0:367){ counter: 1 },]
+	Right Segment [(0:442){ counter: 1 },(1:912){ counter: 1 },(8:4318){ counter: 1 },]
+[SCHEDULER] Process 2737 is completed
+[CACHE] Buffer for sector 2498 not found in cache
+[DRIVER] Best move decision for tracks 5 => 4
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2498)
+	Schedule queue_1 [(0:3), ]
+[SCHEDULER] Next interrupt from disk will be at 534646 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 94
+[SCHEDULER] 530680 us (NEXT ITERATION)
+
+[SCHEDULER] User mode for process 2722
+... worked for 2284 us in user mode (completed)
+[SCHEDULER] process 2722 exited
+
+[SCHEDULER] Process 2498 waited for 1682 us
+
+[SCHEDULER] 534646 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2498
+[CACHE] Buffer (4:2498) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(4:2498){ counter: 1 },(5:2737){ counter: 1 },]
+	Mid Segment   [(5:2722){ counter: 1 },(9:4615){ counter: 1 },]
+	Right Segment [(0:367){ counter: 1 },(0:442){ counter: 1 },(1:912){ counter: 1 },]
+[SCHEDULER] Process 2498 is completed
+[CACHE] Buffer for sector 3 not found in cache
+[DRIVER] Best move decision for tracks 4 => 0
+	move time 2000
+[DRIVER] Device strategy LOOK
+	Active_buffer (0:3)
+	Schedule queue_1 []
+[SCHEDULER] Next interrupt from disk will be at 540662 us
+... worked for 50 us in disk interrupt handler
+
+		served_requests: 95
+[SCHEDULER] 536696 us (NEXT ITERATION)
+[SCHEDULER] Process 3 waited for 3966 us
+
+[SCHEDULER] 540662 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 3
+[CACHE] Buffer (0:3) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(0:3){ counter: 1 },(4:2498){ counter: 1 },]
+	Mid Segment   [(5:2737){ counter: 1 },(5:2722){ counter: 1 },]
+	Right Segment [(9:4615){ counter: 1 },(0:367){ counter: 1 },(0:442){ counter: 1 },]
+[SCHEDULER] Process 3 is completed
+
+		served_requests: 96
+[SCHEDULER] 540662 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4621
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 0 => 9
+	move time 4500
+[DRIVER] Device strategy LOOK
+	Active_buffer (9:4621)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 4621
+[SCHEDULER] Next interrupt from disk will be at 549328 us
+
+[SCHEDULER] 545312 us (NEXT ITERATION)
+[SCHEDULER] Process 2491 invoked write()
+
+[SCHEDULER] 545312 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 2491
+... worked for 4016 us in user mode
+
+[SCHEDULER] 549328 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4621
+[CACHE] Buffer (9:4621) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(9:4621){ counter: 1 },(0:3){ counter: 1 },]
+	Mid Segment   [(4:2498){ counter: 1 },(5:2737){ counter: 1 },]
+	Right Segment [(5:2722){ counter: 1 },(9:4615){ counter: 1 },(0:367){ counter: 1 },]
+[SCHEDULER] Process 4621 is completed
+
+		served_requests: 97
+[SCHEDULER] 549328 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 2491
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 9 => 4
+	move time 2500
+[DRIVER] Device strategy LOOK
+	Active_buffer (4:2491)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 2491
+[SCHEDULER] Next interrupt from disk will be at 555994 us
+
+[SCHEDULER] 551978 us (NEXT ITERATION)
+[SCHEDULER] Process 1959 invoked read()
+
+[SCHEDULER] 551978 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 1959
+... worked for 4016 us in user mode
+
+[SCHEDULER] 555994 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 2491
+[CACHE] Buffer (4:2491) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(4:2491){ counter: 1 },(9:4621){ counter: 1 },]
+	Mid Segment   [(0:3){ counter: 1 },(4:2498){ counter: 1 },]
+	Right Segment [(5:2737){ counter: 1 },(5:2722){ counter: 1 },(9:4615){ counter: 1 },]
+[SCHEDULER] Process 2491 is completed
+
+		served_requests: 98
+[SCHEDULER] 555994 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 1959
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 4 => 3
+
+[SCHEDULER] User mode for process 4621
+... worked for 184 us in user mode (completed)
+[SCHEDULER] process 4621 exited
+
+	move time 500
+[DRIVER] Device strategy LOOK
+	Active_buffer (3:1959)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 1959
+[SCHEDULER] Next interrupt from disk will be at 560844 us
+
+[SCHEDULER] 556828 us (NEXT ITERATION)
+[SCHEDULER] Process 4287 invoked write()
+
+[SCHEDULER] 556828 us (NEXT ITERATION)
+[SCHEDULER] User mode for process 4287
+... worked for 4016 us in user mode
+
+[SCHEDULER] 560844 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 1959
+[CACHE] Buffer (3:1959) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(3:1959){ counter: 1 },(4:2491){ counter: 1 },]
+	Mid Segment   [(9:4621){ counter: 1 },(0:3){ counter: 1 },]
+	Right Segment [(4:2498){ counter: 1 },(5:2737){ counter: 1 },(5:2722){ counter: 1 },]
+[SCHEDULER] Process 1959 is completed
+
+		served_requests: 99
+[SCHEDULER] 560844 us (NEXT ITERATION)
+[SCHEDULER] Kernel mode (syscall) for process 4287
+... worked for 150 us in system, request buffer cache
+[DRIVER] Best move decision for tracks 3 => 8
+	move time 2500
+[DRIVER] Device strategy LOOK
+	Active_buffer (8:4287)
+	Schedule queue_1 []
+[SCHEDULER] Blocked process 4287
+[SCHEDULER] Next interrupt from disk will be at 567510 us
+
+[SCHEDULER] 563494 us (NEXT ITERATION)
+[SCHEDULER] RunQ is empty
+[SCHEDULER] Scheduler has nothing to do for 4016 us
+
+[SCHEDULER] 567510 us (NEXT ITERATION)
+[SCHEDULER] Disk interrupt handler was invoked
+[SCHEDULER] Switch context to 4287
+[CACHE] Buffer (8:4287) was added to cache
+[CACHE] Buffer cache LFU:
+	Left Segment  [(8:4287){ counter: 1 },(3:1959){ counter: 1 },]
+	Mid Segment   [(4:2491){ counter: 1 },(9:4621){ counter: 1 },]
+	Right Segment [(0:3){ counter: 1 },(4:2498){ counter: 1 },(5:2737){ counter: 1 },]
+[SCHEDULER] Process 4287 is completed
+
+		served_requests: 100
+RunQ is empty
+Clean cache
+[CACHE] Buffer (8:4287) removed from cache
+[CACHE] Buffer (3:1959) removed from cache
+[CACHE] Buffer (4:2491) removed from cache
+[CACHE] Buffer (9:4621) removed from cache
+[CACHE] Buffer (0:3) removed from cache
+[CACHE] Buffer (4:2498) removed from cache
+[CACHE] Buffer (5:2737) removed from cache
+Scheduler has nothing to do, exited with time: 567510 us

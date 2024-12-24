@@ -43,6 +43,18 @@ typedef struct IORequestNodeStruct {
     struct IORequestNodeStruct *next;
 } IORequestNode;
 
+typedef enum SleepQueueState {
+    FREE,
+    CHECK,
+    EXITED
+} SleepQueueState;
+
+typedef struct {
+    long int time;
+    Process process;
+    SleepQueueState state;
+    bool used;
+} SleepQueue;
 
 
 #endif

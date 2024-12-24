@@ -9,6 +9,8 @@ Buffer active_buffer = {0};
 Buffer schedule_queue[REQUESTS_NUM] = {0};
 Buffer schedule_queue2[REQUESTS_NUM] = {0};
 
+SleepQueue sleep_queue[REQUESTS_NUM] = {0};
+
 Disk_Controller* dc = NULL;
 //----------------------------------------------------------------------------
 void initialize_dc()
@@ -161,8 +163,40 @@ bool process_is_active_buffer(Process *process)
     return ((active_buffer.process.sector == process->sector) && (process->waits_for_next_interrupt > 0));
 }
 //----------------------------------------------------------------------------
-void complete_process()
+SleepQueue* get_sleep_q_process()
 {
+    for (int i = 0; i < REQUESTS_NUM; ++i)
+    {
+	if (sleep_queue[i].state == CHECK)
+	{
+	    return &sleep_queue[i];
+	}
+    }
+
+    return NULL;
+}
+//----------------------------------------------------------------------------
+void complete_sleep_queue_process(SleepQueue* elem)
+{
+    elem->state = EXITED;
+}
+//----------------------------------------------------------------------------
+void complete_process(Process complete_process, long int time_spent)
+{
+    if (strcmp(complete_process.action, "READ") == 0)
+    {
+	for (int i = 0; i < REQUESTS_NUM; ++i)
+	{
+	    if (!sleep_queue[i].used)
+	    {
+		sleep_queue[i].time = time_spent + AFTER_READING_TIME;
+		sleep_queue[i].process = complete_process;
+		sleep_queue[i].state = CHECK;
+		sleep_queue[i].used = true;
+		break;
+	    }
+	}
+    }
     if (active_buffer.active)
     {
 	cache_put(&active_buffer);
@@ -197,6 +231,13 @@ void move_arm_to_track(Process *p, long int *time_worked)
 	    }
 	}
     }
+
+    SleepQueue* compl_process = get_sleep_q_process();
+    if (compl_process != NULL)
+    {
+	long int move_wait = time;
+	completed_process_waits_for_check(compl_process, move_wait, time_worked);
+    }
     
     if (time == 0)
     {
@@ -206,7 +247,7 @@ void move_arm_to_track(Process *p, long int *time_worked)
     {
 	printf("\tmove time %ld\n", time);
     }
-    
+
     *time_worked += time;
     
     generate_interrupt(p, *time_worked);
