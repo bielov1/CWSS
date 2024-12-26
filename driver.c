@@ -176,7 +176,7 @@ SleepQueue* get_sleep_q_process()
     return NULL;
 }
 //----------------------------------------------------------------------------
-void complete_sleep_queue_process(SleepQueue* elem)
+void exit_sleeping_process(SleepQueue* elem)
 {
     elem->state = EXITED;
 }
@@ -211,8 +211,7 @@ void move_arm_to_track(Process *p, long int *time_worked)
     int track = p->sector/SECTORS_PER_TRACK;
     printf("[DRIVER] Best move decision for tracks %d => %d\n", dc->head_pos, track);
     while (dc->head_pos != track)
-    {
-	
+    {	
 	if (dc->head_pos >= TRACKS)
 	{
 	    dc->head_pos = 0;
@@ -232,11 +231,19 @@ void move_arm_to_track(Process *p, long int *time_worked)
 	}
     }
 
-    SleepQueue* compl_process = get_sleep_q_process();
-    if (compl_process != NULL)
+    SleepQueue* sleeping_process = get_sleep_q_process();
+    if (sleeping_process != NULL)
     {
-	long int move_wait = time;
-	completed_process_waits_for_check(compl_process, move_wait, time_worked);
+	printf("ITS ME SABOTAGIN!\n");
+	printf("\t\tsleeping_process: %ld\n", sleeping_process->process.sector);
+	while (check_sleeping_process(sleeping_process, time, time_worked) == 0)
+	{
+	    sleeping_process = get_sleep_q_process();
+	    if (sleeping_process == NULL)
+	    {
+		break;
+	    }
+	}
     }
     
     if (time == 0)
@@ -248,6 +255,7 @@ void move_arm_to_track(Process *p, long int *time_worked)
 	printf("\tmove time %ld\n", time);
     }
 
+    p->quantum_time -= time;
     *time_worked += time;
     
     generate_interrupt(p, *time_worked);

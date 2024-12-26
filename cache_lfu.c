@@ -29,9 +29,7 @@ void move_buffer_to_front(Buffer* buffer, bool new_buffer)
 {
     if (!new_buffer && active_buffer_index_in_cache >= LEFT_SEGMENT)
     {
-	printf("\t\t boba before buffer->counter = %d", buffer->counter);
 	buffer->counter++;
-	printf("\t\t boba after buffer->counter = %d", buffer->counter);
     }
     
     for (int j = active_buffer_index_in_cache; j > 0; --j)

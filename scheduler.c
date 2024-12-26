@@ -23,17 +23,17 @@ char* last_process_action = "READ";
 bool last_action_was_read = true;
 Process* next_process_to_serve = NULL;
 
-int completed_process_waits_for_check(SleepQueue* sp, long int wait_time, long int* time_spent)
+int check_sleeping_process(SleepQueue* sp, long int wait_time, long int* time_spent)
 {
     if (*time_spent + wait_time >= sp->time)
     {
 	printf("\n");
 	printf("[SCHEDULER] User mode for process %ld\n", sp->process.sector);
 	printf("... worked for %ld us in user mode (completed)\n", sp->time - (*time_spent));
-	assert(sp->time - (*time_spent) > 0);
+	assert(sp->time - (*time_spent) >= 0);
 	*time_spent = sp->time;
 	printf("[SCHEDULER] process %ld exited\n", sp->process.sector);
-	complete_sleep_queue_process(sp);
+	exit_sleeping_process(sp);
 	printf("\n");
 	return 0;
     }
@@ -45,6 +45,29 @@ void syscall(Process *curr_process, long int* time_spent)
 {
     if (!active_buffer_exists())
     {
+	if (strcmp(curr_process->action, "WRITE") == 0)
+	{
+	    SleepQueue* sleeping_process = get_sleep_q_process();
+
+	    if (sleeping_process != NULL)
+	    {
+		printf("\t\tsleeping_process: %ld\n", sleeping_process->process.sector);
+		printf("\t\tsleeping_process: %ld\n", sleeping_process->time);
+		long int wait_time = BEFORE_WRITING_TIME;
+		while (check_sleeping_process(sleeping_process, wait_time, time_spent) == 0)
+		{
+		    sleeping_process = get_sleep_q_process();
+		    if (sleeping_process == NULL)
+		    {
+			break;
+		    }
+		}
+	    }
+	    
+	    printf("[SCHEDULER] formatting data before writing it took %d us\n", BEFORE_WRITING_TIME);
+	    *time_spent += BEFORE_WRITING_TIME;
+	    curr_process->quantum_time -= BEFORE_WRITING_TIME;
+	}
 	
 	move_arm_to_track(curr_process, time_spent);
 	set_process_as_active_buffer(curr_process);
@@ -68,7 +91,7 @@ int tick(IORequestNode** curr_request, long int *time_spent, SchedulerType sched
 	if (sleeping_process != NULL)
 	{
 	    wait_time = process_waits_for_interrupt->waits_for_next_interrupt - *time_spent;
-	    completed_process_waits_for_check(sleeping_process, wait_time, time_spent);
+	    check_sleeping_process(sleeping_process, wait_time, time_spent);
 	}
 	if (*time_spent != process_waits_for_interrupt->waits_for_next_interrupt)
 	{
@@ -79,6 +102,15 @@ int tick(IORequestNode** curr_request, long int *time_spent, SchedulerType sched
     }
     
     Process *curr_process = (*curr_request)->process;
+
+    if (curr_process->quantum_time <= 0)
+    {
+	printf("[SCHEDULER] Process %ld exceeded it's quantum time\n", curr_process->sector);
+	printf("[SCHEDULER] Switch context %ld", (*curr_request)->next->process->sector);
+	printf("\n");
+	curr_process->quantum_time = QUANTUM_TIME;
+	return 0;
+    }
 
     if (strcmp(curr_process->action, "READ") == 0)
     {
@@ -92,7 +124,7 @@ int tick(IORequestNode** curr_request, long int *time_spent, SchedulerType sched
 		assert(sleeping_process->time - *time_spent > 0);
 		*time_spent = sleeping_process->time;
 		printf("[SCHEDULER] process %ld exited\n", sleeping_process->process.sector);
-		complete_sleep_queue_process(sleeping_process);
+		exit_sleeping_process(sleeping_process);
 		return 0;
 	    }
 	}
@@ -115,9 +147,25 @@ int tick(IORequestNode** curr_request, long int *time_spent, SchedulerType sched
 	    int push_count = 0;
 	    while (save_request->process->sector != curr_process->sector)
 	    {
+		if (save_request->prev != NULL && !moved)
+		{
+		    save_request = save_request->prev;
+		    if (save_request->process->sector == curr_process->sector)
+		    {
+			(*curr_request)->process->state = WAITING_FOR_INTERRUPT;
+			return 1;
+		    }
+
+		    continue;
+		}
+		
 		moved = true;
 		push_count++;
 		save_request = save_request->next;
+		if (save_request == NULL)
+		{
+		    break;
+		}
 	    }
 	    if (moved)
 	    {
@@ -193,27 +241,22 @@ int tick(IORequestNode** curr_request, long int *time_spent, SchedulerType sched
 	    return 0;
 	    break;
 	case WAITING_FOR_INTERRUPT:
-	    sleeping_process = get_sleep_q_process();
-	    if (sleeping_process != NULL)
-	    {
-		wait_time = process_waits_for_interrupt->waits_for_next_interrupt - *time_spent;
-		completed_process_waits_for_check(sleeping_process, wait_time, time_spent);
-	    }
 	    
 	    printf("[SCHEDULER] User mode for process %ld\n", curr_process->sector);
 	    if (process_waits_for_interrupt != NULL)
 	    {
 		if (process_waits_for_interrupt->waits_for_next_interrupt > -1)
 		{
+		    sleeping_process = get_sleep_q_process();
+		    if (sleeping_process != NULL)
+		    {
+			wait_time = process_waits_for_interrupt->waits_for_next_interrupt - *time_spent;
+			check_sleeping_process(sleeping_process, wait_time, time_spent);
+		    }
 		    printf("... worked for %ld us in user mode\n", process_waits_for_interrupt->waits_for_next_interrupt - *time_spent);
 		    assert(process_waits_for_interrupt->waits_for_next_interrupt - *time_spent >= 0);
 		    *time_spent = process_waits_for_interrupt->waits_for_next_interrupt;
 		}
-	    }
-	    else
-	    {
-		printf("... worked for %d us in user mode", BEFORE_WRITING_TIME);
-		*time_spent += BEFORE_WRITING_TIME;
 	    }
 	    curr_process->mode = KERNEL_MODE;
 	    return 1;
@@ -232,10 +275,11 @@ int tick(IORequestNode** curr_request, long int *time_spent, SchedulerType sched
 		if (sleeping_process != NULL)
 		{
 		    wait_time = SYSCALL_READ_TIME;
-		    completed_process_waits_for_check(sleeping_process, wait_time, time_spent);
+		    check_sleeping_process(sleeping_process, wait_time, time_spent);
 		}
 		printf("[SCHEDULER] Kernel mode (syscall) for process %ld\n", curr_process->sector);
 		printf("... worked for %d us in system, request buffer cache\n", SYSCALL_READ_TIME);
+		curr_process->quantum_time -= SYSCALL_READ_TIME;
 		*time_spent += SYSCALL_READ_TIME;
 		curr_process->state = BLOCKED;
 		syscall(curr_process, time_spent);
@@ -271,7 +315,7 @@ int tick(IORequestNode** curr_request, long int *time_spent, SchedulerType sched
 	    if (sleeping_process != NULL)
 	    {
 		wait_time = process_waits_for_interrupt->waits_for_next_interrupt - *time_spent;
-		completed_process_waits_for_check(sleeping_process, wait_time, time_spent);
+		check_sleeping_process(sleeping_process, wait_time, time_spent);
 	    }
 	    printf("[SCHEDULER] Process %ld waited for %ld us\n", curr_process->sector, process_waits_for_interrupt->waits_for_next_interrupt - *time_spent);
 	    *time_spent = process_waits_for_interrupt->waits_for_next_interrupt;
@@ -327,11 +371,12 @@ int tick(IORequestNode** curr_request, long int *time_spent, SchedulerType sched
 		if (sleeping_process != NULL)
 		{
 		    wait_time = DISK_INTR_TIME;
-		    completed_process_waits_for_check(sleeping_process, wait_time, time_spent);
+		    check_sleeping_process(sleeping_process, wait_time, time_spent);
 		}
 		process_waits_for_interrupt = next_process_to_serve;
 		printf("[SCHEDULER] Next interrupt from disk will be at %ld us\n", process_waits_for_interrupt->waits_for_next_interrupt);
 		*time_spent += DISK_INTR_TIME;
+		curr_process->quantum_time -= DISK_INTR_TIME;
 		printf("... worked for %d us in disk interrupt handler\n", DISK_INTR_TIME);
 	    }
 	    

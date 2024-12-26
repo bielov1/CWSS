@@ -30,7 +30,7 @@ bool process_is_active_buffer(Process *process);
 bool queue_is_empty(Buffer *queue);
 
 SleepQueue* get_sleep_q_process();
-void complete_sleep_queue_process(SleepQueue* process);
+void exit_sleeping_process(SleepQueue* process);
 void complete_process(Process complete_process, long int time_spent);
 void move_arm_to_track(Process *p, long int *time_worked);
 void free_active_buffer();

@@ -13,6 +13,7 @@
         printf("\tsector_access_time:  %d\n", SECTOR_ACCESS_TIME); \
         printf("\tsyscall_read_time:   %d\n", SYSCALL_READ_TIME); \
         printf("\tsyscall_write_time:  %d\n", SYSCALL_WRITE_TIME); \
+	printf("\tquantum_time:        %d\n", QUANTUM_TIME); \
         printf("\tbefore_writing_time: %d\n", BEFORE_WRITING_TIME); \
 	printf("\tafter_reading_time:  %d\n", AFTER_READING_TIME); \
 	printf("\tdisk_intr_time:      %d\n", DISK_INTR_TIME); \
@@ -25,7 +26,7 @@
 TotalTime total = {0};
 
 //----------------------------------------------------------------------------
-Process* new_process(size_t sector, size_t track, const char* action, bool duplicate, long int next_interrupt, long int finish, Mode mode, State state)
+Process* new_process(size_t sector, size_t track, const char* action, bool duplicate, long int next_interrupt, long int finish, long int quantum_time,  Mode mode, State state)
 {
     Process *p = malloc(sizeof(Process));
     if (p == NULL) {
@@ -39,13 +40,14 @@ Process* new_process(size_t sector, size_t track, const char* action, bool dupli
 	.duplicate = duplicate,
 	.waits_for_next_interrupt = next_interrupt,
 	.finish_time = finish,
+	.quantum_time = quantum_time,
 	.mode = mode,
 	.state = state
     };
     return p;
 }
 //----------------------------------------------------------------------------
-void generate_requests(Process* (*f)(size_t, size_t, const char*, bool, long int, long int, Mode, State), IORequestNode **user_requests)
+void generate_requests(Process* (*f)(size_t, size_t, const char*, bool, long int, long int, long int, Mode, State), IORequestNode **user_requests)
 {
     Process* p;
     srand(time(NULL));
@@ -56,7 +58,7 @@ void generate_requests(Process* (*f)(size_t, size_t, const char*, bool, long int
 	//generate action
 	const char* ga = rand() % 2 == 0 ? "WRITE" : "READ"; 
 	bool gd = false; // duplicate
-	p = f(gs, gt, ga, gd, -1, 0, USER_MODE, NEW_PROCESS);
+	p = f(gs, gt, ga, gd, -1, 0, QUANTUM_TIME, USER_MODE, NEW_PROCESS);
 	printf("[SCHEDULER] Process %ld was added witch action %s\n", p->sector, p->action);
 	add_request(user_requests, p);
     }
@@ -66,7 +68,7 @@ void start_simulation()
 {
     long int time_worked = 0;
     int served_requests = 0;
-    SchedulerType sched_t = SCHEDULER_FLOOK;
+    SchedulerType sched_t = SCHEDULER_LOOK;
     IORequestNode *user_requests = NULL;
 
     generate_requests(new_process, &user_requests);
@@ -96,7 +98,7 @@ void start_simulation()
 		continue;
 	    }
 	    
-	    if (req->process->state == COMPLETED)
+	    if (req->process->state == COMPLETED || req->process->duplicate)
 	    {
 		delete_node(&user_requests, req);
 		served_requests++;
@@ -104,13 +106,6 @@ void start_simulation()
 	    }
 
 	    req = req->next;
-
-
-	    if (req != NULL && req->process->duplicate)
-	    {
-		delete_node(&user_requests, req);
-		served_requests++;
-	    }
 	}
     }
 
