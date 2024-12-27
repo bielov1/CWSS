@@ -68,7 +68,7 @@ void start_simulation()
 {
     long int time_worked = 0;
     int served_requests = 0;
-    SchedulerType sched_t = SCHEDULER_LOOK;
+    SchedulerType sched_t = SCHEDULER_FLOOK;
     IORequestNode *user_requests = NULL;
 
     generate_requests(new_process, &user_requests);

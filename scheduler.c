@@ -143,14 +143,15 @@ int tick(IORequestNode** curr_request, long int *time_spent, SchedulerType sched
 	else
 	{
 	    IORequestNode* save_request = (*curr_request);
+	    IORequestNode* look_behind = save_request;
 	    bool moved = false;
 	    int push_count = 0;
 	    while (save_request->process->sector != curr_process->sector)
 	    {
-		if (save_request->prev != NULL && !moved)
+		if (look_behind->prev != NULL && !moved)
 		{
-		    save_request = save_request->prev;
-		    if (save_request->process->sector == curr_process->sector)
+		    look_behind = look_behind->prev;
+		    if (look_behind->process->sector == curr_process->sector)
 		    {
 			(*curr_request)->process->state = WAITING_FOR_INTERRUPT;
 			return 1;
